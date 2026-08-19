@@ -61,9 +61,9 @@ em{font-style:normal;font-weight:600}
   font-family:var(--body);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--bone);background:transparent;border:1px solid var(--bone);
   padding:16px 28px;cursor:pointer;user-select:none;white-space:nowrap;
-  transition:background .18s ease,color .18s ease,transform .18s ease;
+  transition:background .06s steps(1,end),color .06s steps(1,end);
 }
-.btn:hover{background:var(--bone);color:var(--iron);transform:translateY(-1px)}
+.btn:hover{background:var(--bone);color:var(--iron)}
 .btn--solid{background:var(--bone);color:var(--iron)}
 .btn--solid:hover{background:transparent;color:var(--bone)}
 .btn--tiny{padding:10px 16px;font-size:11px;letter-spacing:.12em}
@@ -83,7 +83,7 @@ em{font-style:normal;font-weight:600}
 .nav__links{display:flex;gap:26px}
 .nav__links a{
   font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);
-  transition:color .15s ease;
+  transition:color .07s steps(1,end);
 }
 .nav__links a:hover,.nav__links a.is-active{color:var(--bone)}
 .nav__cta{display:inline-flex}
@@ -114,9 +114,21 @@ em{font-style:normal;font-weight:600}
 .hero__l2{
   display:block;font-size:clamp(52px,10.5vw,150px);margin-top:.06em;
   color:transparent;-webkit-text-stroke:2px var(--ash);
-  transition:color .5s ease,-webkit-text-stroke-color .5s ease;
+  transition:color .12s steps(2,end),-webkit-text-stroke-color .12s steps(2,end);
 }
 .hero__l2.is-filled{color:var(--bone);-webkit-text-stroke-color:var(--bone)}
+/* print-strike entry: everything lands on stepped frames, nothing eases */
+html.js:not(.reduced) .hero__eyebrow,
+html.js:not(.reduced) .hero__l1,
+html.js:not(.reduced) .hero__l2,
+html.js:not(.reduced) .hero__lede,
+html.js:not(.reduced) .hero__ctas{opacity:0}
+body.go .hero__eyebrow{animation:stampIn .14s steps(2,end) .10s both}
+body.go .hero__l1{animation:stampIn .16s steps(2,end) .22s both}
+body.go .hero__l2{animation:stampIn .16s steps(2,end) .42s both}
+body.go .hero__lede{animation:stampIn .14s steps(2,end) .58s both}
+body.go .hero__ctas{animation:stampIn .14s steps(2,end) .70s both}
+.hero__h1.rack{animation:rack .14s steps(2,end)}
 .hero__lede{max-width:560px;color:var(--ash);margin-top:34px;font-size:17px}
 .hero__ctas{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap}
 
@@ -147,7 +159,7 @@ em{font-style:normal;font-weight:600}
   font-size:clamp(30px,5.4vw,74px);letter-spacing:-.005em;
 }
 .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:clamp(70px,10vh,120px)}
-.pillar{background:var(--iron);padding:34px 26px 38px;position:relative;transition:background .2s ease}
+.pillar{background:var(--iron);padding:34px 26px 38px;position:relative;transition:background .07s steps(1,end)}
 .pillar__plate{
   font-family:var(--disp);font-size:64px;line-height:1;color:transparent;
   -webkit-text-stroke:1.5px var(--ash-dim);display:block;margin-bottom:22px;
@@ -166,7 +178,7 @@ em{font-style:normal;font-weight:600}
 .wall__s{
   font-family:var(--disp);text-transform:uppercase;line-height:1.05;
   color:var(--ash-dim);cursor:default;font-size:clamp(20px,2.6vw,34px);
-  transition:color .18s ease,transform .12s ease;
+  transition:color .08s steps(2,end);
 }
 .wall__s--lg{font-size:clamp(26px,3.6vw,48px)}
 .wall__s--xl{font-size:clamp(32px,4.8vw,64px)}
@@ -183,7 +195,7 @@ em{font-style:normal;font-weight:600}
 .prod{border:1px solid var(--hair);background:var(--panel);display:flex;flex-direction:column}
 .prod__views{position:relative;aspect-ratio:400/460;background:
   radial-gradient(120% 90% at 50% 0%,var(--panel-2) 0%,var(--panel) 68%)}
-.prod__view{position:absolute;inset:0;padding:8%;opacity:0;transition:opacity .28s ease}
+.prod__view{position:absolute;inset:0;padding:8%;opacity:0;transition:opacity .1s steps(2,end)}
 .prod[data-view="front"] .prod__view--front,
 .prod[data-view="back"] .prod__view--back{opacity:1}
 .prod__view .tee{width:100%;height:100%}
@@ -197,7 +209,7 @@ em{font-style:normal;font-weight:600}
 .prod__flip button{
   font-family:var(--body);font-weight:600;font-size:10px;letter-spacing:.12em;
   background:rgba(17,17,17,.72);color:var(--ash);border:0;padding:7px 10px;cursor:pointer;
-  transition:background .15s ease,color .15s ease;
+  transition:background .06s steps(1,end),color .06s steps(1,end);
 }
 .prod__flip button.is-on{background:var(--bone);color:var(--iron)}
 .prod__meta{padding:20px 20px 22px;border-top:1px solid var(--hair);display:flex;flex-direction:column;flex:1}
@@ -291,10 +303,33 @@ em{font-style:normal;font-weight:600}
 .foot__ez{color:var(--ash);border-bottom:1px solid var(--ash-dim)}
 .foot__ez:hover{color:var(--bone);border-color:var(--bone)}
 
-/* ---------- reveal states (JS present only) ---------- */
+/* ---------- stamp reveals (JS present only) ----------
+   The motion identity: a screen print doesn't fade onto a shirt,
+   it strikes. Two stepped frames — misregistered ghost, then ink. */
 html.js .reveal,html.js .reveal-up{opacity:0}
-html.js .reveal-up{transform:translateY(26px)}
 html.js.reduced .reveal,html.js.reduced .reveal-up{opacity:1;transform:none}
+.stamped{animation:stampIn .16s steps(2,end) both}
+@keyframes stampIn{
+  0%{opacity:0;transform:translate(4px,-4px)}
+  50%{opacity:.55;transform:translate(4px,-4px)}
+  100%{opacity:1;transform:none}
+}
+@keyframes rack{
+  0%{transform:translateX(0)}
+  50%{transform:translateX(2px)}
+  100%{transform:translateX(0)}
+}
+/* section rules load in chunks, not a sweep */
+html.js:not(.reduced) .sec__rule{transform:scaleX(0)}
+.sec__rule.ruled{animation:ruleLoad .5s steps(8,end) both}
+@keyframes ruleLoad{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+/* the wall + buttons reuse the strike */
+.is-hit{animation:hit .12s steps(2,end)}
+@keyframes hit{
+  0%{transform:translate(2px,-2px)}
+  50%{transform:translate(-1px,1px)}
+  100%{transform:none}
+}
 
 /* ---------- responsive ---------- */
 @media (max-width:1160px){
@@ -302,7 +337,8 @@ html.js.reduced .reveal,html.js.reduced .reveal-up{opacity:1;transform:none}
   .pillars{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:880px){
-  .nav__links,.nav__cta{display:none}
+  .nav__links{display:none}
+  .nav__cta{padding:10px 14px;font-size:11px}
   .nav__burger{display:block}
   .nav__word{width:150px}
   .name__split{grid-template-columns:1fr}
@@ -319,3 +355,81 @@ html.js.reduced .reveal,html.js.reduced .reveal-up{opacity:1;transform:none}
 }
 
 .menu[hidden]{display:none}
+
+/* ---------- the load: scroll progress as plates on a bar ---------- */
+.load{
+  position:fixed;right:20px;bottom:16px;z-index:40;
+  display:flex;flex-direction:column;align-items:flex-end;gap:4px;
+  opacity:0;pointer-events:none;transition:opacity .1s steps(2,end);
+}
+.load.show{opacity:1}
+html.reduced .load{opacity:1}
+.load svg{width:128px;height:auto}
+.ld__bar{fill:var(--ash-dim)}
+.ld__cl{fill:var(--ash)}
+.ld__p{fill:var(--bone);opacity:0}
+.ld__p.on{opacity:1}
+.load__wt{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--ash-dim)}
+.load.clank svg{animation:hit .1s steps(2,end)}
+@media (max-width:900px){.load{display:none}}
+
+/* ---------- size chips ---------- */
+.prod__size{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.prod__size button{
+  font-family:var(--body);font-weight:600;font-size:10.5px;letter-spacing:.08em;
+  background:transparent;color:var(--ash);border:1px solid var(--hair);
+  min-width:32px;padding:6px 0;cursor:pointer;
+  transition:background .06s steps(1,end),color .06s steps(1,end);
+}
+.prod__size button:hover{border-color:var(--ash)}
+.prod__size button.is-on{background:var(--bone);color:var(--iron);border-color:var(--bone)}
+.prod__price{font-family:var(--disp);font-size:15px;color:var(--bone);letter-spacing:.03em}
+
+/* ---------- cart drawer ---------- */
+.cartWrap[hidden]{display:none}
+.cart__scrim{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.6)}
+.cart{
+  position:fixed;top:0;right:0;bottom:0;z-index:71;width:min(430px,94vw);
+  background:var(--iron);border-left:1px solid var(--hair);
+  display:flex;flex-direction:column;padding:26px;overflow-y:auto;
+}
+.cart__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.cart__title{font-family:var(--disp);font-weight:400;font-size:24px;letter-spacing:.03em}
+.cart__close{
+  background:none;border:1px solid var(--hair);color:var(--bone);
+  width:38px;height:38px;font-size:20px;cursor:pointer;line-height:1;
+}
+.cart__close:hover{background:var(--bone);color:var(--iron)}
+.cart__items{list-style:none;display:flex;flex-direction:column}
+.cart__item{
+  display:grid;grid-template-columns:1fr auto auto;grid-template-areas:
+  "name ctl x" "meta price x";gap:4px 14px;align-items:center;
+  padding:14px 0;border-bottom:1px solid var(--hair-2);
+}
+.cart__iname{grid-area:name;font-family:var(--disp);font-size:13px;letter-spacing:.03em;text-transform:uppercase}
+.cart__imeta{grid-area:meta;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ash-dim)}
+.cart__ictl{grid-area:ctl;display:flex;align-items:center;gap:10px}
+.cart__ictl button{
+  background:none;border:1px solid var(--hair);color:var(--bone);
+  width:26px;height:26px;cursor:pointer;font-size:14px;line-height:1;
+}
+.cart__ictl button:hover{background:var(--bone);color:var(--iron)}
+.cart__ictl b{font-family:var(--mono);font-size:12px;min-width:14px;text-align:center}
+.cart__iprice{grid-area:price;font-family:var(--mono);font-size:12px;color:var(--ash);text-align:right}
+.cart__ix{
+  grid-area:x;background:none;border:0;color:var(--ash-dim);font-size:17px;
+  cursor:pointer;padding:6px;
+}
+.cart__ix:hover{color:var(--bone)}
+.cart__empty{color:var(--ash-dim);font-family:var(--disp);font-size:15px;letter-spacing:.04em;margin-top:10px}
+.cart__foot{margin-top:auto;padding-top:22px;border-top:1px solid var(--hair)}
+.cart__row{
+  display:flex;justify-content:space-between;font-family:var(--disp);
+  font-size:16px;letter-spacing:.04em;margin-bottom:8px;
+}
+.cart__ship{font-size:12px;color:var(--ash-dim);margin-bottom:18px}
+.cart__checkout{width:100%}
+.cart__demo{
+  font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.04em;
+  color:var(--ash);border:1px dashed var(--hair);padding:12px 14px;margin-top:14px;
+}

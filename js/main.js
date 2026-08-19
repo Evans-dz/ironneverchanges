@@ -1,7 +1,10 @@
 /* ============================================================
    IRON NEVER CHANGES — interaction layer
-   Lenis smooth scroll + GSAP ScrollTrigger. Everything degrades:
-   no JS → static page; reduced motion → static page with JS UI.
+   Motion language: screen-print, not cinema. Nothing eases or
+   glides — content STAMPS in on stepped frames, scroll is the
+   browser's own, and the only continuously-animated thing is
+   the ticker. GSAP is kept for ScrollTrigger; Lenis is gone on
+   purpose. No JS → static page; reduced motion → static + UI.
    ============================================================ */
 (() => {
   'use strict';
@@ -9,31 +12,18 @@
   document.documentElement.classList.add('js');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduced) document.documentElement.classList.add('reduced');
-  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ---------------- smooth scroll ---------------- */
-  let lenis = null;
-  if (!reduced) {
-    lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((t) => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-    window.__lenis = lenis;
-  }
+  /* ---------------- scroll helpers (native — no smoothing library) ---------------- */
   const scrollTo = (target) => {
-    if (lenis) lenis.scrollTo(target, { offset: -70, duration: 1.4, easing: (t) => 1 - Math.pow(1 - t, 4) });
-    else {
-      const el = typeof target === 'string' ? $(target) : target;
-      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior: reduced ? 'auto' : 'smooth' });
-    }
+    const el = typeof target === 'string' ? $(target) : target;
+    const top = target === 0 ? 0 : el ? el.getBoundingClientRect().top + window.scrollY - 70 : 0;
+    window.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' });
   };
-  /* scroll lock needs BOTH: under reduced motion Lenis is never constructed */
   const lockScroll = (on) => {
-    if (lenis) on ? lenis.stop() : lenis.start();
     document.documentElement.style.overflow = on ? 'hidden' : '';
   };
 
@@ -54,7 +44,6 @@
   window.addEventListener('scroll', onScrollNav, { passive: true });
   onScrollNav();
 
-  /* active link */
   const links = $$('.nav__links a');
   const byHash = {};
   links.forEach((l) => { byHash[l.getAttribute('href')] = l; });
@@ -86,58 +75,43 @@
     menu.hidden = !menuOpen;
     lockScroll(menuOpen);
   });
-  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
 
-  /* ---------------- hero ---------------- */
+  /* ---------------- hero: print-strike entry ---------------- */
   const l2 = $('.hero__l2');
   if (reduced) {
     l2.classList.add('is-filled');
   } else {
-    const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
-    intro
-      .from('.hero__l1', { yPercent: 24, opacity: 0, duration: 0.9 })
-      .from('.hero__l2', { yPercent: 24, opacity: 0, duration: 0.9 }, 0.14)
-      .add(() => l2.classList.add('is-filled'), 0.95)
-      /* the rack settles: one hard 1px tick when YOU DO. fills */
-      .to('.hero__h1', { x: 1.5, duration: 0.05, repeat: 3, yoyo: true, ease: 'none' }, 0.95)
-      .fromTo('.hero__eyebrow, .hero__lede, .hero__ctas',
-        { opacity: 0, y: 18 }, { opacity: 1, y: 0, stagger: 0.1, duration: 0.7 }, 0.5);
-    gsap.to('.hero__ring', {
-      yPercent: -12, ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
-    });
+    document.body.classList.add('go');           /* CSS stamp cascade */
+    setTimeout(() => {
+      l2.classList.add('is-filled');
+      $('.hero__h1').classList.add('rack');       /* one hard tick as the ink lands */
+    }, 620);
   }
-  /* ---------------- ticker ---------------- */
+
+  /* ---------------- ticker (the one thing allowed to move) ---------------- */
   if (!reduced) {
     gsap.to('#tickerTrack', { xPercent: -50, ease: 'none', duration: 46, repeat: -1 });
   }
 
-  /* ---------------- generic reveals ---------------- */
+  /* ---------------- stamp reveals ---------------- */
   if (!reduced) {
-    $$('.reveal').forEach((el) => {
-      gsap.to(el, {
-        opacity: 1, duration: 0.85, ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 86%' },
-      });
-    });
-    $$('.reveal-up').forEach((el) => {
-      gsap.to(el, {
-        opacity: 1, y: 0, duration: 0.85, ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%' },
+    $$('.reveal, .reveal-up').forEach((el) => {
+      ScrollTrigger.create({
+        trigger: el, start: 'top 88%', once: true,
+        onEnter: () => el.classList.add('stamped'),
       });
     });
     $$('.sec__rule').forEach((el) => {
-      gsap.from(el, {
-        scaleX: 0, duration: 1.1, ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 90%' },
+      ScrollTrigger.create({
+        trigger: el, start: 'top 90%', once: true,
+        onEnter: () => el.classList.add('ruled'),
       });
     });
   } else {
-    /* belt and braces: CSS .reduced already shows these */
     $$('.reveal, .reveal-up').forEach((el) => { el.style.opacity = 1; el.style.transform = 'none'; });
   }
 
-  /* ---------------- 01 the standard: word scrub ---------------- */
+  /* ---------------- 01 the standard: word scrub (already discrete) ---------------- */
   const scrub = $('#scrub');
   if (scrub) {
     const words = scrub.textContent.trim().split(/\s+/);
@@ -162,15 +136,48 @@
     }
   }
 
-  /* ---------------- 02 the wall: stamp on tap ---------------- */
+  /* ---------------- 02 the wall ---------------- */
   $$('.wall__s').forEach((s) => {
     s.addEventListener('click', () => {
-      s.classList.add('is-stamped');
-      if (!reduced) gsap.fromTo(s, { scale: 0.96 }, { scale: 1, duration: 0.28, ease: 'back.out(3)' });
+      s.classList.remove('is-hit');
+      void s.offsetWidth;                          /* restart the stamp */
+      s.classList.add('is-stamped', 'is-hit');
     });
   });
 
-  /* ---------------- 03 the line: front/back ---------------- */
+  /* ---------------- the load: scroll progress as plates on a bar ---------------- */
+  const loadEl = $('#load');
+  if (loadEl) {
+    const plates = $$('.ld__p', loadEl);
+    const wt = $('#loadWt');
+    const WEIGHTS = ['BAR · 45 LB', '135 LB', '225 LB', '315 LB', '405 LB', '495 LB'];
+    let stage = -1;
+    const setStage = (n) => {
+      if (n === stage) return;
+      stage = n;
+      plates.forEach((p, i) => p.classList.toggle('on', i < n));
+      wt.textContent = WEIGHTS[n];
+      if (!reduced) {
+        loadEl.classList.remove('clank');
+        void loadEl.offsetWidth;
+        loadEl.classList.add('clank');
+      }
+    };
+    if (reduced) setStage(5);
+    else {
+      ScrollTrigger.create({
+        start: 0, end: 'max',
+        onUpdate: (st) => setStage(Math.min(5, Math.floor(st.progress * 6))),
+      });
+      setStage(0);
+      ScrollTrigger.create({
+        trigger: '#standard', start: 'top 90%', end: 'max',
+        onToggle: (st) => loadEl.classList.toggle('show', st.isActive),
+      });
+    }
+  }
+
+  /* ---------------- 03 the shop: front/back views ---------------- */
   $$('.prod').forEach((card) => {
     const set = (face) => {
       card.dataset.view = face;
@@ -182,24 +189,117 @@
     };
     $$('.prod__flip button', card).forEach((b) =>
       b.addEventListener('click', () => set(b.dataset.face)));
-    /* the view itself flips too — hover to peek on desktop, tap on touch */
     const views = $('.prod__views', card);
     views.addEventListener('click', (e) => {
       if (e.target.closest('.prod__flip')) return;
       set(card.dataset.view === 'front' ? 'back' : 'front');
     });
-    if (finePointer) {
-      let hovered = false;
-      views.addEventListener('mouseenter', () => { hovered = card.dataset.view === 'front'; if (hovered) set('back'); });
-      views.addEventListener('mouseleave', () => { if (hovered) { set('front'); hovered = false; } });
-    }
+    /* size chips */
+    $$('.prod__size button', card).forEach((b) =>
+      b.addEventListener('click', () => {
+        $$('.prod__size button', card).forEach((x) => {
+          x.classList.toggle('is-on', x === b);
+          x.setAttribute('aria-pressed', String(x === b));
+        });
+      }));
   });
 
-  /* notify buttons → waitlist */
-  $$('[data-notify]').forEach((b) => b.addEventListener('click', () => {
-    scrollTo('#list');
-    setTimeout(() => $('#listEmail').focus({ preventScroll: true }), reduced ? 0 : 900);
+  /* ---------------- cart (demo — client-side only) ---------------- */
+  const CART_KEY = 'inc-cart';
+  let cart = [];
+  try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { cart = []; }
+  const save = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {} };
+
+  const cartWrap = $('#cartWrap');
+  const cartBtn = $('#cartBtn');
+  const cartCount = $('#cartCount');
+  const cartItems = $('#cartItems');
+  const cartEmpty = $('#cartEmpty');
+  const cartFoot = $('#cartFoot');
+  const cartTotal = $('#cartTotal');
+  const cartDemo = $('#cartDemo');
+  let cartOpen = false;
+
+  const money = (n) => '$' + n;
+  const count = () => cart.reduce((a, i) => a + i.qty, 0);
+
+  function renderCart() {
+    const n = count();
+    cartCount.textContent = '(' + n + ')';
+    cartBtn.setAttribute('aria-label', 'Cart, ' + n + ' item' + (n === 1 ? '' : 's'));
+    cartItems.innerHTML = '';
+    cart.forEach((item, idx) => {
+      const li = document.createElement('li');
+      li.className = 'cart__item';
+      li.innerHTML =
+        '<span class="cart__iname">' + item.name + '</span>' +
+        '<span class="cart__imeta">' + item.sku + ' · SIZE ' + item.size + '</span>' +
+        '<span class="cart__ictl">' +
+          '<button type="button" data-q="-1" aria-label="One fewer">−</button>' +
+          '<b>' + item.qty + '</b>' +
+          '<button type="button" data-q="1" aria-label="One more">+</button>' +
+        '</span>' +
+        '<span class="cart__iprice">' + money(item.price * item.qty) + '</span>' +
+        '<button class="cart__ix" type="button" aria-label="Remove">×</button>';
+      $$('[data-q]', li).forEach((b) => b.addEventListener('click', () => {
+        item.qty += Number(b.dataset.q);
+        if (item.qty <= 0) cart.splice(idx, 1);
+        save(); renderCart();
+      }));
+      $('.cart__ix', li).addEventListener('click', () => {
+        cart.splice(idx, 1); save(); renderCart();
+      });
+      cartItems.appendChild(li);
+    });
+    const has = cart.length > 0;
+    cartEmpty.hidden = has;
+    cartFoot.hidden = !has;
+    if (has) cartTotal.textContent = money(cart.reduce((a, i) => a + i.price * i.qty, 0));
+  }
+
+  function openCart() {
+    cartOpen = true;
+    cartWrap.hidden = false;
+    lockScroll(true);
+    renderCart();
+    $('#cartClose').focus({ preventScroll: true });
+  }
+  function closeCart() {
+    if (!cartOpen) return;
+    cartOpen = false;
+    cartWrap.hidden = true;
+    cartDemo.hidden = true;
+    lockScroll(false);
+    cartBtn.focus({ preventScroll: true });
+  }
+  cartBtn.addEventListener('click', () => (cartOpen ? closeCart() : openCart()));
+  $('#cartClose').addEventListener('click', closeCart);
+  $('#cartScrim').addEventListener('click', closeCart);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { closeCart(); closeMenu(); }
+  });
+
+  /* add to cart */
+  $$('[data-add]').forEach((b) => b.addEventListener('click', () => {
+    const card = b.closest('.prod');
+    const size = ($('.prod__size .is-on', card) || {}).textContent || 'M';
+    const sku = card.dataset.sku;
+    const found = cart.find((i) => i.sku === sku && i.size === size);
+    if (found) found.qty += 1;
+    else cart.push({ sku, name: card.dataset.name, price: Number(card.dataset.price), size, qty: 1 });
+    save(); renderCart();
+    const label = b.textContent;
+    b.textContent = 'RACKED.';
+    b.classList.add('is-hit');
+    setTimeout(() => { b.textContent = label; b.classList.remove('is-hit'); }, 900);
   }));
+
+  /* checkout: honest about being a concept build */
+  $('#cartCheckout').addEventListener('click', () => {
+    cartDemo.hidden = false;
+  });
+
+  renderCart();
 
   /* ---------------- waitlist (demo — intentionally unwired) ---------------- */
   const form = $('#listForm');
@@ -208,12 +308,12 @@
     const email = $('#listEmail').value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       $('#listEmail').focus();
-      if (!reduced) gsap.fromTo(form, { x: -4 }, { x: 0, duration: 0.3, ease: 'elastic.out(1,0.35)' });
+      form.classList.remove('is-hit'); void form.offsetWidth; form.classList.add('is-hit');
       return;
     }
     form.hidden = true;
     const done = $('#listDone');
     done.hidden = false;
-    if (!reduced) gsap.from(done, { opacity: 0, y: 10, duration: 0.5, ease: 'power2.out' });
+    done.classList.add('stamped');
   });
 })();

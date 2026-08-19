@@ -7,7 +7,7 @@
 <meta name="description" content="Heavyweight gym wear for men with jobs, kids, and a bar in their week. No highlight reels. Iron never changes. You do.">
 <meta name="robots" content="noindex, nofollow">
 <meta property="og:title" content="IRON NEVER CHANGES">
-<meta property="og:description" content="Where limits meet defeat. Heavyweight gym wear for the ones who show up anyway. Drop 001 coming.">
+<meta property="og:description" content="Where limits meet defeat. Heavyweight gym wear for the ones who show up anyway.">
 <meta property="og:image" content="assets/brand/og-square.png">
 <link rel="icon" href="assets/brand/favicon-64.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/brand/favicon-192.png">
@@ -50,11 +50,11 @@
   <nav class="nav__links" aria-label="Sections">
     <a href="#standard" data-scroll>The Standard</a>
     <a href="#wall" data-scroll>The Wall</a>
-    <a href="#line" data-scroll>Drop 001</a>
+    <a href="#shop" data-scroll>The Shop</a>
     <a href="#feed" data-scroll>The Feed</a>
     <a href="#name" data-scroll>The Name</a>
   </nav>
-  <a class="btn btn--solid nav__cta" href="#list" data-scroll>Get on the list</a>
+  <button class="btn btn--solid nav__cta" id="cartBtn" type="button" aria-haspopup="dialog" aria-label="Cart, 0 items">Cart <span id="cartCount">(0)</span></button>
   <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
     <span></span><span></span>
   </button>
@@ -64,7 +64,7 @@
   <nav class="menu__links" aria-label="Menu">
     <a href="#standard" data-scroll>The Standard</a>
     <a href="#wall" data-scroll>The Wall</a>
-    <a href="#line" data-scroll>Drop 001</a>
+    <a href="#shop" data-scroll>The Shop</a>
     <a href="#feed" data-scroll>The Feed</a>
     <a href="#name" data-scroll>The Name</a>
     <a href="#list" data-scroll class="menu__cta">Get on the list</a>
@@ -78,7 +78,7 @@
 <section class="hero" id="hero">
   <img class="hero__ring" src="assets/brand/INC_badge-ring_grey.svg" alt="" aria-hidden="true" width="1000" height="1000">
   <div class="hero__inner">
-    <p class="hero__eyebrow">HEAVYWEIGHT GYM WEAR &middot; DROP 001 COMING</p>
+    <p class="hero__eyebrow">HEAVYWEIGHT GYM WEAR &middot; SHOP OPENING SOON</p>
     <h1 class="hero__h1">
       <span class="hero__l1">IRON NEVER<br>CHANGES.</span>
       <span class="hero__l2">YOU DO.</span>
@@ -87,7 +87,7 @@
     who trained after the shift, between the job and the kids, in the middle of the worst year
     he&rsquo;s had &mdash; and came back the next day. The bar doesn&rsquo;t know any of that. That&rsquo;s the point.</p>
     <div class="hero__ctas">
-      <a class="btn btn--solid" href="#line" data-scroll>Shop Drop 001</a>
+      <a class="btn btn--solid" href="#shop" data-scroll>Shop the line</a>
       <a class="btn" href="#standard" data-scroll>Read the Standard</a>
     </div>
   </div>
@@ -152,7 +152,7 @@
     <h2 class="sec__title">THE WALL</h2>
     <span class="sec__rule" aria-hidden="true"></span>
   </div>
-  <p class="sec__lede reveal">Every drop starts here. If one of these reads like your week, that&rsquo;s the one you buy.</p>
+  <p class="sec__lede reveal">Every shirt starts here. If one of these reads like your week, that&rsquo;s the one you buy.</p>
 
   <div class="wall__grid" id="wallGrid">
     <span class="wall__s wall__s--xl">I DIDN&rsquo;T FEEL LIKE IT EITHER</span>
@@ -180,10 +180,10 @@
 </section>
 
 <!-- ============ 03 THE LINE ============ -->
-<section class="sec line" id="line">
+<section class="sec line" id="shop">
   <div class="sec__head">
     <span class="sec__no">03</span>
-    <h2 class="sec__title">THE LINE &mdash; DROP 001</h2>
+    <h2 class="sec__title">THE SHOP</h2>
     <span class="sec__rule" aria-hidden="true"></span>
   </div>
   <p class="sec__lede reveal">Eight shirts. Three colors of cotton, one color of ink. Heavyweight,
@@ -191,7 +191,7 @@
   no neon, no motivation-speak in cursive.</p>
 
   <div class="line__grid" id="lineGrid">
-    <article class="prod reveal-up" data-view="front">
+    <article class="prod reveal-up" data-view="front" data-sku="INC-001" data-name="THE FLAGSHIP" data-price="42">
       <div class="prod__views">
         <div class="prod__view prod__view--front"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, front: skull and barbell mark on the left chest"><use href="#teeF"></use><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="231" y="120" width="37" height="24.6"/></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
         <div class="prod__view prod__view--back"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, back: large vintage wordmark with YOU DO. beneath"><use href="#teeB"></use><image href="assets/brand/vintage-wordmark-stacked_white.png" x="136.5" y="96" width="127" height="109.6"/><text class="pr" x="200" y="240" font-size="26" letter-spacing="2" text-anchor="middle">YOU DO.</text></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
@@ -208,14 +208,15 @@
       <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 3.5&#8243;</li>
       <li><b>BACK</b>stacked wordmark, vintage print &middot; 12&#8243; &middot; &ldquo;YOU DO.&rdquo; beneath</li>
         </ul>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
-          <span class="prod__price">PRICE AT DROP</span>
-          <button class="btn btn--tiny" type="button" data-notify>Notify me</button>
+          <span class="prod__price">$42</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front">
+    <article class="prod reveal-up" data-view="front" data-sku="INC-002" data-name="I DIDN'T FEEL LIKE IT EITHER" data-price="38">
       <div class="prod__views">
         <div class="prod__view prod__view--front"><svg class="tee g-charcoal" viewBox="0 0 400 460" role="img" aria-label="Charcoal tee, front: thin slogan bar across the chest"><use href="#teeF"></use><image href="assets/brand/INC_tagline-bar_white.svg" x="155" y="133" width="90" height="2.13"/></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
         <div class="prod__view prod__view--back"><svg class="tee g-charcoal" viewBox="0 0 400 460" role="img" aria-label="Charcoal tee, back: I didn’t feel like it either in stacked type"><use href="#teeB"></use><text class="pr" x="200" y="128" font-size="18" text-anchor="middle">I DIDN&rsquo;T</text><text class="pr" x="200" y="154" font-size="18" text-anchor="middle">FEEL LIKE IT</text><text class="pr" x="200" y="180" font-size="18" text-anchor="middle">EITHER</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="185" y="206" width="30" height="20"/></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
@@ -232,14 +233,15 @@
       <li><b>FRONT</b>slogan bar across the chest &middot; 8.5&#8243;</li>
       <li><b>BACK</b>the line in stacked type &middot; 13&#8243; &middot; mark centered beneath</li>
         </ul>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
-          <span class="prod__price">PRICE AT DROP</span>
-          <button class="btn btn--tiny" type="button" data-notify>Notify me</button>
+          <span class="prod__price">$38</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front">
+    <article class="prod reveal-up" data-view="front" data-sku="INC-003" data-name="ROCK BOTTOM HAS A SQUAT RACK" data-price="38">
       <div class="prod__views">
         <div class="prod__view prod__view--front"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, front: circular badge on the left chest"><use href="#teeF"></use><image href="assets/brand/INC_badge-primary_white.svg" x="229" y="117" width="42" height="42"/></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
         <div class="prod__view prod__view--back"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, back: rock bottom has a squat rack in heavy type"><use href="#teeB"></use><text class="pr" x="200" y="128" font-size="20" text-anchor="middle">ROCK BOTTOM</text><text class="pr" x="200" y="156" font-size="20" text-anchor="middle">HAS A</text><text class="pr" x="200" y="184" font-size="20" text-anchor="middle">SQUAT RACK.</text></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
@@ -256,14 +258,15 @@
       <li><b>FRONT</b>primary badge &middot; left chest &middot; 4&#8243;</li>
       <li><b>BACK</b>the line, vintage print &middot; 13&#8243;</li>
         </ul>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
-          <span class="prod__price">PRICE AT DROP</span>
-          <button class="btn btn--tiny" type="button" data-notify>Notify me</button>
+          <span class="prod__price">$38</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front">
+    <article class="prod reveal-up" data-view="front" data-sku="INC-004" data-name="45 MINUTES THAT BELONG TO ME" data-price="38">
       <div class="prod__views">
         <div class="prod__view prod__view--front"><svg class="tee g-heather" viewBox="0 0 400 460" role="img" aria-label="Heather grey tee, front: one-line lockup on the left chest"><use href="#teeF"></use><image href="assets/brand/INC_lockup-horizontal-oneline_black.svg" x="229" y="125" width="42" height="5.6"/></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
         <div class="prod__view prod__view--back"><svg class="tee g-heather" viewBox="0 0 400 460" role="img" aria-label="Heather grey tee, back: slim tagline printed down the spine"><use href="#teeB"></use><image href="assets/brand/INC_spine-tagline-slim_black.svg" x="187" y="84" width="26" height="173"/></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
@@ -280,14 +283,15 @@
       <li><b>FRONT</b>one-line lockup &middot; left chest &middot; 4&#8243;</li>
       <li><b>SPINE</b>slim tagline &middot; 2.5&#8243; &times; 16&#8243; down the center back</li>
         </ul>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
-          <span class="prod__price">PRICE AT DROP</span>
-          <button class="btn btn--tiny" type="button" data-notify>Notify me</button>
+          <span class="prod__price">$38</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front">
+    <article class="prod reveal-up" data-view="front" data-sku="INC-005" data-name="THE BAR DOESN'T KNOW YOU'RE TIRED" data-price="40">
       <div class="prod__views">
         <div class="prod__view prod__view--front"><svg class="tee g-charcoal" viewBox="0 0 400 460" role="img" aria-label="Charcoal tee, front: skull and barbell mark on the left chest"><use href="#teeF"></use><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="231" y="120" width="37" height="24.6"/></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
         <div class="prod__view prod__view--back"><svg class="tee g-charcoal" viewBox="0 0 400 460" role="img" aria-label="Charcoal tee, back: line across the shoulders, name down the spine"><use href="#teeB"></use><text class="pr" x="200" y="102" font-size="11" text-anchor="middle">THE BAR DOESN&rsquo;T KNOW</text><text class="pr" x="200" y="118" font-size="11" text-anchor="middle">YOU&rsquo;RE TIRED.</text><image href="assets/brand/INC_spine-name_white.svg" x="185.5" y="130" width="29" height="180"/></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
@@ -305,14 +309,15 @@
       <li><b>BACK</b>the line across the shoulder blades &middot; 11&#8243;</li>
       <li><b>SPINE</b>name print &middot; 2.75&#8243; &times; 17&#8243;</li>
         </ul>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
-          <span class="prod__price">PRICE AT DROP</span>
-          <button class="btn btn--tiny" type="button" data-notify>Notify me</button>
+          <span class="prod__price">$40</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front">
+    <article class="prod reveal-up" data-view="front" data-sku="INC-006" data-name="THE SPINE TEE" data-price="42">
       <div class="prod__views">
         <div class="prod__view prod__view--front"><svg class="tee g-natural" viewBox="0 0 400 460" role="img" aria-label="Natural white tee, front: circular stamp mark on the left chest"><use href="#teeF"></use><image href="assets/brand/INC_mark-stamp-circle_black.svg" x="231.5" y="114.5" width="37" height="37"/></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
         <div class="prod__view prod__view--back"><svg class="tee g-natural" viewBox="0 0 400 460" role="img" aria-label="Natural white tee, back: full spine print with a small hem line"><use href="#teeB"></use><image href="assets/brand/INC_spine-full_black.svg" x="186" y="82" width="28" height="170.4"/><text class="pr" x="200" y="394" font-size="8" letter-spacing="1.5" text-anchor="middle">COME BACK TOMORROW</text></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
@@ -330,14 +335,15 @@
       <li><b>SPINE</b>full spine print &middot; 2.75&#8243; &times; 17&#8243;</li>
       <li><b>HEM</b>&ldquo;COME BACK TOMORROW&rdquo; &middot; 5&#8243;</li>
         </ul>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
-          <span class="prod__price">PRICE AT DROP</span>
-          <button class="btn btn--tiny" type="button" data-notify>Notify me</button>
+          <span class="prod__price">$42</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front">
+    <article class="prod reveal-up" data-view="front" data-sku="INC-007" data-name="THE HOUSE SHIRT" data-price="34">
       <div class="prod__views">
         <div class="prod__view prod__view--front"><div class="prod__photoWrap"><img class="prod__photo" src="assets/brand/garment-badge-black.png" alt="The primary badge screen printed in white on a black tee" loading="lazy" width="900" height="900"></div><span class="prod__face" aria-hidden="true">FRONT &middot; PRINT PROOF</span></div>
         <div class="prod__view prod__view--back"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, back: blank on purpose"><use href="#teeB"></use><text class="pr pr--dim" x="200" y="230" font-size="10" letter-spacing="2" text-anchor="middle">BLANK. ON PURPOSE.</text></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
@@ -354,14 +360,15 @@
       <li><b>FRONT</b>primary badge, vintage print &middot; 11&#8243; full front</li>
       <li><b>BACK</b>blank</li>
         </ul>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
-          <span class="prod__price">PRICE AT DROP</span>
-          <button class="btn btn--tiny" type="button" data-notify>Notify me</button>
+          <span class="prod__price">$34</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front">
+    <article class="prod reveal-up" data-view="front" data-sku="INC-008" data-name="BUILT BACK" data-price="40">
       <div class="prod__views">
         <div class="prod__view prod__view--front"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, front: BUILT BACK printed small over the heart"><use href="#teeF"></use><text class="pr" x="250" y="136" font-size="9" letter-spacing="3" text-anchor="middle">BUILT BACK</text></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
         <div class="prod__view prod__view--back"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, back: large vintage badge over a NOT BORN THIS WAY bar"><use href="#teeB"></use><image href="assets/brand/vintage-badge_white.png" x="136.5" y="86" width="127" height="127"/><rect x="134" y="230" width="132" height="18" fill="var(--ink)"/><text class="prInv" x="200" y="243" font-size="10" letter-spacing="0.5" text-anchor="middle">NOT BORN THIS WAY</text></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
@@ -378,9 +385,10 @@
       <li><b>FRONT</b>&ldquo;BUILT BACK&rdquo; &middot; over the heart</li>
       <li><b>BACK</b>vintage badge &middot; 12&#8243; &middot; &ldquo;NOT BORN THIS WAY&rdquo; slogan bar</li>
         </ul>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
-          <span class="prod__price">PRICE AT DROP</span>
-          <button class="btn btn--tiny" type="button" data-notify>Notify me</button>
+          <span class="prod__price">$40</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
@@ -389,8 +397,8 @@
   <!-- waitlist -->
   <div class="list" id="list">
     <div class="list__inner">
-      <p class="list__kick">DROP 001 SHIPS WHEN IT SHIPS.</p>
-      <p class="list__sub">Sizes S&ndash;3XL. No restock promises. Get on the list and you&rsquo;ll hear first.</p>
+      <p class="list__kick">CHECKOUT OPENS SOON.</p>
+      <p class="list__sub">The shop is being stitched up now &mdash; sizes S&ndash;3XL, no restock promises. Leave your email and you&rsquo;ll know the minute it&rsquo;s live.</p>
       <form class="list__form" id="listForm" novalidate>
         <label class="sr-only" for="listEmail">Email</label>
         <input class="list__input" id="listEmail" type="email" name="email" placeholder="YOUR@EMAIL.COM" autocomplete="email" required>
@@ -433,7 +441,7 @@
       <span class="frame__bar" aria-hidden="true"><i style="width:87%"></i></span>
     </figure>
   </div>
-  <p class="feed__note reveal">The feed goes live with Drop 001. Handles land here when they&rsquo;re locked in.</p>
+  <p class="feed__note reveal">The feed goes live when the shop does. Handles land here when they&rsquo;re locked in.</p>
 </section>
 
 <!-- ============ 05 THE NAME ============ -->
@@ -462,6 +470,37 @@
 
 </main>
 
+
+<!-- the load: scroll progress drawn as plates going on a bar -->
+<div class="load" id="load" aria-hidden="true">
+  <svg viewBox="0 0 150 40">
+    <rect class="ld__bar" x="4" y="18.5" width="142" height="3" rx="1.5"/>
+    <rect class="ld__cl" x="49" y="14" width="4" height="12" rx="1"/>
+    <rect class="ld__cl" x="97" y="14" width="4" height="12" rx="1"/>
+    <rect class="ld__p" x="40" y="4.0" width="7" height="32" rx="1.5"/><rect class="ld__p" x="103" y="4.0" width="7" height="32" rx="1.5"/><rect class="ld__p" x="31" y="6.0" width="7" height="28" rx="1.5"/><rect class="ld__p" x="112" y="6.0" width="7" height="28" rx="1.5"/><rect class="ld__p" x="22" y="7.5" width="7" height="25" rx="1.5"/><rect class="ld__p" x="121" y="7.5" width="7" height="25" rx="1.5"/><rect class="ld__p" x="13" y="9.0" width="7" height="22" rx="1.5"/><rect class="ld__p" x="130" y="9.0" width="7" height="22" rx="1.5"/><rect class="ld__p" x="4" y="10.5" width="7" height="19" rx="1.5"/><rect class="ld__p" x="139" y="10.5" width="7" height="19" rx="1.5"/>
+  </svg>
+  <span class="load__wt" id="loadWt">BAR &middot; 45 LB</span>
+</div>
+
+<!-- cart drawer (demo — client-side only) -->
+<div class="cartWrap" id="cartWrap" hidden>
+  <div class="cart__scrim" id="cartScrim"></div>
+  <aside class="cart" role="dialog" aria-modal="true" aria-label="Cart">
+    <div class="cart__head">
+      <h2 class="cart__title">THE CART</h2>
+      <button class="cart__close" id="cartClose" type="button" aria-label="Close cart">&times;</button>
+    </div>
+    <ul class="cart__items" id="cartItems"></ul>
+    <p class="cart__empty" id="cartEmpty">NOTHING ON THE BAR YET.</p>
+    <div class="cart__foot" id="cartFoot" hidden>
+      <div class="cart__row"><span>SUBTOTAL</span><span id="cartTotal">$0</span></div>
+      <p class="cart__ship">Shipping &amp; tax at checkout.</p>
+      <button class="btn btn--solid cart__checkout" id="cartCheckout" type="button">Checkout</button>
+      <p class="cart__demo" id="cartDemo" hidden>CHECKOUT ISN&rsquo;T WIRED UP YET &mdash; concept build. Leave your email in &ldquo;Checkout opens soon&rdquo; below and you&rsquo;ll hear the minute it goes live.</p>
+    </div>
+  </aside>
+</div>
+
 <!-- ============ FOOTER ============ -->
 <footer class="foot">
   <img class="foot__lockup" src="assets/brand/INC_lockup-horizontal-oneline_white.svg" alt="Iron Never Changes — where limits meet defeat" width="1800" height="239">
@@ -470,17 +509,17 @@
       <span class="foot__h">SITE</span>
       <a href="#standard" data-scroll>The Standard</a>
       <a href="#wall" data-scroll>The Wall</a>
-      <a href="#line" data-scroll>Drop 001</a>
+      <a href="#shop" data-scroll>The Shop</a>
       <a href="#name" data-scroll>The Name</a>
     </nav>
     <div class="foot__col">
       <span class="foot__h">SOCIAL</span>
-      <a href="#" aria-disabled="true" title="Coming with Drop 001">Instagram &mdash; soon</a>
-      <a href="#" aria-disabled="true" title="Coming with Drop 001">TikTok &mdash; soon</a>
+      <a href="#" aria-disabled="true" title="Coming with the shop">Instagram &mdash; soon</a>
+      <a href="#" aria-disabled="true" title="Coming with the shop">TikTok &mdash; soon</a>
     </div>
     <div class="foot__col">
       <span class="foot__h">TRADE</span>
-      <span class="foot__dim">Wholesale &amp; collabs open with the first drop.</span>
+      <span class="foot__dim">Wholesale &amp; collabs open with the shop.</span>
     </div>
   </div>
   <div class="foot__base">
@@ -491,7 +530,6 @@
 
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
-<script src="vendor/lenis.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
