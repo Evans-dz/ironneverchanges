@@ -1,5 +1,6 @@
-# The full print-ready logo package rides in the repo for safekeeping,
-# but the site only serves the curated web set in assets/brand/.
-brand/
-README.md
-server.js
+# Anchored to the repo root — an unanchored "brand/" also matches
+# assets/brand/ (gitignore semantics) and strips the site's own images,
+# which is exactly what broke the first deployment.
+/brand/
+/README.md
+/server.js

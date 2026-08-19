@@ -11,8 +11,12 @@ keyframes). The scroll-progress indicator is a barbell that loads plates as you
 go (45 → 495 LB at the footer). Keep new animation in this language.
 
 - **Run locally:** `node server.js` → http://localhost:4175
-- **Deploy:** Vercel, static. `.vercelignore` keeps `brand/` (the 31 MB print-ready
-  logo package), this README and the dev server out of the deploy.
+- **Deploy:** Vercel, static — `vercel.json` pins `"framework": null` so no
+  preset ever tries to build it (the import flow once guessed Node off
+  `server.js` and failed on a missing entrypoint). `.vercelignore` keeps
+  `/brand/` (the 31 MB print package), this README and the dev server out of
+  the deploy; patterns are root-anchored because an unanchored `brand/` also
+  matches `assets/brand/` and strips the site's own images.
 - **Brand truth:** `brand/BRAND-GUIDE.md` and `brand/SHIRT-CONCEPTS.md` are the
   client's source material — colors (#111 / #fff / #8C8C8C only), Archivo type,
   the eight shirt designs, and the slogan bank all come from there.
