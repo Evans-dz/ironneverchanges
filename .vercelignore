@@ -1,0 +1,5 @@
+# The full print-ready logo package rides in the repo for safekeeping,
+# but the site only serves the curated web set in assets/brand/.
+brand/
+README.md
+server.js
