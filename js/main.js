@@ -9,13 +9,21 @@
 (() => {
   'use strict';
 
-  document.documentElement.classList.add('js');
+  /* if a vendor script died, never arm the CSS hiding rules — the page
+     must stay a static, fully visible document */
+  const hasMotion = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (hasMotion) document.documentElement.classList.add('js');
   if (reduced) document.documentElement.classList.add('reduced');
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
-  gsap.registerPlugin(ScrollTrigger);
+  if (hasMotion) gsap.registerPlugin(ScrollTrigger);
+
+  /* one scroll lock shared by the menu and the cart — refcounted by state */
+  let menuOpen = false;
+  let cartOpen = false;
+  const syncLock = () => lockScroll(menuOpen || cartOpen);
 
   /* ---------------- scroll helpers (native — no smoothing library) ---------------- */
   const scrollTo = (target) => {
@@ -47,7 +55,7 @@
   const links = $$('.nav__links a');
   const byHash = {};
   links.forEach((l) => { byHash[l.getAttribute('href')] = l; });
-  $$('main section[id]').forEach((sec) => {
+  if (hasMotion) $$('main section[id]').forEach((sec) => {
     ScrollTrigger.create({
       trigger: sec, start: 'top 45%', end: 'bottom 45%',
       onToggle: (st) => {
@@ -61,24 +69,23 @@
   const burger = $('#burger');
   const menu = $('#menu');
   menu.hidden = true;
-  let menuOpen = false;
   function closeMenu() {
     if (!menuOpen) return;
     menuOpen = false;
     burger.setAttribute('aria-expanded', 'false');
     menu.hidden = true;
-    lockScroll(false);
+    syncLock();
   }
   burger.addEventListener('click', () => {
     menuOpen = !menuOpen;
     burger.setAttribute('aria-expanded', String(menuOpen));
     menu.hidden = !menuOpen;
-    lockScroll(menuOpen);
+    syncLock();
   });
 
   /* ---------------- hero: print-strike entry ---------------- */
   const l2 = $('.hero__l2');
-  if (reduced) {
+  if (reduced || !hasMotion) {
     l2.classList.add('is-filled');
   } else {
     document.body.classList.add('go');           /* CSS stamp cascade */
@@ -89,12 +96,14 @@
   }
 
   /* ---------------- ticker (the one thing allowed to move) ---------------- */
-  if (!reduced) {
-    gsap.to('#tickerTrack', { xPercent: -50, ease: 'none', duration: 46, repeat: -1 });
+  if (!reduced && hasMotion) {
+    /* the demos glide their marquees; this one ratchets — discrete ~6px
+       notches, like a chain drive */
+    gsap.to('#tickerTrack', { xPercent: -50, ease: 'steps(460)', duration: 52, repeat: -1 });
   }
 
   /* ---------------- stamp reveals ---------------- */
-  if (!reduced) {
+  if (!reduced && hasMotion) {
     $$('.reveal, .reveal-up').forEach((el) => {
       ScrollTrigger.create({
         trigger: el, start: 'top 88%', once: true,
@@ -124,12 +133,13 @@
       if (i < words.length - 1) scrub.appendChild(document.createTextNode(' '));
     });
     const spans = $$('.w-word', scrub);
-    if (reduced) spans.forEach((s) => s.classList.add('lit'));
+    if (reduced || !hasMotion) spans.forEach((s) => s.classList.add('lit'));
     else {
       ScrollTrigger.create({
         trigger: scrub, start: 'top 78%', end: 'bottom 42%', scrub: true,
         onUpdate: (st) => {
-          const n = Math.round(st.progress * spans.length);
+          /* slabs of three — the ink goes down a press-stroke at a time */
+          const n = Math.min(spans.length, Math.ceil((st.progress * spans.length) / 3) * 3);
           spans.forEach((s, i) => s.classList.toggle('lit', i < n));
         },
       });
@@ -155,7 +165,8 @@
     const setStage = (n) => {
       if (n === stage) return;
       stage = n;
-      plates.forEach((p, i) => p.classList.toggle('on', i < n));
+      /* plates load in PAIRS — one per sleeve — or the bar is lopsided */
+      plates.forEach((p, i) => p.classList.toggle('on', i < n * 2));
       wt.textContent = WEIGHTS[n];
       if (!reduced) {
         loadEl.classList.remove('clank');
@@ -165,15 +176,15 @@
     };
     if (reduced) setStage(5);
     else {
-      ScrollTrigger.create({
-        start: 0, end: 'max',
-        onUpdate: (st) => setStage(Math.min(5, Math.floor(st.progress * 6))),
-      });
+      const onLoadScroll = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const p = max > 0 ? window.scrollY / max : 0;
+        setStage(Math.min(5, Math.floor(p * 6)));
+        loadEl.classList.toggle('show', window.scrollY > window.innerHeight * 0.5);
+      };
+      window.addEventListener('scroll', onLoadScroll, { passive: true });
       setStage(0);
-      ScrollTrigger.create({
-        trigger: '#standard', start: 'top 90%', end: 'max',
-        onToggle: (st) => loadEl.classList.toggle('show', st.isActive),
-      });
+      onLoadScroll();
     }
   }
 
@@ -218,7 +229,6 @@
   const cartFoot = $('#cartFoot');
   const cartTotal = $('#cartTotal');
   const cartDemo = $('#cartDemo');
-  let cartOpen = false;
 
   const money = (n) => '$' + n;
   const count = () => cart.reduce((a, i) => a + i.qty, 0);
@@ -235,12 +245,12 @@
         '<span class="cart__iname">' + item.name + '</span>' +
         '<span class="cart__imeta">' + item.sku + ' · SIZE ' + item.size + '</span>' +
         '<span class="cart__ictl">' +
-          '<button type="button" data-q="-1" aria-label="One fewer">−</button>' +
+          '<button type="button" data-q="-1" aria-label="One fewer ' + item.name + '">−</button>' +
           '<b>' + item.qty + '</b>' +
-          '<button type="button" data-q="1" aria-label="One more">+</button>' +
+          '<button type="button" data-q="1" aria-label="One more ' + item.name + '">+</button>' +
         '</span>' +
         '<span class="cart__iprice">' + money(item.price * item.qty) + '</span>' +
-        '<button class="cart__ix" type="button" aria-label="Remove">×</button>';
+        '<button class="cart__ix" type="button" aria-label="Remove ' + item.name + '">×</button>';
       $$('[data-q]', li).forEach((b) => b.addEventListener('click', () => {
         item.qty += Number(b.dataset.q);
         if (item.qty <= 0) cart.splice(idx, 1);
@@ -260,7 +270,8 @@
   function openCart() {
     cartOpen = true;
     cartWrap.hidden = false;
-    lockScroll(true);
+    cartBtn.setAttribute('aria-expanded', 'true');
+    syncLock();
     renderCart();
     $('#cartClose').focus({ preventScroll: true });
   }
@@ -269,9 +280,19 @@
     cartOpen = false;
     cartWrap.hidden = true;
     cartDemo.hidden = true;
-    lockScroll(false);
+    cartBtn.setAttribute('aria-expanded', 'false');
+    syncLock();
     cartBtn.focus({ preventScroll: true });
   }
+  /* keep keyboard focus inside the dialog while it's open */
+  cartWrap.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const f = $$('button, [href], input', cartWrap).filter((el) => el.offsetParent !== null);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+    else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+  });
   cartBtn.addEventListener('click', () => (cartOpen ? closeCart() : openCart()));
   $('#cartClose').addEventListener('click', closeCart);
   $('#cartScrim').addEventListener('click', closeCart);

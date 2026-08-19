@@ -1,7 +1,8 @@
 /* ============================================================
    IRON NEVER CHANGES — concept site
-   Palette is the brand's, in full: #111111 / #FFFFFF / #8C8C8C.
-   The restraint is the look.
+   Palette: the brand's #111111 / #FFFFFF / #8C8C8C, plus derived
+   neutral tints for UI surfaces only (panels, hairlines, dimmed
+   text) — never on a brand mark. The restraint is the look.
    ============================================================ */
 
 /* ---------- fonts (vendored, no external requests) ---------- */
@@ -74,7 +75,7 @@ em{font-style:normal;font-weight:600}
   display:flex;align-items:center;gap:28px;
   padding:0 var(--pad);height:76px;
   border-bottom:1px solid transparent;
-  transition:background .25s ease,border-color .25s ease,height .25s ease;
+  transition:background .1s steps(2,end),border-color .1s steps(2,end),height .1s steps(2,end);
 }
 .nav.is-solid{background:rgba(17,17,17,.88);backdrop-filter:blur(10px);border-color:var(--hair);height:64px}
 .nav__brand{display:flex;align-items:center;gap:14px;margin-right:auto}
@@ -88,7 +89,7 @@ em{font-style:normal;font-weight:600}
 .nav__links a:hover,.nav__links a.is-active{color:var(--bone)}
 .nav__cta{display:inline-flex}
 .nav__burger{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;position:relative}
-.nav__burger span{position:absolute;left:8px;right:8px;height:2px;background:var(--bone);transition:transform .25s ease,top .25s ease}
+.nav__burger span{position:absolute;left:8px;right:8px;height:2px;background:var(--bone);transition:transform .1s steps(2,end),top .1s steps(2,end)}
 .nav__burger span:nth-child(1){top:17px}
 .nav__burger span:nth-child(2){top:27px}
 .nav__burger[aria-expanded="true"] span:nth-child(1){top:22px;transform:rotate(45deg)}
@@ -123,11 +124,13 @@ html.js:not(.reduced) .hero__l1,
 html.js:not(.reduced) .hero__l2,
 html.js:not(.reduced) .hero__lede,
 html.js:not(.reduced) .hero__ctas{opacity:0}
-body.go .hero__eyebrow{animation:stampIn .14s steps(2,end) .10s both}
-body.go .hero__l1{animation:stampIn .16s steps(2,end) .22s both}
-body.go .hero__l2{animation:stampIn .16s steps(2,end) .42s both}
-body.go .hero__lede{animation:stampIn .14s steps(2,end) .58s both}
-body.go .hero__ctas{animation:stampIn .14s steps(2,end) .70s both}
+/* three press pulls: title line, title line, then the whole rest of the
+   sheet in ONE strike — not the demos' element-by-element stagger */
+body.go .hero__l1{animation:stampIn .16s steps(2,end) .12s both}
+body.go .hero__l2{animation:stampIn .16s steps(2,end) .30s both}
+body.go .hero__eyebrow,
+body.go .hero__lede,
+body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
 .hero__h1.rack{animation:rack .14s steps(2,end)}
 .hero__lede{max-width:560px;color:var(--ash);margin-top:34px;font-size:17px}
 .hero__ctas{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap}
@@ -151,7 +154,7 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .70s both}
   font-size:clamp(24px,3.9vw,52px);line-height:1.18;max-width:1160px;
   color:var(--ash-dim);
 }
-.standard__scrub .w-word{color:var(--ash-dim);transition:color .2s linear}
+.standard__scrub .w-word{color:var(--ash-dim)}
 .standard__scrub .w-word.lit{color:var(--bone)}
 .standard__punch{
   margin:clamp(70px,11vh,130px) auto 0;text-align:center;
@@ -190,11 +193,10 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .70s both}
 }
 .wall__s--house:hover{color:var(--iron)}
 
-/* ---------- 03 the line ---------- */
+/* ---------- 03 the shop ---------- */
 .line__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
 .prod{border:1px solid var(--hair);background:var(--panel);display:flex;flex-direction:column}
-.prod__views{position:relative;aspect-ratio:400/460;background:
-  radial-gradient(120% 90% at 50% 0%,var(--panel-2) 0%,var(--panel) 68%)}
+.prod__views{position:relative;aspect-ratio:400/460;background:var(--panel-2)}
 .prod__view{position:absolute;inset:0;padding:8%;opacity:0;transition:opacity .1s steps(2,end)}
 .prod[data-view="front"] .prod__view--front,
 .prod[data-view="back"] .prod__view--back{opacity:1}
@@ -259,8 +261,8 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .70s both}
 /* ---------- 04 the feed ---------- */
 .feed__row{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1080px}
 .frame{
-  position:relative;aspect-ratio:9/16;border:1px solid var(--hair);background:
-  radial-gradient(140% 100% at 50% 0%,var(--panel-2) 0%,var(--iron) 75%);
+  position:relative;aspect-ratio:9/16;border:1px solid var(--hair);
+  background:var(--panel-2);
   padding:18px;display:flex;flex-direction:column;
 }
 .frame__label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--ash-dim)}
@@ -338,9 +340,11 @@ html.js:not(.reduced) .sec__rule{transform:scaleX(0)}
 }
 @media (max-width:880px){
   .nav__links{display:none}
+  .nav{gap:16px}
+  .nav__brand{min-width:0}
   .nav__cta{padding:10px 14px;font-size:11px}
   .nav__burger{display:block}
-  .nav__word{width:150px}
+  .nav__word{width:150px;max-width:26vw}
   .name__split{grid-template-columns:1fr}
   .name__art{max-width:320px}
   .feed__row{grid-template-columns:1fr;max-width:420px}
@@ -372,6 +376,7 @@ html.reduced .load{opacity:1}
 .load__wt{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--ash-dim)}
 .load.clank svg{animation:hit .1s steps(2,end)}
 @media (max-width:900px){.load{display:none}}
+@media (min-width:901px){.foot__base{padding-right:164px}}
 
 /* ---------- size chips ---------- */
 .prod__size{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
@@ -433,3 +438,9 @@ html.reduced .load{opacity:1}
   font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.04em;
   color:var(--ash);border:1px dashed var(--hair);padding:12px 14px;margin-top:14px;
 }
+
+@media (max-width:480px){
+  .nav__word{display:none}
+}
+/* footer "soon" socials are labels, not links */
+.foot__soon{font-size:13.5px;font-weight:500;color:var(--ash-dim);letter-spacing:.04em}

@@ -15,7 +15,7 @@ go (45 → 495 LB at the footer). Keep new animation in this language.
   logo package), this README and the dev server out of the deploy.
 - **Brand truth:** `brand/BRAND-GUIDE.md` and `brand/SHIRT-CONCEPTS.md` are the
   client's source material — colors (#111 / #fff / #8C8C8C only), Archivo type,
-  the eight Drop 001 shirt designs, and the slogan bank all come from there.
+  the eight shirt designs, and the slogan bank all come from there.
 - **Shop:** framed as a shop, not drops (client's call). Working client-side demo
   cart — size chips, quantities, subtotal, localStorage — with an honest "checkout
   isn't wired up yet" state. Prices are concept placeholders ($34–$42).
