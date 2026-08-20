@@ -1,0 +1,199 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Archivo Black';src:url('/assets/fonts/archivo-black-latin-400-normal.woff2') format('woff2');font-weight:400}
+@font-face{font-family:'Archivo';src:url('/assets/fonts/archivo-latin-400-normal.woff2') format('woff2');font-weight:400}
+@font-face{font-family:'Archivo';src:url('/assets/fonts/archivo-latin-600-normal.woff2') format('woff2');font-weight:600}
+@font-face{font-family:'Archivo';src:url('/assets/fonts/archivo-latin-900-normal.woff2') format('woff2');font-weight:900}
+:root{--disp:'Archivo Black','Archivo',sans-serif;--body:'Archivo',sans-serif;
+  --mono:ui-monospace,Menlo,monospace;--iron:#111;--bone:#fff;--ash:#8c8c8c;
+  --panel:#181818;--panel-2:#1e1e1e;--hair:rgba(255,255,255,.14);--hair-2:rgba(255,255,255,.07)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000}
+.slide{width:1080px;height:1350px;background:#111;color:#fff;position:relative;overflow:hidden;
+  font-family:'Archivo',sans-serif;display:flex;flex-direction:column;padding:64px 56px}
+.slide+.slide{margin-top:40px}
+.grain{position:absolute;inset:0;opacity:.05;pointer-events:none;
+  background-image:url('/assets/brand/wash-grain.png');background-size:220px}
+.disp{font-family:'Archivo Black',sans-serif;text-transform:uppercase;line-height:.94;letter-spacing:-.005em}
+.mono{font-family:ui-monospace,Menlo,monospace;letter-spacing:.18em;font-size:19px;color:#8c8c8c}
+.top{display:flex;align-items:center;gap:18px;margin-bottom:auto}
+.top img{width:70px}
+.top span{font-family:'Archivo Black',sans-serif;font-size:25px;letter-spacing:.03em}
+.q{font-size:118px;margin:26px 0 8px}
+.sub{font-size:25px;color:#8c8c8c;max-width:800px;line-height:1.5}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin:40px 0}
+.opt{border:1px solid rgba(255,255,255,.14);background:#181818;padding:26px 22px 30px;position:relative}
+.badge{position:absolute;top:-1px;left:-1px;background:#fff;color:#111;font-family:'Archivo Black',sans-serif;
+  font-size:34px;width:64px;height:64px;display:flex;align-items:center;justify-content:center}
+.opt .tee{width:100%;height:auto}
+.optName{font-family:'Archivo Black',sans-serif;font-size:27px;text-transform:uppercase;margin-top:14px;line-height:1.12}
+.optLine{color:#8c8c8c;font-size:19px;margin-top:8px;line-height:1.45}
+.cta{border-top:1px solid rgba(255,255,255,.14);padding-top:28px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.ctaBig{font-family:'Archivo Black',sans-serif;font-size:46px;text-transform:uppercase;line-height:1.02}
+.ctaSm{font-size:19px;color:#8c8c8c;text-align:right;letter-spacing:.06em}
+/* detail slides */
+.dHead{display:flex;align-items:flex-start;gap:26px;margin:20px 0 6px}
+.dLetter{font-family:'Archivo Black',sans-serif;font-size:150px;line-height:.8;color:#fff}
+.dTitle{font-family:'Archivo Black',sans-serif;font-size:56px;text-transform:uppercase;line-height:1.02;padding-top:8px}
+.dViews{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin:34px 0 auto}
+.view{background:#181818;border:1px solid rgba(255,255,255,.14);padding:22px}
+.view .tee{width:100%;height:auto}
+.vLabel{font-family:ui-monospace,Menlo,monospace;font-size:17px;letter-spacing:.16em;color:#8c8c8c;margin-top:12px}
+.specs{border-top:1px solid rgba(255,255,255,.14);padding-top:22px;margin-top:26px}
+.specs li{display:flex;gap:18px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);
+  list-style:none;font-size:20px;color:#8c8c8c}
+.specs b{font-family:ui-monospace,Menlo,monospace;font-size:16px;letter-spacing:.1em;color:#fff;min-width:82px;font-weight:400}
+/* garment flats — the paths live in <defs> and are cloned via <use>,
+   so rules must match them at the DEFINITION, not through the instance
+   svg; per-card color arrives through custom props inherited from the
+   .g-* class on each <use>'s host svg. */
+.tb{fill:var(--g,#2a2a2c);stroke:var(--go,rgba(255,255,255,.07));stroke-width:1;stroke-linejoin:round}
+.tcol{fill:var(--gc,#242426)}
+.trib{fill:none;stroke:#000;opacity:.22;stroke-width:1.1}
+.tst{fill:none;stroke:var(--gd,rgba(255,255,255,.14));stroke-width:1.1;stroke-dasharray:3 3;opacity:.7}
+/* prints sit in the fabric, not on it */
+.pl{opacity:.93}
+.tee .pr{font-family:var(--disp);fill:var(--ink)}
+.tee .pr--dim{fill:#8c8c8c;opacity:.8}
+.tee .prInv{font-family:var(--disp);fill:var(--g)}
+/* garment-dyed colorways: washed base + collar tone + mottle strengths */
+.g-black{--g:#252528;--gc:#1c1c1f;--go:rgba(255,255,255,.09);--gd:rgba(255,255,255,.15);--ink:#f5f4f1;--mL:.17;--mD:.26;--gr:.07}
+.g-charcoal{--g:#44444a;--gc:#35353a;--go:rgba(255,255,255,.09);--gd:rgba(255,255,255,.15);--ink:#f5f4f1;--mL:.18;--mD:.22;--gr:.07}
+.g-heather{--g:#a3a3a7;--gc:#919195;--go:rgba(0,0,0,.15);--gd:rgba(0,0,0,.26);--ink:#1a1a1b;--mL:.20;--mD:.20;--gr:.12}
+.g-natural{--g:#e8e1d1;--gc:#d8cfbb;--go:rgba(0,0,0,.13);--gd:rgba(0,0,0,.2);--ink:#1a1a1b;--mL:.16;--mD:.15;--gr:.07}
+
+
+</style></head><body><svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="softHard" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
+    <pattern id="grainP" width="220" height="220" patternUnits="userSpaceOnUse">
+      <image href="/assets/brand/wash-grain.png" width="220" height="220"/>
+    </pattern>
+    <linearGradient id="shadeL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".30"/><stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="shadeR" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".30"/><stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hemShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".15"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="0.5" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="clipF"><path d="M146,42 C154,68 246,68 254,42 L316,56 C328,59 336,64 341,72 L390,128 C393,133 392,139 386,142 L336,163 C330,165 325,163 322,157 L318,140 C317,190 318,300 316,404 C316,411 311,416 303,416 L97,416 C89,416 84,411 84,404 C82,300 83,190 82,140 L78,157 C75,163 70,165 64,163 L14,142 C8,139 7,133 10,128 L59,72 C64,64 72,59 84,56 L146,42 Z"/></clipPath>
+    <clipPath id="clipB"><path d="M148,40 C156,54 244,54 252,40 L316,56 C328,59 336,64 341,72 L390,128 C393,133 392,139 386,142 L336,163 C330,165 325,163 322,157 L318,140 C317,190 318,300 316,404 C316,411 311,416 303,416 L97,416 C89,416 84,411 84,404 C82,300 83,190 82,140 L78,157 C75,163 70,165 64,163 L14,142 C8,139 7,133 10,128 L59,72 C64,64 72,59 84,56 L148,40 Z"/></clipPath>
+
+      <g id="washFx">
+        <image href="/assets/brand/wash-light.png" x="0" y="0" width="400" height="460" preserveAspectRatio="none" style="opacity:var(--mL,.08)"/>
+        <image href="/assets/brand/wash-dark.png" x="0" y="0" width="400" height="460" preserveAspectRatio="none" style="opacity:var(--mD,.07)"/>
+        <rect x="0" y="0" width="400" height="460" fill="url(#grainP)" style="opacity:var(--gr,.05)"/>
+        <rect x="62" y="30" width="38" height="400" fill="url(#shadeL)"/>
+        <rect x="300" y="30" width="38" height="400" fill="url(#shadeR)"/>
+        <ellipse cx="200" cy="120" rx="150" ry="80" fill="url(#sheen)"/>
+        <rect x="80" y="330" width="240" height="90" fill="url(#hemShade)"/>
+      </g>
+      <g id="wrinkles" fill="none" stroke-linecap="round">
+        <!-- armhole pull, both sides, deliberately not mirrored -->
+        <path d="M304,150 C291,162 282,177 277,192 M292,145 C281,156 274,167 269,178" stroke="#000" stroke-width="4" opacity=".09" filter="url(#soft)"/>
+        <path d="M96,153 C109,164 118,178 123,193 M108,147 C118,157 125,168 130,179" stroke="#000" stroke-width="4" opacity=".07" filter="url(#soft)"/>
+        <!-- shoulder-seam shadow into the sleeve -->
+        <path d="M44,96 C56,107 69,114 82,118" stroke="#000" stroke-width="5" opacity=".07" filter="url(#soft)"/>
+        <path d="M346,90 C337,104 327,115 315,120" stroke="#000" stroke-width="5" opacity=".06" filter="url(#soft)"/>
+        <!-- one soft asymmetric fold low on the body, where a boxy tee stacks -->
+        <path d="M118,352 C176,362 246,344 296,356" stroke="#000" stroke-width="9" opacity=".05" filter="url(#softHard)"/>
+        <path d="M126,378 C182,386 240,372 292,381" stroke="#000" stroke-width="7" opacity=".045" filter="url(#softHard)"/>
+      </g>
+      <g id="seams">
+        <path class="tst" d="M100,404 L300,404 M100,409 L300,409"/>
+        <path class="tst" d="M330,152 L380,132 M326,146 L376,126"/>
+        <path class="tst" d="M70,152 L20,132 M74,146 L24,126"/>
+        <path d="M300,58 C306,82 308,106 304,130 M100,58 C94,82 92,106 96,130" fill="none" stroke="#000" opacity=".14" stroke-width="1.4"/>
+        <path class="tst" d="M298,60 C304,83 306,105 302,128 M102,60 C96,83 94,105 98,128"/>
+      </g>
+    <g id="teeF">
+      <ellipse cx="200" cy="418" rx="160" ry="16" fill="#000" opacity=".38" filter="url(#softHard)"/>
+      <path class="tb" d="M146,42 C154,68 246,68 254,42 L316,56 C328,59 336,64 341,72 L390,128 C393,133 392,139 386,142 L336,163 C330,165 325,163 322,157 L318,140 C317,190 318,300 316,404 C316,411 311,416 303,416 L97,416 C89,416 84,411 84,404 C82,300 83,190 82,140 L78,157 C75,163 70,165 64,163 L14,142 C8,139 7,133 10,128 L59,72 C64,64 72,59 84,56 L146,42 Z"/>
+      <g clip-path="url(#clipF)"><use href="#washFx"/><use href="#wrinkles"/></g>
+      <use href="#seams"/>
+      <path class="tcol" d="M146,42 C154,68 246,68 254,42 L250,32 C242,54 158,54 150,32 Z"/>
+      <path d="M150,33 C158,54 242,54 250,33" fill="none" stroke="#000" opacity=".28" stroke-width="1.6"/>
+      <path class="trib" d="M158,42 l2,9 M167,47 l1.6,9 M177,51 l1.2,9 M188,53 l.8,9 M200,54 l0,9 M212,53 l-.8,9 M223,51 l-1.2,9 M233,47 l-1.6,9 M242,42 l-2,9"/>
+      <path class="tst" d="M150,60 C158,74 242,74 250,60"/>
+    </g>
+    <g id="teeB">
+      <ellipse cx="200" cy="418" rx="160" ry="16" fill="#000" opacity=".38" filter="url(#softHard)"/>
+      <path class="tb" d="M148,40 C156,54 244,54 252,40 L316,56 C328,59 336,64 341,72 L390,128 C393,133 392,139 386,142 L336,163 C330,165 325,163 322,157 L318,140 C317,190 318,300 316,404 C316,411 311,416 303,416 L97,416 C89,416 84,411 84,404 C82,300 83,190 82,140 L78,157 C75,163 70,165 64,163 L14,142 C8,139 7,133 10,128 L59,72 C64,64 72,59 84,56 L148,40 Z"/>
+      <g clip-path="url(#clipB)"><use href="#washFx"/><use href="#wrinkles"/></g>
+      <use href="#seams"/>
+      <path class="tcol" d="M148,40 C156,54 244,54 252,40 L248,31 C240,45 160,45 152,31 Z"/>
+      <path class="trib" d="M162,38 l1.6,7 M174,41 l1.2,7 M187,43 l.6,7 M200,44 l0,7 M213,43 l-.6,7 M226,41 l-1.2,7 M238,38 l-1.6,7"/>
+      <path class="tst" d="M154,50 C162,62 238,62 246,50"/>
+      <path class="tst" d="M104,72 C160,67 240,67 296,72"/>
+    </g>
+  </defs>
+</svg>
+<div class="slide" id="s1"><div class="grain"></div>
+  <div class="top">
+    <img src="/assets/brand/INC_mark-skull-barbell_white.svg" alt="">
+    <span>IRON NEVER CHANGES</span>
+  </div>
+  <p class="mono">DROP 001 &middot; YOU PICK</p>
+  <h1 class="disp q">WHICH ONE<br>DO WE MAKE?</h1>
+  <p class="sub">Two shirts. We&rsquo;re only printing one first. Heavyweight, boxy, washed &mdash; the kind you actually wear to the gym and then everywhere else.</p>
+  <div class="pair">
+    <div class="opt"><span class="badge">A</span><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee back"><use href="#teeB"></use><g class="pl"><image href="/assets/brand/vintage-wordmark-stacked_white.png" x="136.5" y="96" width="127" height="109.6"/><text class="pr" x="200" y="240" font-size="26" letter-spacing="2" text-anchor="middle">YOU DO.</text></g></svg>
+      <p class="optName">The Flagship</p>
+      <p class="optLine">&ldquo;Iron never changes. You do.&rdquo;<br><span style="color:#5a5a5a;font-size:16px;letter-spacing:.1em">BACK PRINT &middot; 12&#8243;</span></p>
+    </div>
+    <div class="opt"><span class="badge">B</span><svg class="tee g-charcoal" viewBox="0 0 400 460" role="img" aria-label="Charcoal tee back"><use href="#teeB"></use><g class="pl"><text class="pr" x="200" y="128" font-size="18" text-anchor="middle">I DIDN&rsquo;T</text><text class="pr" x="200" y="154" font-size="18" text-anchor="middle">FEEL LIKE IT</text><text class="pr" x="200" y="180" font-size="18" text-anchor="middle">EITHER</text><image href="/assets/brand/INC_mark-skull-barbell_white.svg" x="185" y="206" width="30" height="20"/></g></svg>
+      <p class="optName">I Didn&rsquo;t Feel<br>Like It Either</p>
+      <p class="optLine">The most relatable line in any gym.<br><span style="color:#5a5a5a;font-size:16px;letter-spacing:.1em">BACK PRINT &middot; 13&#8243;</span></p>
+    </div>
+  </div>
+  <div class="cta">
+    <p class="ctaBig">Comment<br>A or B</p>
+    <p class="ctaSm">SWIPE FOR FRONT + BACK &rarr;<br>ironneverchanges.com</p>
+  </div>
+</div>
+<div class="slide"><div class="grain"></div>
+  <div class="top">
+    <img src="/assets/brand/INC_mark-skull-barbell_white.svg" alt="">
+    <span>IRON NEVER CHANGES</span>
+  </div>
+  <div class="dHead">
+    <span class="dLetter">A</span>
+    <div><p class="dTitle">The Flagship</p><p class="mono" style="margin-top:12px">BLACK &middot; WASHED &middot; BOXY FIT</p></div>
+  </div>
+  <p class="sub">The iron is the constant. You&rsquo;re the variable. The whole brand in one line across your back.</p>
+  <div class="dViews">
+    <div class="view"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee front"><use href="#teeF"></use><g class="pl"><image href="/assets/brand/INC_mark-skull-barbell_white.svg" x="231" y="120" width="37" height="24.6"/></g></svg><p class="vLabel">FRONT</p></div>
+    <div class="view"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee back"><use href="#teeB"></use><g class="pl"><image href="/assets/brand/vintage-wordmark-stacked_white.png" x="136.5" y="96" width="127" height="109.6"/><text class="pr" x="200" y="240" font-size="26" letter-spacing="2" text-anchor="middle">YOU DO.</text></g></svg><p class="vLabel">BACK</p></div>
+  </div>
+  <ul class="specs"><li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 3.5&#8243;</li><li><b>BACK</b>stacked wordmark &middot; 12&#8243; &middot; &ldquo;YOU DO.&rdquo; beneath</li></ul>
+  <div class="cta" style="margin-top:26px">
+    <p class="ctaBig">Vote A</p>
+    <p class="ctaSm">COMMENT BELOW<br>ironneverchanges.com</p>
+  </div>
+</div>
+<div class="slide"><div class="grain"></div>
+  <div class="top">
+    <img src="/assets/brand/INC_mark-skull-barbell_white.svg" alt="">
+    <span>IRON NEVER CHANGES</span>
+  </div>
+  <div class="dHead">
+    <span class="dLetter">B</span>
+    <div><p class="dTitle">I Didn&rsquo;t Feel Like It Either</p><p class="mono" style="margin-top:12px">CHARCOAL &middot; WASHED &middot; BOXY FIT</p></div>
+  </div>
+  <p class="sub">Everybody in that room negotiated with themselves to be there. Says <em style="color:#fff;font-style:normal">I see you</em> without saying anything soft.</p>
+  <div class="dViews">
+    <div class="view"><svg class="tee g-charcoal" viewBox="0 0 400 460" role="img" aria-label="Charcoal tee front"><use href="#teeF"></use><g class="pl"><image href="/assets/brand/INC_tagline-bar_white.svg" x="155" y="133" width="90" height="2.13"/></g></svg><p class="vLabel">FRONT</p></div>
+    <div class="view"><svg class="tee g-charcoal" viewBox="0 0 400 460" role="img" aria-label="Charcoal tee back"><use href="#teeB"></use><g class="pl"><text class="pr" x="200" y="128" font-size="18" text-anchor="middle">I DIDN&rsquo;T</text><text class="pr" x="200" y="154" font-size="18" text-anchor="middle">FEEL LIKE IT</text><text class="pr" x="200" y="180" font-size="18" text-anchor="middle">EITHER</text><image href="/assets/brand/INC_mark-skull-barbell_white.svg" x="185" y="206" width="30" height="20"/></g></svg><p class="vLabel">BACK</p></div>
+  </div>
+  <ul class="specs"><li><b>FRONT</b>slogan bar across the chest &middot; 8.5&#8243;</li><li><b>BACK</b>the line in stacked type &middot; 13&#8243; &middot; mark beneath</li></ul>
+  <div class="cta" style="margin-top:26px">
+    <p class="ctaBig">Vote B</p>
+    <p class="ctaSm">COMMENT BELOW<br>ironneverchanges.com</p>
+  </div>
+</div></body></html>
