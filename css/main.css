@@ -242,10 +242,10 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
 .tee .pr--dim{fill:#8c8c8c;opacity:.8}
 .tee .prInv{font-family:var(--disp);fill:var(--g)}
 /* garment-dyed colorways: washed base + collar tone + mottle strengths */
-.g-black{--g:#2b2b2e;--gc:#232326;--go:rgba(255,255,255,.08);--gd:rgba(255,255,255,.15);--ink:#f5f4f1;--mL:.06;--mD:.04;--gr:.05}
-.g-charcoal{--g:#3d3d42;--gc:#333338;--go:rgba(255,255,255,.08);--gd:rgba(255,255,255,.15);--ink:#f5f4f1;--mL:.05;--mD:.05;--gr:.05}
-.g-heather{--g:#97979b;--gc:#88888c;--go:rgba(0,0,0,.14);--gd:rgba(0,0,0,.26);--ink:#1a1a1b;--mL:.05;--mD:.07;--gr:.11}
-.g-natural{--g:#eae4d6;--gc:#ddd6c6;--go:rgba(0,0,0,.12);--gd:rgba(0,0,0,.2);--ink:#1a1a1b;--mL:.03;--mD:.05;--gr:.05}
+.g-black{--g:#252528;--gc:#1c1c1f;--go:rgba(255,255,255,.09);--gd:rgba(255,255,255,.15);--ink:#f5f4f1;--mL:.17;--mD:.26;--gr:.07}
+.g-charcoal{--g:#44444a;--gc:#35353a;--go:rgba(255,255,255,.09);--gd:rgba(255,255,255,.15);--ink:#f5f4f1;--mL:.18;--mD:.22;--gr:.07}
+.g-heather{--g:#a3a3a7;--gc:#919195;--go:rgba(0,0,0,.15);--gd:rgba(0,0,0,.26);--ink:#1a1a1b;--mL:.20;--mD:.20;--gr:.12}
+.g-natural{--g:#e8e1d1;--gc:#d8cfbb;--go:rgba(0,0,0,.13);--gd:rgba(0,0,0,.2);--ink:#1a1a1b;--mL:.16;--mD:.15;--gr:.07}
 
 /* waitlist */
 .list{margin-top:clamp(60px,9vh,100px);border:1px solid var(--hair);background:var(--panel)}
