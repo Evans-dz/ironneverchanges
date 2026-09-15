@@ -207,7 +207,8 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
 .wall__s--house:hover{color:var(--iron)}
 
 /* ---------- 03 the shop ---------- */
-.line__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+/* 24 shirts, rows of six: 6 / 3 / 2 / 1 columns so every row stays full */
+.line__grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
 .prod{border:1px solid var(--hair);background:var(--panel);display:flex;flex-direction:column}
 .prod__views{position:relative;aspect-ratio:400/460;background:var(--panel-2)}
 .prod__view{position:absolute;inset:0;padding:8%;opacity:0;transition:opacity .1s steps(2,end)}
@@ -245,6 +246,7 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
    ink art on grey; the slogan-bar knockout text reads as bare garment */
 .pl{opacity:.93}
 .tee .pr{font-family:var(--disp);fill:#f5f4f1}
+.tee .prMono{font-family:var(--mono);font-weight:500;fill:#f5f4f1}
 .tee .pr--d{fill:#1a1a1b}
 .tee .pr--dim{fill:#8c8c8c;opacity:.8}
 .tee .prInv{font-family:var(--disp);fill:#2b2b2e}
@@ -374,8 +376,10 @@ html.js:not(.reduced) .sec__rule{transform:scaleX(0)}
 }
 
 /* ---------- responsive ---------- */
+@media (max-width:1279px){
+  .line__grid{grid-template-columns:repeat(3,1fr);gap:22px}
+}
 @media (max-width:1160px){
-  .line__grid{grid-template-columns:repeat(2,1fr)}
   .pillars{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:880px){
@@ -391,8 +395,13 @@ html.js:not(.reduced) .sec__rule{transform:scaleX(0)}
   .feed__proof{grid-template-columns:repeat(2,1fr);max-width:420px}
   .hero__ring{right:-40vw;width:110vw;opacity:.09}
 }
-@media (max-width:640px){
+@media (max-width:880px){
+  .line__grid{grid-template-columns:repeat(2,1fr);gap:16px}
+}
+@media (max-width:560px){
   .line__grid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
   .pillars{grid-template-columns:1fr}
   .sec__head{flex-wrap:wrap;gap:12px}
   .sec__title{white-space:normal}

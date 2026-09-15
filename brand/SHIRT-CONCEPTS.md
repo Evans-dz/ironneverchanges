@@ -222,3 +222,14 @@ yelling at you.
    a bar-path line. Comeback shirt for whoever's year it was.
 10. **THE SPOTTER** — "I GOT YOU." small over the heart, nothing else. The
     one you buy for your training partner, not yourself.
+
+---
+
+## Status, September 2026
+
+The line runs 24 designs (INC-001 through INC-024). Idea-bank items 1 through
+7, 9 and 10 above are built, plus three straight from the slogan bank:
+SHOWED UP ANYWAY (INC-022), THE WEIGHT NEVER LIES (INC-023) and COME BACK
+TOMORROW (INC-024). Print masters for everything new live in
+`09_SHIRT-ART/`, white and black, outlined type, SVG plus 1000px and 4000px
+PNG. Still on the bench: idea 8, BETWEEN THE JOB AND THE KIDS.
