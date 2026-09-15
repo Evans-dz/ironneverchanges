@@ -245,6 +245,7 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
    ink art on grey; the slogan-bar knockout text reads as bare garment */
 .pl{opacity:.93}
 .tee .pr{font-family:var(--disp);fill:#f5f4f1}
+.tee .pr--d{fill:#1a1a1b}
 .tee .pr--dim{fill:#8c8c8c;opacity:.8}
 .tee .prInv{font-family:var(--disp);fill:#2b2b2e}
 
@@ -302,7 +303,23 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
 }
 .feed__note{color:var(--ash-dim);font-size:14px;margin-top:34px;font-family:var(--mono);letter-spacing:.04em}
 
-/* ---------- 05 the name ---------- */
+/* ---------- 05 the corner (coaching) ---------- */
+.corner__split{display:grid;grid-template-columns:minmax(240px,380px) 1fr;gap:clamp(36px,5vw,80px);align-items:start}
+.corner__photo{margin:0;border:1px solid var(--hair);background:var(--panel-2)}
+.corner__photo img{display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.05)}
+.corner__price{font-family:var(--disp);font-size:clamp(44px,6vw,72px);line-height:1;color:var(--bone)}
+.corner__price span{font-size:.3em;color:var(--ash);letter-spacing:.14em;margin-left:8px}
+.corner__sub{color:var(--ash);margin-top:12px}
+.corner__spec{list-style:none;border-top:1px solid var(--hair-2);margin:28px 0;max-width:580px}
+.corner__spec li{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--hair-2);font-size:14px;color:var(--ash);line-height:1.55}
+.corner__spec b{font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.12em;color:var(--bone);min-width:48px;padding-top:2px}
+.corner__note{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ash-dim);margin-top:16px}
+@media (max-width:880px){
+  .corner__split{grid-template-columns:1fr}
+  .corner__photo{max-width:340px}
+}
+
+/* ---------- 06 the name ---------- */
 .name__split{display:grid;grid-template-columns:minmax(260px,440px) 1fr;gap:clamp(40px,6vw,90px);align-items:center}
 .name__art img{width:100%;opacity:.92}
 .name__big{font-family:var(--disp);font-size:clamp(26px,3.4vw,44px);line-height:1.1;text-transform:uppercase;margin-bottom:26px}

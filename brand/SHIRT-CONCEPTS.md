@@ -170,3 +170,55 @@ yelling at you.
   bar at the base
 - **Why:** the site's Wall section, wearable. Nobody buys it for one line —
   they buy it because three of them were their year.
+
+### 10. SMALL EFFORTS, REPEATED
+
+- **Front:** `badge-primary`, 6" left chest
+- **Back:** "success is the sum of small efforts repeated day in and day out"
+  stacked in one block, REPEATED set biggest, mark centered beneath — art in
+  `09_SHIRT-ART/INC-010_success-stack`
+- **Why:** the old line printed the way it actually works — one word doing all
+  the lifting. Nothing about talent anywhere on it.
+
+### 11. HOME
+
+- **Front:** HOME across the chest, 13", the gym printed inside the letters
+  (photo knockout — DTG/DTF print, the one exception to 1-color) with
+  "THE GYM COUNTS." set small beneath — art in `09_SHIRT-ART/INC-011_home-*`
+- **Back:** blank
+- **Why:** the word over the place it means. If you know, you know — and if
+  they ask, that's the point.
+
+### 12. CLOCK OUT. LOAD UP.
+
+- **Front:** clock & bar mark, 6" left chest — a clock face whose hands are a
+  barbell, new ownable mark in `09_SHIRT-ART/INC-012_clock-*`
+- **Back:** the mark at 9" with CLOCK OUT. above and LOAD UP. below
+- **Why:** for everybody training after the shift. Quitting time and starting
+  time are the same minute.
+
+---
+
+## Idea bank — future drops
+
+1. **THE HARD PART WAS THE PARKING LOT** — the line big on the back, mark on
+   the front. The most honest sentence in the bank that isn't a shirt yet.
+2. **PROOF OF WORK — the receipt tee** — a gym receipt printed down the back:
+   sets and reps as line items, "PAID IN FULL" stamped at the bottom.
+3. **SAME BAR. DIFFERENT DAY. — the attendance card** — a month's calendar
+   grid on the back with every box struck through. No missed days shown;
+   that's the point.
+4. **EVERY REP IS A VOTE** — ballot-box plate graphic; the line under it.
+   Evergreen, but it prints itself in an election year.
+5. **OPEN 24 HOURS** — neon-sign style lockup of the mark; companion piece to
+   HOME. The gym that never closes because it's in you now.
+6. **NOBODY IS GOING TO LIFT IT FOR YOU** — a loaded bar on the floor drawn in
+   one line, the sentence beneath. The solo shirt.
+7. **IT DOESN'T FIX EVERYTHING. IT FIXES ENOUGH.** — small front text only,
+   blank back. The quiet one in the line — some lines don't need 13 inches.
+8. **BETWEEN THE JOB AND THE KIDS** — a day planner block on the back, every
+   hour filled in grey, one hour at 5AM inked white.
+9. **STRONGER THAN THE YEAR THAT TRIED ME** — "THE YEAR" struck through with
+   a bar-path line. Comeback shirt for whoever's year it was.
+10. **THE SPOTTER** — "I GOT YOU." small over the heart, nothing else. The
+    one you buy for your training partner, not yourself.

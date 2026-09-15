@@ -99,6 +99,9 @@ not UI palette.
 | Product card | Front/back cross-fade views + flip toggle; tapping the image flips; size chips S–3X; `data-sku/name/price` on the article drive the cart | The card IS the product database (see §9) |
 | Feed clips | Real training footage in the 9:16 frames (`assets/feed/week-*.mp4`, 540p H.264 ~1.4Mbps, AUDIO STRIPPED — reels carry licensed music; `tools/` has the AVFoundation pipeline); click-to-play one at a time, muted+looping, progress bar fills in 8 discrete notches; photos in `.feed__proof` | Proof of work, honest and silent; masters re-exportable from the Photos album (never committed) |
 | Media = monochrome | Every photo and clip renders through `filter:grayscale(1)` | The palette rule (#111/#fff/#8C8C8C) extends to photography — color footage would be the only color on the page |
+| HOME letters | INC-011's front is a `clipPath` text knockout — the gym photo (`assets/brand/home-fill.webp`) shows through live HOME letters with a thin dark outline | The one photo-print design; the sanctioned exception to 1-color ink, per the client |
+| Clock & bar mark | INC-012's mark lives as `#clockBar` in the page defs (stroke geometry, reused front and back via nested `<svg><use>`); print masters in `brand/09_SHIRT-ART/` | A new ownable mark — drawn once, used at any size |
+| The Corner | Coaching section (05): photo + `$100/MO` display + a `prod__spec`-style includes list; CTA routes to the same waitlist | Coaching sells on the shirts' own deal — honest, monthly, no portal |
 | Cart drawer | Client-side demo: localStorage `inc-cart`, qty/remove, subtotal; checkout reveals an honest "isn't wired up yet" note; focus-trapped dialog, Esc closes, refcounted scroll lock shared with the menu | Concept build never fakes a working checkout |
 | The load | Fixed bottom-right barbell SVG; plates on in pairs per sixth of scroll, caption 45→495 LB, clank on change; hidden <900px and until half a viewport of scroll | Scroll progress in the brand's own units |
 | The wall | Slogan cloud from the brand's slogan bank; click stamps a line permanently lit (`is-stamped`) + `hit` rattle | The merch pipeline as a page section |
@@ -168,12 +171,16 @@ elevation; keep it that way.
 
 ## 9. Data source of truth
 
-**File: none — `<TODO — decide before checkout wiring>`.** Product data
-(SKU, name, price, colorway, print spec) lives inline on each `.prod` article
-as `data-*` attributes + visible copy; the cart reads the DOM. Prices are
-concept placeholders ($34–$42). Copy truth for slogans/placements is
-`brand/SHIRT-CONCEPTS.md`; identity truth is `brand/BRAND-GUIDE.md`. If the
-shop grows past 8 SKUs or checkout gets wired, extract `js/products.js` first.
+**File: none — `<TODO — extraction now due>`.** Product data (SKU, name,
+price, colorway, print spec) lives inline on each `.prod` article as `data-*`
+attributes + visible copy; the cart reads the DOM. Prices are concept
+placeholders ($34–$42). Copy truth for slogans/placements is
+`brand/SHIRT-CONCEPTS.md`; identity truth is `brand/BRAND-GUIDE.md`; print
+art for the new designs is `brand/09_SHIRT-ART/`. The line is at 12 SKUs —
+past the 8-SKU threshold — so `js/products.js` extraction is DUE before
+checkout wiring or SKU 13, whichever lands first. The shop currently sells
+nothing: every card CTA is a "Coming soon" link into the waitlist until the
+drop date is picked (the demo cart code stays, unused, for the flip back).
 
 ## 10. Launch checklist
 

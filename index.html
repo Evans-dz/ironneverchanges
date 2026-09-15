@@ -30,7 +30,16 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <filter id="softHard" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
-
+    <!-- INC-012 mark: the clock whose hands are a barbell -->
+    <g id="clockBar" fill="none" stroke="#f5f4f1" stroke-linecap="round">
+      <circle cx="50" cy="50" r="43" stroke-width="5"/>
+      <path d="M50 12v8 M50 80v8 M12 50h8 M80 50h8" stroke-width="4"/>
+      <g transform="rotate(-34 50 50)">
+        <path d="M23 50h54" stroke-width="4.5"/>
+        <path d="M33 40v20 M67 40v20" stroke-width="6"/>
+        <path d="M26.5 43.5v13 M73.5 43.5v13" stroke-width="5"/>
+      </g>
+    </g>
   </defs>
 </svg>
 
@@ -46,6 +55,7 @@
     <a href="#wall" data-scroll>The Wall</a>
     <a href="#shop" data-scroll>The Shop</a>
     <a href="#feed" data-scroll>The Feed</a>
+    <a href="#corner" data-scroll>The Corner</a>
     <a href="#name" data-scroll>The Name</a>
   </nav>
   <button class="btn btn--solid nav__cta" id="cartBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Cart, 0 items">Cart <span id="cartCount">(0)</span></button>
@@ -60,6 +70,7 @@
     <a href="#wall" data-scroll>The Wall</a>
     <a href="#shop" data-scroll>The Shop</a>
     <a href="#feed" data-scroll>The Feed</a>
+    <a href="#corner" data-scroll>The Corner</a>
     <a href="#name" data-scroll>The Name</a>
     <a href="#list" data-scroll class="menu__cta">Get on the list</a>
   </nav>
@@ -180,7 +191,7 @@
     <h2 class="sec__title">THE SHOP</h2>
     <span class="sec__rule" aria-hidden="true"></span>
   </div>
-  <p class="sec__lede reveal">Nine shirts. Four washes of cotton, one color of ink. Heavyweight,
+  <p class="sec__lede reveal">Twelve shirts. Four washes of cotton, one color of ink. Heavyweight,
   garment&#8209;dyed, screen printed &mdash; so it cracks and fades exactly the way it should. No tech fabric,
   no neon, no motivation-speak in cursive.</p>
 
@@ -205,7 +216,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$42</span>
-          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
         </div>
       </div>
     </article>
@@ -230,7 +241,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
         </div>
       </div>
     </article>
@@ -255,7 +266,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
         </div>
       </div>
     </article>
@@ -280,7 +291,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
         </div>
       </div>
     </article>
@@ -306,7 +317,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$40</span>
-          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
         </div>
       </div>
     </article>
@@ -332,7 +343,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$42</span>
-          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
         </div>
       </div>
     </article>
@@ -357,7 +368,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$34</span>
-          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
         </div>
       </div>
     </article>
@@ -382,7 +393,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$40</span>
-          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
         </div>
       </div>
     </article>
@@ -407,7 +418,82 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$42</span>
-          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="prod reveal-up" data-view="back" data-sku="INC-010" data-name="SMALL EFFORTS, REPEATED" data-price="38">
+      <div class="prod__views">
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: circular badge on the left chest"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_badge-primary_white.svg" x="219.4" y="106.1" width="60.1" height="60.1"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: success is the sum of small efforts, repeated day in and day out, stacked"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="200.8" y="120" font-size="10.6" text-anchor="middle">SUCCESS IS THE SUM</text><text class="pr" x="200.8" y="137" font-size="11.9" text-anchor="middle">OF SMALL EFFORTS</text><text class="pr" x="200.8" y="165" font-size="23.9" text-anchor="middle">REPEATED</text><text class="pr" x="200.8" y="182" font-size="10.6" text-anchor="middle">DAY IN AND DAY OUT</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="187.8" y="196" width="26" height="17.3"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__flip" role="group" aria-label="View side">
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
+        </div>
+      </div>
+      <div class="prod__meta">
+        <p class="prod__sku">INC-010 &middot; WASHED BROWN &middot; GARMENT-DYED</p>
+        <h3 class="prod__name">SMALL EFFORTS, REPEATED</h3>
+        <p class="prod__why">The old line, printed the way it actually works &mdash; one word doing all the lifting. Nothing about talent anywhere on it.</p>
+        <ul class="prod__spec">
+      <li><b>FRONT</b>primary badge &middot; left chest &middot; 6&#8243;</li>
+      <li><b>BACK</b>the quote stacked &middot; 13&#8243; &middot; mark beneath</li>
+        </ul>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
+        <div class="prod__foot">
+          <span class="prod__price">$38</span>
+          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="prod reveal-up" data-view="front" data-sku="INC-011" data-name="HOME" data-price="42">
+      <div class="prod__views">
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, front: HOME in large letters with a photo of the gym printed inside them"><ellipse class="tsh" cx="200" cy="349" rx="151" ry="13"/><image href="assets/shirts/washed-grey_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><clipPath id="homeClip"><text x="200.8" y="152" font-size="46" letter-spacing="4" text-anchor="middle" style="font-family:'Archivo Black','Archivo',sans-serif">HOME</text></clipPath><g clip-path="url(#homeClip)"><image href="assets/brand/home-fill.webp" x="126" y="112" width="150" height="44" preserveAspectRatio="xMidYMid slice"/></g><text x="200.8" y="152" font-size="46" letter-spacing="4" text-anchor="middle" fill="none" stroke="#1a1a1b" stroke-width="1.2" style="font-family:'Archivo Black','Archivo',sans-serif">HOME</text><text class="pr pr--d" x="200.8" y="172" font-size="7" letter-spacing="2" text-anchor="middle">THE GYM COUNTS.</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, back: blank"><ellipse class="tsh" cx="200" cy="342" rx="149" ry="13"/><image href="assets/shirts/washed-grey_back.webp" x="0" y="0" width="400" height="460"/></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__flip" role="group" aria-label="View side">
+          <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
+          <button type="button" data-face="back" aria-pressed="false">BACK</button>
+        </div>
+      </div>
+      <div class="prod__meta">
+        <p class="prod__sku">INC-011 &middot; WASHED GREY &middot; GARMENT-DYED</p>
+        <h3 class="prod__name">HOME</h3>
+        <p class="prod__why">The word over the place it means &mdash; the floor, the bag and the loaded bar printed inside the letters. If you know, you know.</p>
+        <ul class="prod__spec">
+      <li><b>FRONT</b>&ldquo;HOME&rdquo;, the gym printed inside the letters &middot; 13&#8243;</li>
+      <li><b>BACK</b>blank</li>
+        </ul>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
+        <div class="prod__foot">
+          <span class="prod__price">$42</span>
+          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="prod reveal-up" data-view="back" data-sku="INC-012" data-name="CLOCK OUT. LOAD UP." data-price="38">
+      <div class="prod__views">
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: clock and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><svg x="220.5" y="108.9" width="63.8" height="63.8" viewBox="0 0 100 100"><use href="#clockBar"/></svg></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: CLOCK OUT above and LOAD UP below a large clock whose hands are a barbell"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="199.3" y="126" font-size="22" text-anchor="middle">CLOCK OUT.</text><svg x="152.5" y="140" width="93.5" height="93.5" viewBox="0 0 100 100"><use href="#clockBar"/></svg><text class="pr" x="199.3" y="256" font-size="22" text-anchor="middle">LOAD UP.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__flip" role="group" aria-label="View side">
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
+        </div>
+      </div>
+      <div class="prod__meta">
+        <p class="prod__sku">INC-012 &middot; WASHED BLUE &middot; GARMENT-DYED</p>
+        <h3 class="prod__name">CLOCK OUT. LOAD UP.</h3>
+        <p class="prod__why">For everybody training after the shift. The hands on the clock are a barbell &mdash; quitting time and starting time are the same minute.</p>
+        <ul class="prod__spec">
+      <li><b>FRONT</b>clock &amp; bar mark &middot; left chest &middot; 6&#8243;</li>
+      <li><b>BACK</b>clock &amp; bar &middot; 9&#8243; &middot; the line split above and below</li>
+        </ul>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
+        <div class="prod__foot">
+          <span class="prod__price">$38</span>
+          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
         </div>
       </div>
     </article>
@@ -472,10 +558,41 @@
   <p class="feed__note reveal">Shot mid-week, not staged. Sound off on purpose. Handles land here when they&rsquo;re locked in.</p>
 </section>
 
-<!-- ============ 05 THE NAME ============ -->
-<section class="sec name" id="name">
+<!-- ============ 05 THE CORNER ============ -->
+<section class="sec corner" id="corner">
   <div class="sec__head">
     <span class="sec__no">05</span>
+    <h2 class="sec__title">THE CORNER</h2>
+    <span class="sec__rule" aria-hidden="true"></span>
+  </div>
+  <p class="sec__lede reveal">Coaching, on the same deal as the shirts: honest, monthly, priced for
+  men with bills. Zac&rsquo;s in your corner &mdash; a coach who answers, not a PDF and a login.</p>
+
+  <div class="corner__split">
+    <figure class="corner__photo reveal" aria-hidden="true">
+      <img src="assets/feed/proof-01.webp" alt="" loading="lazy" width="900" height="1200">
+    </figure>
+    <div class="corner__deal reveal-up">
+      <p class="corner__price">$100<span>/ MONTH</span></p>
+      <p class="corner__sub">Month to month. Cancel by text. No contracts, no upsells, no shame.</p>
+      <ul class="corner__spec">
+        <li><b>FOOD</b>meal plans built from real groceries &mdash; the food your house already eats</li>
+        <li><b>LIFTS</b>lifting programs built around your schedule and whatever equipment you&rsquo;ve got</li>
+        <li><b>TALK</b>unlimited talk &amp; text with your coach &mdash; a person, not a portal</li>
+        <li><b>FORM</b>video form checks on the big lifts, as often as you send them</li>
+        <li><b>PROOF</b>a progress portfolio &mdash; your numbers and photos tracked month over month</li>
+        <li><b>RESET</b>the plan rebuilt every four weeks from what actually happened, not what should have</li>
+      </ul>
+      <a class="btn btn--solid" href="#list" data-scroll>Get in the corner</a>
+      <p class="corner__note">Coaching opens with the shop &mdash; the same list covers both.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 THE NAME ============ -->
+<section class="sec name" id="name">
+  <div class="sec__head">
+    <span class="sec__no">06</span>
     <h2 class="sec__title">THE NAME</h2>
     <span class="sec__rule" aria-hidden="true"></span>
   </div>
@@ -538,6 +655,7 @@
       <a href="#standard" data-scroll>The Standard</a>
       <a href="#wall" data-scroll>The Wall</a>
       <a href="#shop" data-scroll>The Shop</a>
+      <a href="#corner" data-scroll>The Corner</a>
       <a href="#name" data-scroll>The Name</a>
     </nav>
     <div class="foot__col">
