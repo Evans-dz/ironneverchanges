@@ -247,11 +247,19 @@
       }));
   });
 
-  /* ---------------- cart (demo — client-side only) ---------------- */
+  /* ---------------- cart ----------------
+     Lives in localStorage; checkout hands it to /api/checkout, which
+     prices it from js/products.js server-side. Names and prices are
+     re-resolved from that same catalog on every render, so a stale or
+     hand-edited cart can't show a price the server won't honour. */
   const CART_KEY = 'inc-cart';
+  const CATALOG = (window.INC_CATALOG && window.INC_CATALOG.CATALOG) || {};
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { cart = []; }
+  if (Object.keys(CATALOG).length) cart = cart.filter((i) => i && CATALOG[i.sku]);
   const save = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {} };
+  const nameOf = (item) => (CATALOG[item.sku] && CATALOG[item.sku].name) || item.name;
+  const priceOf = (item) => (CATALOG[item.sku] && CATALOG[item.sku].price) || item.price;
 
   const cartWrap = $('#cartWrap');
   const cartBtn = $('#cartBtn');
@@ -261,6 +269,20 @@
   const cartFoot = $('#cartFoot');
   const cartTotal = $('#cartTotal');
   const cartDemo = $('#cartDemo');
+  const cartError = $('#cartError');
+  const MAX_QTY = (window.INC_CATALOG && window.INC_CATALOG.MAX_QTY) || 10;
+
+  /* Removing a row rebuilds the list, so the next row slides up under a
+     stationary pointer and a second click lands on a shirt nobody meant to
+     remove. Ignore removals that arrive inside one beat of the last one. */
+  let lastRemoval = 0;
+  function removeRow(at) {
+    const now = Date.now();
+    if (now - lastRemoval < 400) return false;
+    lastRemoval = now;
+    cart.splice(at, 1);
+    return true;
+  }
 
   const money = (n) => '$' + n;
   const count = () => cart.reduce((a, i) => a + i.qty, 0);
@@ -272,31 +294,47 @@
     cartItems.innerHTML = '';
     cart.forEach((item, idx) => {
       const li = document.createElement('li');
+      const name = nameOf(item);
       li.className = 'cart__item';
       li.innerHTML =
-        '<span class="cart__iname">' + item.name + '</span>' +
-        '<span class="cart__imeta">' + item.sku + ' · SIZE ' + item.size + '</span>' +
+        '<span class="cart__iname"></span>' +
+        '<span class="cart__imeta"></span>' +
         '<span class="cart__ictl">' +
-          '<button type="button" data-q="-1" aria-label="One fewer ' + item.name + '">−</button>' +
+          '<button type="button" data-q="-1">−</button>' +
           '<b>' + item.qty + '</b>' +
-          '<button type="button" data-q="1" aria-label="One more ' + item.name + '">+</button>' +
+          '<button type="button" data-q="1">+</button>' +
         '</span>' +
-        '<span class="cart__iprice">' + money(item.price * item.qty) + '</span>' +
-        '<button class="cart__ix" type="button" aria-label="Remove ' + item.name + '">×</button>';
+        '<span class="cart__iprice">' + money(priceOf(item) * item.qty) + '</span>' +
+        '<button class="cart__ix" type="button">×</button>';
+      $('.cart__iname', li).textContent = name;
+      $('.cart__imeta', li).textContent = item.sku + ' · SIZE ' + item.size;
+      $('[data-q="-1"]', li).setAttribute('aria-label', 'One fewer ' + name);
+      $('[data-q="1"]', li).setAttribute('aria-label', 'One more ' + name);
+      $('.cart__ix', li).setAttribute('aria-label', 'Remove ' + name);
+      const plus = $('[data-q="1"]', li);
+      if (item.qty >= MAX_QTY) {
+        plus.disabled = true;
+        plus.setAttribute('aria-label', 'Maximum ' + MAX_QTY + ' of ' + name);
+      }
       $$('[data-q]', li).forEach((b) => b.addEventListener('click', () => {
-        item.qty += Number(b.dataset.q);
-        if (item.qty <= 0) cart.splice(idx, 1);
+        const at = cart.indexOf(item);            /* by identity: idx goes stale */
+        if (at < 0) return;
+        const next = item.qty + Number(b.dataset.q);
+        if (next <= 0) { if (!removeRow(at)) return; }
+        else item.qty = Math.min(next, MAX_QTY);  /* server rejects past MAX_QTY */
         save(); renderCart();
       }));
       $('.cart__ix', li).addEventListener('click', () => {
-        cart.splice(idx, 1); save(); renderCart();
+        const at = cart.indexOf(item);
+        if (at < 0 || !removeRow(at)) return;
+        save(); renderCart();
       });
       cartItems.appendChild(li);
     });
     const has = cart.length > 0;
     cartEmpty.hidden = has;
     cartFoot.hidden = !has;
-    if (has) cartTotal.textContent = money(cart.reduce((a, i) => a + i.price * i.qty, 0));
+    if (has) cartTotal.textContent = money(cart.reduce((a, i) => a + priceOf(i) * i.qty, 0));
   }
 
   function openCart() {
@@ -347,12 +385,66 @@
     setTimeout(() => { b.textContent = label; b.classList.remove('is-hit'); }, 900);
   }));
 
-  /* checkout: honest about being a concept build */
-  $('#cartCheckout').addEventListener('click', () => {
-    cartDemo.hidden = false;
+  /* checkout: hand the cart to Stripe. Until STRIPE_SECRET_KEY is set in
+     Vercel the endpoint reports itself closed and we fall back to the
+     honest concept-build note, which is also what happens offline. */
+  const checkoutBtn = $('#cartCheckout');
+  const CHECKOUT_LABEL = checkoutBtn.textContent;   /* captured once, never the loading text */
+  const resetCheckout = () => {
+    checkoutBtn.disabled = false;
+    checkoutBtn.textContent = CHECKOUT_LABEL;
+  };
+  /* Coming back from Stripe with the Back button restores this page from the
+     bfcache exactly as it left: button still disabled, still mid-sentence.
+     Put it back so a customer who changed their mind can try again. */
+  window.addEventListener('pageshow', resetCheckout);
+
+  checkoutBtn.addEventListener('click', async () => {
+    if (!cart.length || checkoutBtn.disabled) return;
+    checkoutBtn.disabled = true;
+    checkoutBtn.textContent = 'LOADING THE BAR…';
+    cartDemo.hidden = true;
+    cartError.hidden = true;
+    try {
+      const r = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: cart.map((i) => ({ sku: i.sku, size: i.size, qty: i.qty })),
+        }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (r.ok && data.url) {
+        window.location.href = data.url;        /* Stripe's hosted page */
+        return;
+      }
+      /* 503 is the only status that means "the shop never opened". Anything
+         else is a real failure and must not tell a paying customer that the
+         store is a concept build. */
+      if (r.status === 503) cartDemo.hidden = false;
+      else {
+        cartError.textContent = data.error || 'Checkout did not answer. Try again in a moment.';
+        cartError.hidden = false;
+      }
+    } catch (e) {
+      cartError.textContent = 'Could not reach checkout. Check your connection and try again.';
+      cartError.hidden = false;
+    }
+    resetCheckout();
   });
 
+  /* back from a paid session: the bar is racked. Clear the cart and open the
+     drawer, or the confirmation lands inside a panel nobody has opened. */
+  const paid = new URLSearchParams(window.location.search).get('paid') === '1';
+  if (paid) {
+    cart = [];
+    save();
+    cartEmpty.textContent = 'ORDER IN. RECEIPT SENT. COME BACK TOMORROW.';
+    history.replaceState(null, '', window.location.pathname);
+  }
+
   renderCart();
+  if (paid) openCart();
 
   /* ---------------- waitlist ----------------
      Paste a Web3Forms access key (free — web3forms.com emails it to you) to

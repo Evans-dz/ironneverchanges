@@ -136,8 +136,10 @@ elevation; keep it that way.
 - Keep the page fully readable with JS off, and static-but-complete under
   reduced motion.
 - Keep all assets local — fonts, GSAP, textures. Zero external requests,
-  with ONE sanctioned exception: the waitlist POST to api.web3forms.com
-  (key-gated in `js/main.js`; no key → honest demo mode, no request).
+  with TWO sanctioned exceptions, both gated so their absence degrades
+  honestly: the waitlist POST to api.web3forms.com (key-gated in
+  `js/main.js`) and the checkout POST to our own `/api/checkout`, which
+  talks to Stripe server-side.
 - Keep demo states honest ("checkout isn't wired up yet", "the list isn't wired
   up yet", footer "Concept build").
 - Keep `.vercelignore` patterns root-anchored (`/brand/` once stripped
@@ -171,23 +173,59 @@ elevation; keep it that way.
 
 ## 9. Data source of truth
 
-**File: none — `<TODO — extraction now due>`.** Product data (SKU, name,
-price, colorway, print spec) lives inline on each `.prod` article as `data-*`
-attributes + visible copy; the cart reads the DOM. Prices are concept
-placeholders ($34–$42). Copy truth for slogans/placements is
-`brand/SHIRT-CONCEPTS.md`; identity truth is `brand/BRAND-GUIDE.md`; print
-art for the new designs is `brand/09_SHIRT-ART/`. The line is at 12 SKUs —
-past the 8-SKU threshold — so `js/products.js` extraction is DUE before
-checkout wiring or SKU 13, whichever lands first. The shop currently sells
-nothing: every card CTA is a "Coming soon" link into the waitlist until the
-drop date is picked (the demo cart code stays, unused, for the flip back).
+**File: `js/products.js`.** SKU → name and price for all 24 shirts, in one
+file that is both loaded raw by the browser (`window.INC_CATALOG`) and
+`require`d by `api/checkout.js` on the server. **Price lives here and
+nowhere else.** The cart re-resolves name and price from it on every render,
+and the checkout endpoint prices the order from it server-side, so a cart
+edited in devtools buys nothing cheaper and shows nothing false. The `data-price`
+attributes in markup are display copy only; keep them in step with this file.
+
+Everything else still reads from markup: colorway, print spec, the why-copy.
+Copy truth for slogans and placements is `brand/SHIRT-CONCEPTS.md`, identity
+truth is `brand/BRAND-GUIDE.md`, print art is `brand/09_SHIRT-ART/`. Prices
+are concept placeholders ($34–$42).
+
+The shop currently sells nothing: every card CTA is a "Coming soon" link into
+the waitlist. **To open the shop:** set `STRIPE_SECRET_KEY` in Vercel, then
+swap each card's Coming-soon anchor back to
+`<button class="btn btn--tiny" type="button" data-add>Add to cart</button>`.
+Nothing else changes; the cart and checkout are already wired.
+
+## 9a. Payments
+
+| Piece | Where | Note |
+|---|---|---|
+| Checkout endpoint | `api/checkout.js` | Vercel serverless, **zero deps** — Stripe's REST API is form-encoded HTTPS, so raw `fetch` keeps the no-build promise. Rejects non-POST, unknown SKU/size, non-integer or out-of-range qty, duplicate lines, and carts over 24 lines. |
+| Price authority | server-side only | Client sends `{sku, size, qty}`. Never a price. |
+| Return URLs | origin allowlist in `api/checkout.js` | A forged `Origin` falls back to the canonical domain, so no open redirect. |
+| Secret | `STRIPE_SECRET_KEY` env var in Vercel | Never in the repo, never in a response body. Absent → endpoint returns 503 and the UI shows the honest demo note. |
+| Coaching | Stripe Payment Link | A subscription needs a recurring Price; `tools/stripe-seed.mjs` creates it and prints the link URL for The Corner's button. |
+| Seeding | `tools/stripe-seed.mjs` | Repo-only, deploy-excluded. Stable product ids so re-running updates instead of duplicating. Run it yourself: the key stays on your machine. |
+| Cart limits | `MAX_QTY` / `MAX_LINES` in `js/products.js` | Both sides read them, so the `+` button stops exactly where the server would refuse. |
+
+**Known tradeoff, decided deliberately.** Checkout sends inline
+`price_data.product_data` rather than referencing a seeded Price id. Stripe
+treats that as "create a Product", so the dashboard catalog accumulates one
+duplicate per line item sold. Accepted because the alternative costs the
+customer their size on Stripe's payment page, and because it keeps checkout
+working whether or not the seed script has been run. Size therefore lives in
+the line's `description`, not its name, which holds the duplicates to one name
+per SKU instead of one per SKU-and-size, and `metadata.sku` keeps every order
+attributable. **Upgrade path if the catalog gets noisy:** seed a Product per
+sku/size and reference it by id — that also buys per-size sales data, which is
+what tells you which sizes to reorder.
 
 ## 10. Launch checklist
 
 - [ ] Real prices confirmed, concept-placeholder notes removed
 - [ ] Waitlist live: Web3Forms access key pasted into `WAITLIST_KEY`
       (`js/main.js`) — the demo note hides itself once the key is set
-- [ ] Checkout wired or the shop framed as pre-order
+- [ ] `STRIPE_SECRET_KEY` set in Vercel (live key, not `sk_test_`), shop CTAs
+      flipped from Coming-soon back to `data-add` buttons
+- [ ] `tools/stripe-seed.mjs` run against the live key; coaching Payment Link
+      URL pasted into The Corner's button
+- [ ] One real test order placed and refunded, shipping rate confirmed
 - [ ] Socials linked (footer "soon" labels replaced)
 - [ ] `noindex` removed; robots.txt + sitemap.xml added
 - [ ] GA4 (Armour Crete account) + Search Console + Bing — the standard EZHD

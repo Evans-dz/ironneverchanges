@@ -482,6 +482,12 @@ html.reduced .load{opacity:1}
   font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.04em;
   color:var(--ash);border:1px dashed var(--hair);padding:12px 14px;margin-top:14px;
 }
+/* a checkout that actually failed, as opposed to one that was never open */
+.cart__err{
+  font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.04em;
+  color:var(--bone);border:1px solid var(--bone);padding:12px 14px;margin-top:14px;
+}
+.cart__err[hidden]{display:none}
 
 @media (max-width:480px){
   .nav__word{display:none}

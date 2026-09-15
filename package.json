@@ -1,0 +1,11 @@
+{
+  "name": "iron-never-changes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Iron Never Changes — heavyweight gym wear. Static site, no build step.",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "node server.js"
+  },
+  "//": "There are no dependencies and there is no build. This file exists so Vercel treats api/*.js as CommonJS rather than guessing, and so `npm run dev` matches the other EZHD builds. vercel.json sets installCommand and buildCommand to empty: nothing is ever installed at deploy time."
+}

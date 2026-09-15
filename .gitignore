@@ -2,6 +2,13 @@
 *.log
 node_modules/
 
+# Secrets never land in the repo. The Stripe key lives in Vercel's
+# environment variables, and in your shell when running tools/stripe-seed.mjs.
+.env
+.env.*
+!.env.example
+.vercel/
+
 # local editor / assistant config
 .claude/
 

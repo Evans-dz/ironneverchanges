@@ -13,3 +13,9 @@
 /assets/shirts/raw/
 /assets/feed/raw/
 /tools/
+
+# Internal notes. These were being served at ironneverchanges.com/DESIGN.md
+# and friends, which handed anyone the build's whole playbook.
+/DESIGN.md
+/CLAUDE.md
+/verify-baseline.txt
