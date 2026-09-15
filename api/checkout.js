@@ -10,9 +10,15 @@
    prices — those are read from js/products.js on this side, so a
    rewritten cart in somebody's devtools buys nothing cheaper.
 
-   Needs one environment variable in Vercel: STRIPE_SECRET_KEY.
-   Without it the endpoint reports itself closed and the site
-   falls back to its honest "not wired up yet" note.
+   Needs one environment variable in Vercel: STRIPE_SECRET_KEY, a
+   RESTRICTED key (rk_) whose only permission is Checkout Sessions:
+   Write. That covers the inline prices and the inline shipping rate
+   below; it cannot refund, read a customer, or move a payout, so a
+   leak costs nothing but some junk payment pages. Turning on
+   automatic_tax later would also need Tax: Read.
+
+   Without the variable the endpoint reports itself closed and the
+   site falls back to its honest "not wired up yet" note.
    ============================================================ */
 'use strict';
 

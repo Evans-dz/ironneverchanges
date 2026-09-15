@@ -199,7 +199,8 @@ Nothing else changes; the cart and checkout are already wired.
 | Checkout endpoint | `api/checkout.js` | Vercel serverless, **zero deps** — Stripe's REST API is form-encoded HTTPS, so raw `fetch` keeps the no-build promise. Rejects non-POST, unknown SKU/size, non-integer or out-of-range qty, duplicate lines, and carts over 24 lines. |
 | Price authority | server-side only | Client sends `{sku, size, qty}`. Never a price. |
 | Return URLs | origin allowlist in `api/checkout.js` | A forged `Origin` falls back to the canonical domain, so no open redirect. |
-| Secret | `STRIPE_SECRET_KEY` env var in Vercel | Never in the repo, never in a response body. Absent → endpoint returns 503 and the UI shows the honest demo note. |
+| Secret | `STRIPE_SECRET_KEY` env var in Vercel | A **restricted** key (`rk_`) with one permission: Checkout Sessions → Write. That is enough for the inline prices and shipping rate; it cannot refund, read customers, or move payouts. Never in the repo, never in a response body. Absent → 503 and the honest demo note. |
+| Seeding key | separate, local, temporary | Restricted key with write on Products, Prices, Payment Links. Used once by `tools/stripe-seed.mjs`, then rolled. Never goes near Vercel. |
 | Coaching | Stripe Payment Link | A subscription needs a recurring Price; `tools/stripe-seed.mjs` creates it and prints the link URL for The Corner's button. |
 | Seeding | `tools/stripe-seed.mjs` | Repo-only, deploy-excluded. Stable product ids so re-running updates instead of duplicating. Run it yourself: the key stays on your machine. |
 | Cart limits | `MAX_QTY` / `MAX_LINES` in `js/products.js` | Both sides read them, so the `+` button stops exactly where the server would refuse. |

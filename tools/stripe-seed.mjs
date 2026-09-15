@@ -13,10 +13,15 @@
 
    Run it yourself so the key never leaves your machine:
 
-     STRIPE_SECRET_KEY=sk_test_... node tools/stripe-seed.mjs
+     STRIPE_SECRET_KEY=rk_test_... node tools/stripe-seed.mjs
 
-   Sandbox key seeds the sandbox, live key seeds live. Safe to run
-   more than once. Zero dependencies.
+   Wants a RESTRICTED key (rk_) with write on Products, Prices and
+   Payment Links. Nothing else. Roll or delete it when seeding is done;
+   it is not the key the site runs on.
+
+   Sandbox key seeds the sandbox, live key seeds live, and the script
+   prints which before it touches anything. Safe to run more than once.
+   Zero dependencies.
    ============================================================ */
 import { createRequire } from 'node:module';
 
@@ -28,7 +33,10 @@ if (!KEY) {
   console.error('Set STRIPE_SECRET_KEY first. See the header of this file.');
   process.exit(1);
 }
-const MODE = KEY.startsWith('sk_live') ? 'LIVE' : 'test';
+/* Restricted keys are rk_, not sk_ — matching only sk_live would have called
+   a live restricted key "test" and seeded the real account while saying it
+   was the sandbox. */
+const MODE = /^(sk|rk)_live/.test(KEY) ? 'LIVE' : 'test';
 const COACHING_CENTS = 10000;
 
 function encodeForm(value, prefix, pairs) {
