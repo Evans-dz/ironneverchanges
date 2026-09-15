@@ -97,6 +97,8 @@ not UI palette.
 | Print overlay | Prints stay LIVE — SVG `<image>` marks and page-font `<text>` in the `.pl` group at 93% opacity over the photo, never baked into the raster; placement = print spec in inches (`brand/SHIRT-CONCEPTS.md`) × measured units-per-inch (`assets/shirts/raw/placements.json`); white ink on the dark washes, black ink art on grey, slogan-bar text is a fixed dark knockout (`#2b2b2e`) | Retina-crisp prints, slogans set in the site's own Archivo, and a print change is a markup edit — no reprocessing |
 | Ground shadow | `.tsh` ellipse per face, cy/rx from that colorway's measured hem, blurred by `#softHard` — the one filter left in `<defs>` | Cutouts need grounding on the panel or they float |
 | Product card | Front/back cross-fade views + flip toggle; tapping the image flips; size chips S–3X; `data-sku/name/price` on the article drive the cart | The card IS the product database (see §9) |
+| Feed clips | Real training footage in the 9:16 frames (`assets/feed/week-*.mp4`, 540p H.264 ~1.4Mbps, AUDIO STRIPPED — reels carry licensed music; `tools/` has the AVFoundation pipeline); click-to-play one at a time, muted+looping, progress bar fills in 8 discrete notches; photos in `.feed__proof` | Proof of work, honest and silent; masters re-exportable from the Photos album (never committed) |
+| Media = monochrome | Every photo and clip renders through `filter:grayscale(1)` | The palette rule (#111/#fff/#8C8C8C) extends to photography — color footage would be the only color on the page |
 | Cart drawer | Client-side demo: localStorage `inc-cart`, qty/remove, subtotal; checkout reveals an honest "isn't wired up yet" note; focus-trapped dialog, Esc closes, refcounted scroll lock shared with the menu | Concept build never fakes a working checkout |
 | The load | Fixed bottom-right barbell SVG; plates on in pairs per sixth of scroll, caption 45→495 LB, clank on change; hidden <900px and until half a viewport of scroll | Scroll progress in the brand's own units |
 | The wall | Slogan cloud from the brand's slogan bank; click stamps a line permanently lit (`is-stamped`) + `hit` rattle | The merch pipeline as a page section |
@@ -130,7 +132,9 @@ elevation; keep it that way.
   anything new.
 - Keep the page fully readable with JS off, and static-but-complete under
   reduced motion.
-- Keep all assets local — fonts, GSAP, textures. Zero external requests.
+- Keep all assets local — fonts, GSAP, textures. Zero external requests,
+  with ONE sanctioned exception: the waitlist POST to api.web3forms.com
+  (key-gated in `js/main.js`; no key → honest demo mode, no request).
 - Keep demo states honest ("checkout isn't wired up yet", "the list isn't wired
   up yet", footer "Concept build").
 - Keep `.vercelignore` patterns root-anchored (`/brand/` once stripped
@@ -158,8 +162,9 @@ elevation; keep it that way.
   cart drawer (`min(430px,94vw)`) are the real mobile surface.
 - Desktop adds: the 4-col shop wall, pillar row, hero ring at half-off-screen,
   the load meter, inline nav with active-section state.
-- Tap targets: chips/flip buttons run small (~26–32px) — audit flags them;
-  known debt on the concept build.
+- Tap targets: every target clears the 24px floor (audit-clean); chips and
+  flip buttons sit in the 32–40px band, warned but accepted — full 44px
+  would mean redesigning the chip row.
 
 ## 9. Data source of truth
 
@@ -173,7 +178,8 @@ shop grows past 8 SKUs or checkout gets wired, extract `js/products.js` first.
 ## 10. Launch checklist
 
 - [ ] Real prices confirmed, concept-placeholder notes removed
-- [ ] Waitlist form wired (stays honestly unwired until then)
+- [ ] Waitlist live: Web3Forms access key pasted into `WAITLIST_KEY`
+      (`js/main.js`) — the demo note hides itself once the key is set
 - [ ] Checkout wired or the shop framed as pre-order
 - [ ] Socials linked (footer "soon" labels replaced)
 - [ ] `noindex` removed; robots.txt + sitemap.xml added

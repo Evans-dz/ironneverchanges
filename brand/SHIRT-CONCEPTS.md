@@ -161,3 +161,12 @@ are the ones that say *I know what your week looked like* — not the ones that 
 somebody weak for missing a session. "I didn't feel like it either" outsells "no
 excuses" every time, because one of them is standing next to you and the other one is
 yelling at you.
+
+### 9. THE WALL
+
+- **Front:** `mark-skull-barbell`, left chest, 4.5"
+- **Back:** the slogan wall — eight lines from the bank stacked in one 12" × 15"
+  block, each line sized to the same width, with the house slogan in a knockout
+  bar at the base
+- **Why:** the site's Wall section, wearable. Nobody buys it for one line —
+  they buy it because three of them were their year.

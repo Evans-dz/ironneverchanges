@@ -4,3 +4,6 @@ node_modules/
 
 # local editor / assistant config
 .claude/
+
+# Feed masters — Photos-album exports, huge; re-exportable, never committed
+assets/feed/raw/
