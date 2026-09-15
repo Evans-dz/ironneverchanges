@@ -1,0 +1,102 @@
+# verify baseline — 2026-09-14 19:04 — commit fbad7d0
+
+
+═══ http://localhost:4175 @ 1440x900 (desktop) ═══
+
+— document —
+  ✓ <html lang> set ("en")
+  ✓ <title> present and ≤65 chars (45)
+  ✓ meta viewport present
+  ✓ <main> landmark present
+  ✓ exactly one <h1> (found 1)
+  ✓ no skipped heading levels
+  ! no skip link to main content
+
+— accessibility —
+  ✓ every <img> has alt (0 missing)
+  ✓ every button/link has an accessible name (0 unnamed)
+  ✓ every form control is labelled (0 unlabelled)
+
+— layout —
+  ✓ no horizontal scroll (0px overflow)
+  ✓ CLS under 0.1 (0.0002)
+  ✗ all targets ≥24px tappable (87 probed, 8 under)
+      a  117x21 tappable
+      a  76x21 tappable
+      a  78x21 tappable
+      a  75x21 tappable
+      a  78x21 tappable
+      a  150x23 tappable
+  ! sticky header + 6 anchor targets with no scroll-margin-top
+      section#hero.hero
+      section#standard.sec.standard
+      section#wall.sec.wall
+      section#shop.sec.line
+      section#feed.sec.feed
+      section#name.sec.name
+
+— motion —
+  ✗ transitions stay off layout properties (1 rendered offenders)
+      header#nav.nav  transition: background, border-color, height 0.1s, 0.1s, 0.1s
+  ✗ no prefers-reduced-motion block found
+
+— forms —
+  ✓ input types match their purpose (0 wrong)
+
+— focus —
+  ✓ visible focus ring on all 60 tab stops checked (0 without)
+
+═══ http://localhost:4175 @ 390x844 (mobile) ═══
+
+— document —
+  ✓ <html lang> set ("en")
+  ✓ <title> present and ≤65 chars (45)
+  ✓ meta viewport present
+  ✓ <main> landmark present
+  ✓ exactly one <h1> (found 1)
+  ✓ no skipped heading levels
+  ! no skip link to main content
+
+— accessibility —
+  ✓ every <img> has alt (0 missing)
+  ✓ every button/link has an accessible name (0 unnamed)
+  ✓ every form control is labelled (0 unlabelled)
+
+— layout —
+  ✓ no horizontal scroll (0px overflow)
+  ✓ CLS under 0.1 (0.0003)
+  ✗ all targets ≥24px tappable (83 probed, 3 under)
+      a  150x23 tappable
+      a  150x23 tappable
+      a  150x23 tappable
+  ! 75 targets between 24 and 44px tappable
+      a.nav__brand  44x31 tappable
+      button#cartBtn.btn.btn--solid  96x35 tappable
+      button.is-on  61x26 tappable
+      button  53x26 tappable
+      button  32x26 tappable
+      button.is-on  32x26 tappable
+  ! sticky header + 6 anchor targets with no scroll-margin-top
+      section#hero.hero
+      section#standard.sec.standard
+      section#wall.sec.wall
+      section#shop.sec.line
+      section#feed.sec.feed
+      section#name.sec.name
+
+— motion —
+  ✗ transitions stay off layout properties (3 rendered offenders)
+      header#nav.nav  transition: background, border-color, height 0.1s, 0.1s, 0.1s
+      span  transition: transform, top 0.1s, 0.1s
+      span  transition: transform, top 0.1s, 0.1s
+  ✗ no prefers-reduced-motion block found
+
+— forms —
+  ✓ input types match their purpose (0 wrong)
+
+— focus —
+  ✓ visible focus ring on all 60 tab stops checked (0 without)
+
+────────────────────────────────────────────────────────────
+  6 failing, 5 warnings
+
