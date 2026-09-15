@@ -38,6 +38,14 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 html.js{scroll-behavior:auto}
+/* the JS handles reduced motion (html.reduced); this block covers the
+   no-JS document and anything CSS-only, and is what the audit checks */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+/* anchored sections land clear of the fixed nav (native + no-JS jumps) */
+main section[id]{scroll-margin-top:84px}
 body{
   background:var(--iron);color:var(--bone);
   font-family:var(--body);font-weight:400;font-size:16px;line-height:1.65;
@@ -48,6 +56,10 @@ img,svg{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--bone);outline-offset:3px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;top:10px;left:10px;z-index:80;transform:translateY(-200%);
+  background:var(--bone);color:var(--iron);font-weight:600;font-size:13px;letter-spacing:.1em;
+  text-transform:uppercase;padding:12px 18px}
+.skip:focus-visible{transform:none;outline-offset:0}
 strong{font-weight:600}
 em{font-style:normal;font-weight:600}
 
@@ -75,7 +87,7 @@ em{font-style:normal;font-weight:600}
   display:flex;align-items:center;gap:28px;
   padding:0 var(--pad);height:76px;
   border-bottom:1px solid transparent;
-  transition:background .1s steps(2,end),border-color .1s steps(2,end),height .1s steps(2,end);
+  transition:background .1s steps(2,end),border-color .1s steps(2,end);
 }
 .nav.is-solid{background:rgba(17,17,17,.88);backdrop-filter:blur(10px);border-color:var(--hair);height:64px}
 .nav__brand{display:flex;align-items:center;gap:14px;margin-right:auto}
@@ -84,17 +96,17 @@ em{font-style:normal;font-weight:600}
 .nav__links{display:flex;gap:26px}
 .nav__links a{
   font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);
-  white-space:nowrap;
+  white-space:nowrap;padding-block:10px;
   transition:color .07s steps(1,end);
 }
 .nav__links a:hover,.nav__links a.is-active{color:var(--bone)}
 .nav__cta{display:inline-flex}
 .nav__burger{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;position:relative}
-.nav__burger span{position:absolute;left:8px;right:8px;height:2px;background:var(--bone);transition:transform .1s steps(2,end),top .1s steps(2,end)}
+.nav__burger span{position:absolute;left:8px;right:8px;height:2px;background:var(--bone);transition:transform .1s steps(2,end)}
 .nav__burger span:nth-child(1){top:17px}
 .nav__burger span:nth-child(2){top:27px}
-.nav__burger[aria-expanded="true"] span:nth-child(1){top:22px;transform:rotate(45deg)}
-.nav__burger[aria-expanded="true"] span:nth-child(2){top:22px;transform:rotate(-45deg)}
+.nav__burger[aria-expanded="true"] span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.nav__burger[aria-expanded="true"] span:nth-child(2){transform:translateY(-5px) rotate(-45deg)}
 
 .menu{position:fixed;inset:0;z-index:45;background:var(--iron);display:flex;flex-direction:column;justify-content:center;padding:var(--pad)}
 .menu__links{display:flex;flex-direction:column;gap:6px}
@@ -256,21 +268,38 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
 .feed__row{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1080px}
 .frame{
   position:relative;aspect-ratio:9/16;border:1px solid var(--hair);
-  background:var(--panel-2);
+  background:var(--panel-2);overflow:hidden;cursor:pointer;
   padding:18px;display:flex;flex-direction:column;
 }
-.frame__label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--ash-dim)}
-.frame__line{font-family:var(--disp);text-transform:uppercase;font-size:clamp(19px,2vw,26px);line-height:1.12;margin:auto 0;padding-top:20px}
+/* the clip is the ground layer; monochrome is the palette rule, not a mood */
+.frame__vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.06)}
+.frame::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(17,17,17,.55),rgba(17,17,17,0) 34%,rgba(17,17,17,0) 56%,rgba(17,17,17,.72));
+}
+.frame__label,.frame__line,.frame__play,.frame__bar{position:relative}
+.frame__label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--bone);text-shadow:0 1px 8px rgba(0,0,0,.85)}
+.frame__line{font-family:var(--disp);text-transform:uppercase;font-size:clamp(19px,2vw,26px);line-height:1.12;margin:auto 0;padding-top:20px;text-shadow:0 1px 10px rgba(0,0,0,.7)}
 .frame__play{
-  width:46px;height:46px;border:1px solid var(--ash-dim);border-radius:50%;
-  position:relative;margin-bottom:16px;
+  width:46px;height:46px;border:1px solid var(--ash);border-radius:50%;
+  position:relative;margin-bottom:16px;background:rgba(17,17,17,.4);cursor:pointer;padding:0;
 }
 .frame__play::after{
   content:'';position:absolute;left:18px;top:14px;
-  border-left:12px solid var(--ash);border-top:9px solid transparent;border-bottom:9px solid transparent;
+  border-left:12px solid var(--bone);border-top:9px solid transparent;border-bottom:9px solid transparent;
+}
+.frame.is-playing .frame__play::after{
+  border:0;left:17px;top:15px;width:4px;height:16px;background:var(--bone);box-shadow:8px 0 0 var(--bone);
 }
 .frame__bar{display:block;height:2px;background:var(--hair)}
-.frame__bar i{display:block;height:100%;background:var(--ash)}
+.frame__bar i{display:block;height:100%;width:100%;background:var(--bone);transform:scaleX(0);transform-origin:left;transition:transform .12s steps(2,end)}
+.feed__proof{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;max-width:1080px;margin-top:26px}
+.shot{position:relative;border:1px solid var(--hair);background:var(--panel-2);margin:0}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:3/4;filter:grayscale(1) contrast(1.05)}
+.shot__cap{
+  position:absolute;left:12px;bottom:10px;font-family:var(--mono);
+  font-size:10px;letter-spacing:.16em;color:var(--bone);text-shadow:0 1px 8px rgba(0,0,0,.85);
+}
 .feed__note{color:var(--ash-dim);font-size:14px;margin-top:34px;font-family:var(--mono);letter-spacing:.04em}
 
 /* ---------- 05 the name ---------- */
@@ -288,7 +317,7 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
 .foot__cols{display:flex;gap:clamp(40px,8vw,120px);flex-wrap:wrap;margin-bottom:64px}
 .foot__col{display:flex;flex-direction:column;gap:10px;min-width:150px}
 .foot__h{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--ash-dim);margin-bottom:6px}
-.foot__col a{font-size:13.5px;font-weight:500;color:var(--ash);letter-spacing:.04em}
+.foot__col a{font-size:13.5px;font-weight:500;color:var(--ash);letter-spacing:.04em;padding-block:8px;margin-block:-4px}
 .foot__col a:hover{color:var(--bone)}
 .foot__dim{font-size:13.5px;color:var(--ash-dim);max-width:230px;line-height:1.6}
 .foot__base{
@@ -296,7 +325,7 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
   border-top:1px solid var(--hair-2);padding-top:22px;
   font-size:11.5px;color:var(--ash-dim);letter-spacing:.04em;
 }
-.foot__ez{color:var(--ash);border-bottom:1px solid var(--ash-dim)}
+.foot__ez{color:var(--ash);border-bottom:1px solid var(--ash-dim);display:inline-block;padding-block:6px;margin-block:-6px}
 .foot__ez:hover{color:var(--bone);border-color:var(--bone)}
 
 /* ---------- stamp reveals (JS present only) ----------
@@ -342,6 +371,7 @@ html.js:not(.reduced) .sec__rule{transform:scaleX(0)}
   .name__split{grid-template-columns:1fr}
   .name__art{max-width:320px}
   .feed__row{grid-template-columns:1fr;max-width:420px}
+  .feed__proof{grid-template-columns:repeat(2,1fr);max-width:420px}
   .hero__ring{right:-40vw;width:110vw;opacity:.09}
 }
 @media (max-width:640px){
@@ -377,7 +407,7 @@ html.reduced .load{opacity:1}
 .prod__size button{
   font-family:var(--body);font-weight:600;font-size:10.5px;letter-spacing:.08em;
   background:transparent;color:var(--ash);border:1px solid var(--hair);
-  min-width:32px;padding:6px 0;cursor:pointer;
+  min-width:34px;padding:9px 0;cursor:pointer;
   transition:background .06s steps(1,end),color .06s steps(1,end);
 }
 .prod__size button:hover{border-color:var(--ash)}

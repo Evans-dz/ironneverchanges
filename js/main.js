@@ -188,6 +188,38 @@
     }
   }
 
+  /* ---------------- 04 the feed: real clips ----------------
+     Click anywhere on a frame to play/pause (one at a time, muted, looping);
+     the progress bar loads in eight discrete notches, not a sweep. */
+  $$('.frame').forEach((fr) => {
+    const v = $('.frame__vid', fr);
+    if (!v) return;
+    const btn = $('.frame__play', fr);
+    const bar = $('.frame__bar i', fr);
+    const playLabel = btn.getAttribute('aria-label');
+    const stop = (f) => {
+      const ov = $('.frame__vid', f);
+      ov.pause();
+      f.classList.remove('is-playing');
+      $('.frame__play', f).setAttribute('aria-label', $('.frame__play', f).dataset.play);
+    };
+    btn.dataset.play = playLabel;
+    fr.addEventListener('click', () => {          /* button clicks bubble here — one handler */
+      if (v.paused) {
+        $$('.frame.is-playing').forEach(stop);
+        v.play();
+        fr.classList.add('is-playing');
+        btn.setAttribute('aria-label', 'Pause');
+      } else {
+        stop(fr);
+      }
+    });
+    v.addEventListener('timeupdate', () => {
+      if (!v.duration) return;
+      bar.style.transform = 'scaleX(' + Math.floor((v.currentTime / v.duration) * 8) / 8 + ')';
+    });
+  });
+
   /* ---------------- 03 the shop: front/back views ---------------- */
   $$('.prod').forEach((card) => {
     const set = (face) => {
@@ -322,9 +354,15 @@
 
   renderCart();
 
-  /* ---------------- waitlist (demo — intentionally unwired) ---------------- */
+  /* ---------------- waitlist ----------------
+     Paste a Web3Forms access key (free — web3forms.com emails it to you) to
+     wire the list for real: submissions land in that inbox. Empty key keeps
+     the honest concept-mode note. The one sanctioned external request. */
+  const WAITLIST_KEY = '';
   const form = $('#listForm');
-  form.addEventListener('submit', (e) => {
+  const listDemo = $('#listDemo');
+  if (WAITLIST_KEY) listDemo.hidden = true;
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = $('#listEmail').value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -332,9 +370,29 @@
       form.classList.remove('is-hit'); void form.offsetWidth; form.classList.add('is-hit');
       return;
     }
-    form.hidden = true;
     const done = $('#listDone');
-    done.hidden = false;
-    done.classList.add('stamped');
+    if (!WAITLIST_KEY) {          /* concept mode: the stamp lands, the note below stays honest */
+      form.hidden = true; done.hidden = false; done.classList.add('stamped');
+      return;
+    }
+    const btn = $('button[type="submit"]', form);
+    btn.disabled = true; btn.textContent = 'STAMPING…';
+    try {
+      const r = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WAITLIST_KEY,
+          email,
+          subject: 'Waitlist signup — ironneverchanges.com',
+          from_name: 'IRON NEVER CHANGES',
+        }),
+      });
+      if (!(await r.json()).success) throw new Error('rejected');
+      form.hidden = true; done.hidden = false; done.classList.add('stamped');
+    } catch (err) {
+      btn.disabled = false; btn.textContent = 'Try again';
+      form.classList.remove('is-hit'); void form.offsetWidth; form.classList.add('is-hit');
+    }
   });
 })();
