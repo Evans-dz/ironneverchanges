@@ -21,78 +21,14 @@
 <!-- grain -->
 <div class="grain" aria-hidden="true"></div>
 
-<!-- garment flats — washed, garment-dyed, boxy. The wash is baked noise
-     textures (assets/brand/wash-*.png) clipped to the body — live SVG
-     turbulence rasterizes into visible blocks on some GPUs. -->
+<!-- garments — real washed blanks (assets/shirts/), cut out and normalized
+     into the 400x460 card space by tools/normalize.mjs, collar at y=60 and
+     ~10.2 units/inch. Prints overlay live in the .pl groups, same as always:
+     SVG marks and page-font text at 93% opacity, sitting in the fabric. -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
     <filter id="softHard" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
-    <pattern id="grainP" width="220" height="220" patternUnits="userSpaceOnUse">
-      <image href="assets/brand/wash-grain.png" width="220" height="220"/>
-    </pattern>
-    <linearGradient id="shadeL" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#000" stop-opacity=".30"/><stop offset="1" stop-color="#000" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="shadeR" x1="1" y1="0" x2="0" y2="0">
-      <stop offset="0" stop-color="#000" stop-opacity=".30"/><stop offset="1" stop-color="#000" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="hemShade" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".15"/>
-    </linearGradient>
-    <radialGradient id="sheen" cx="0.5" cy="0.35" r="0.7">
-      <stop offset="0" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
-    </radialGradient>
-    <clipPath id="clipF"><path d="M146,42 C154,68 246,68 254,42 L316,56 C328,59 336,64 341,72 L390,128 C393,133 392,139 386,142 L336,163 C330,165 325,163 322,157 L318,140 C317,190 318,300 316,404 C316,411 311,416 303,416 L97,416 C89,416 84,411 84,404 C82,300 83,190 82,140 L78,157 C75,163 70,165 64,163 L14,142 C8,139 7,133 10,128 L59,72 C64,64 72,59 84,56 L146,42 Z"/></clipPath>
-    <clipPath id="clipB"><path d="M148,40 C156,54 244,54 252,40 L316,56 C328,59 336,64 341,72 L390,128 C393,133 392,139 386,142 L336,163 C330,165 325,163 322,157 L318,140 C317,190 318,300 316,404 C316,411 311,416 303,416 L97,416 C89,416 84,411 84,404 C82,300 83,190 82,140 L78,157 C75,163 70,165 64,163 L14,142 C8,139 7,133 10,128 L59,72 C64,64 72,59 84,56 L148,40 Z"/></clipPath>
 
-      <g id="washFx">
-        <image href="assets/brand/wash-light.png" x="0" y="0" width="400" height="460" preserveAspectRatio="none" style="opacity:var(--mL,.08)"/>
-        <image href="assets/brand/wash-dark.png" x="0" y="0" width="400" height="460" preserveAspectRatio="none" style="opacity:var(--mD,.07)"/>
-        <rect x="0" y="0" width="400" height="460" fill="url(#grainP)" style="opacity:var(--gr,.05)"/>
-        <rect x="62" y="30" width="38" height="400" fill="url(#shadeL)"/>
-        <rect x="300" y="30" width="38" height="400" fill="url(#shadeR)"/>
-        <ellipse cx="200" cy="120" rx="150" ry="80" fill="url(#sheen)"/>
-        <rect x="80" y="330" width="240" height="90" fill="url(#hemShade)"/>
-      </g>
-      <g id="wrinkles" fill="none" stroke-linecap="round">
-        <!-- armhole pull, both sides, deliberately not mirrored -->
-        <path d="M304,150 C291,162 282,177 277,192 M292,145 C281,156 274,167 269,178" stroke="#000" stroke-width="4" opacity=".09" filter="url(#soft)"/>
-        <path d="M96,153 C109,164 118,178 123,193 M108,147 C118,157 125,168 130,179" stroke="#000" stroke-width="4" opacity=".07" filter="url(#soft)"/>
-        <!-- shoulder-seam shadow into the sleeve -->
-        <path d="M44,96 C56,107 69,114 82,118" stroke="#000" stroke-width="5" opacity=".07" filter="url(#soft)"/>
-        <path d="M346,90 C337,104 327,115 315,120" stroke="#000" stroke-width="5" opacity=".06" filter="url(#soft)"/>
-        <!-- one soft asymmetric fold low on the body, where a boxy tee stacks -->
-        <path d="M118,352 C176,362 246,344 296,356" stroke="#000" stroke-width="9" opacity=".05" filter="url(#softHard)"/>
-        <path d="M126,378 C182,386 240,372 292,381" stroke="#000" stroke-width="7" opacity=".045" filter="url(#softHard)"/>
-      </g>
-      <g id="seams">
-        <path class="tst" d="M100,404 L300,404 M100,409 L300,409"/>
-        <path class="tst" d="M330,152 L380,132 M326,146 L376,126"/>
-        <path class="tst" d="M70,152 L20,132 M74,146 L24,126"/>
-        <path d="M300,58 C306,82 308,106 304,130 M100,58 C94,82 92,106 96,130" fill="none" stroke="#000" opacity=".14" stroke-width="1.4"/>
-        <path class="tst" d="M298,60 C304,83 306,105 302,128 M102,60 C96,83 94,105 98,128"/>
-      </g>
-    <g id="teeF">
-      <ellipse cx="200" cy="418" rx="160" ry="16" fill="#000" opacity=".38" filter="url(#softHard)"/>
-      <path class="tb" d="M146,42 C154,68 246,68 254,42 L316,56 C328,59 336,64 341,72 L390,128 C393,133 392,139 386,142 L336,163 C330,165 325,163 322,157 L318,140 C317,190 318,300 316,404 C316,411 311,416 303,416 L97,416 C89,416 84,411 84,404 C82,300 83,190 82,140 L78,157 C75,163 70,165 64,163 L14,142 C8,139 7,133 10,128 L59,72 C64,64 72,59 84,56 L146,42 Z"/>
-      <g clip-path="url(#clipF)"><use href="#washFx"/><use href="#wrinkles"/></g>
-      <use href="#seams"/>
-      <path class="tcol" d="M146,42 C154,68 246,68 254,42 L250,32 C242,54 158,54 150,32 Z"/>
-      <path d="M150,33 C158,54 242,54 250,33" fill="none" stroke="#000" opacity=".28" stroke-width="1.6"/>
-      <path class="trib" d="M158,42 l2,9 M167,47 l1.6,9 M177,51 l1.2,9 M188,53 l.8,9 M200,54 l0,9 M212,53 l-.8,9 M223,51 l-1.2,9 M233,47 l-1.6,9 M242,42 l-2,9"/>
-      <path class="tst" d="M150,60 C158,74 242,74 250,60"/>
-    </g>
-    <g id="teeB">
-      <ellipse cx="200" cy="418" rx="160" ry="16" fill="#000" opacity=".38" filter="url(#softHard)"/>
-      <path class="tb" d="M148,40 C156,54 244,54 252,40 L316,56 C328,59 336,64 341,72 L390,128 C393,133 392,139 386,142 L336,163 C330,165 325,163 322,157 L318,140 C317,190 318,300 316,404 C316,411 311,416 303,416 L97,416 C89,416 84,411 84,404 C82,300 83,190 82,140 L78,157 C75,163 70,165 64,163 L14,142 C8,139 7,133 10,128 L59,72 C64,64 72,59 84,56 L148,40 Z"/>
-      <g clip-path="url(#clipB)"><use href="#washFx"/><use href="#wrinkles"/></g>
-      <use href="#seams"/>
-      <path class="tcol" d="M148,40 C156,54 244,54 252,40 L248,31 C240,45 160,45 152,31 Z"/>
-      <path class="trib" d="M162,38 l1.6,7 M174,41 l1.2,7 M187,43 l.6,7 M200,44 l0,7 M213,43 l-.6,7 M226,41 l-1.2,7 M238,38 l-1.6,7"/>
-      <path class="tst" d="M154,50 C162,62 238,62 246,50"/>
-      <path class="tst" d="M104,72 C160,67 240,67 296,72"/>
-    </g>
   </defs>
 </svg>
 
@@ -242,22 +178,22 @@
     <h2 class="sec__title">THE SHOP</h2>
     <span class="sec__rule" aria-hidden="true"></span>
   </div>
-  <p class="sec__lede reveal">Eight shirts. Three colors of cotton, one color of ink. Heavyweight,
+  <p class="sec__lede reveal">Eight shirts. Four washes of cotton, one color of ink. Heavyweight,
   garment&#8209;dyed, screen printed &mdash; so it cracks and fades exactly the way it should. No tech fabric,
   no neon, no motivation-speak in cursive.</p>
 
   <div class="line__grid" id="lineGrid">
     <article class="prod reveal-up" data-view="front" data-sku="INC-001" data-name="THE FLAGSHIP" data-price="42">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, front: skull and barbell mark on the left chest"><use href="#teeF"></use><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="231" y="120" width="37" height="24.6"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, back: large vintage wordmark with YOU DO. beneath"><use href="#teeB"></use><g class="pl"><image href="assets/brand/vintage-wordmark-stacked_white.png" x="136.5" y="96" width="127" height="109.6"/><text class="pr" x="200" y="240" font-size="26" letter-spacing="2" text-anchor="middle">YOU DO.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="230.6" y="125.8" width="36.3" height="24.1"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: large vintage wordmark with YOU DO. beneath"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/vintage-wordmark-stacked_white.png" x="137.7" y="107.8" width="124.7" height="107.6"/><text class="pr" x="200" y="245" font-size="26" letter-spacing="2" text-anchor="middle">YOU DO.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
           <button type="button" data-face="back" aria-pressed="false">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-001 &middot; BLACK &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-001 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
         <h3 class="prod__name">THE FLAGSHIP</h3>
         <p class="prod__why">The whole promise in one line. The iron is the constant; you&rsquo;re the variable. The shirt people buy twice.</p>
         <ul class="prod__spec">
@@ -274,15 +210,15 @@
 
     <article class="prod reveal-up" data-view="front" data-sku="INC-002" data-name="I DIDN'T FEEL LIKE IT EITHER" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee g-charcoal" viewBox="0 0 400 460" role="img" aria-label="Charcoal tee, front: thin slogan bar across the chest"><use href="#teeF"></use><g class="pl"><image href="assets/brand/INC_tagline-bar_white.svg" x="155" y="133" width="90" height="2.13"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee g-charcoal" viewBox="0 0 400 460" role="img" aria-label="Charcoal tee, back: I didn’t feel like it either in stacked type"><use href="#teeB"></use><g class="pl"><text class="pr" x="200" y="128" font-size="18" text-anchor="middle">I DIDN&rsquo;T</text><text class="pr" x="200" y="154" font-size="18" text-anchor="middle">FEEL LIKE IT</text><text class="pr" x="200" y="180" font-size="18" text-anchor="middle">EITHER</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="185" y="206" width="30" height="20"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: thin slogan bar across the chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_tagline-bar_white.svg" x="154.8" y="133.3" width="90.4" height="2.13"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: I didn’t feel like it either in stacked type"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="200" y="130" font-size="18" text-anchor="middle">I DIDN&rsquo;T</text><text class="pr" x="200" y="156" font-size="18" text-anchor="middle">FEEL LIKE IT</text><text class="pr" x="200" y="182" font-size="18" text-anchor="middle">EITHER</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="184.4" y="204" width="31.2" height="20.7"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
           <button type="button" data-face="back" aria-pressed="false">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-002 &middot; CHARCOAL &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-002 &middot; WASHED BLUE &middot; GARMENT-DYED</p>
         <h3 class="prod__name">I DIDN&rsquo;T FEEL LIKE IT EITHER</h3>
         <p class="prod__why">The most relatable sentence in any gym. It says <em>I see you</em> without saying anything soft.</p>
         <ul class="prod__spec">
@@ -299,15 +235,15 @@
 
     <article class="prod reveal-up" data-view="front" data-sku="INC-003" data-name="ROCK BOTTOM HAS A SQUAT RACK" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, front: circular badge on the left chest"><use href="#teeF"></use><g class="pl"><image href="assets/brand/INC_badge-primary_white.svg" x="229" y="117" width="42" height="42"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, back: rock bottom has a squat rack in heavy type"><use href="#teeB"></use><g class="pl"><text class="pr" x="200" y="128" font-size="20" text-anchor="middle">ROCK BOTTOM</text><text class="pr" x="200" y="156" font-size="20" text-anchor="middle">HAS A</text><text class="pr" x="200" y="184" font-size="20" text-anchor="middle">SQUAT RACK.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: circular badge on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_badge-primary_white.svg" x="228.1" y="117.2" width="41.5" height="41.5"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: rock bottom has a squat rack in heavy type"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="200" y="132" font-size="20" text-anchor="middle">ROCK BOTTOM</text><text class="pr" x="200" y="160" font-size="20" text-anchor="middle">HAS A</text><text class="pr" x="200" y="188" font-size="20" text-anchor="middle">SQUAT RACK.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
           <button type="button" data-face="back" aria-pressed="false">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-003 &middot; BLACK &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-003 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
         <h3 class="prod__name">ROCK BOTTOM HAS A SQUAT RACK</h3>
         <p class="prod__why">The hard-times shirt. Dark humor with a hand out &mdash; the way up starts in the same place you landed.</p>
         <ul class="prod__spec">
@@ -324,15 +260,15 @@
 
     <article class="prod reveal-up" data-view="front" data-sku="INC-004" data-name="45 MINUTES THAT BELONG TO ME" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee g-heather" viewBox="0 0 400 460" role="img" aria-label="Heather grey tee, front: one-line lockup on the left chest"><use href="#teeF"></use><g class="pl"><image href="assets/brand/INC_lockup-horizontal-oneline_black.svg" x="229" y="125" width="42" height="5.6"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee g-heather" viewBox="0 0 400 460" role="img" aria-label="Heather grey tee, back: slim tagline printed down the spine"><use href="#teeB"></use><g class="pl"><image href="assets/brand/INC_spine-tagline-slim_black.svg" x="187" y="84" width="26" height="173"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, front: one-line lockup on the left chest"><ellipse class="tsh" cx="200" cy="349" rx="151" ry="13"/><image href="assets/shirts/washed-grey_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_lockup-horizontal-oneline_black.svg" x="227.7" y="132.5" width="41" height="2.84"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, back: slim tagline printed down the spine"><ellipse class="tsh" cx="200" cy="342" rx="149" ry="13"/><image href="assets/shirts/washed-grey_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_spine-tagline-slim_black.svg" x="187.3" y="100.6" width="25.4" height="162.2"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
           <button type="button" data-face="back" aria-pressed="false">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-004 &middot; HEATHER GREY &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-004 &middot; WASHED GREY &middot; GARMENT-DYED</p>
         <h3 class="prod__name">45 MINUTES THAT BELONG TO ME</h3>
         <p class="prod__why">The dad shirt. The worker shirt. Not selfish &mdash; necessary.</p>
         <ul class="prod__spec">
@@ -349,15 +285,15 @@
 
     <article class="prod reveal-up" data-view="front" data-sku="INC-005" data-name="THE BAR DOESN'T KNOW YOU'RE TIRED" data-price="40">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee g-charcoal" viewBox="0 0 400 460" role="img" aria-label="Charcoal tee, front: skull and barbell mark on the left chest"><use href="#teeF"></use><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="231" y="120" width="37" height="24.6"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee g-charcoal" viewBox="0 0 400 460" role="img" aria-label="Charcoal tee, back: line across the shoulders, name down the spine"><use href="#teeB"></use><g class="pl"><text class="pr" x="200" y="102" font-size="11" text-anchor="middle">THE BAR DOESN&rsquo;T KNOW</text><text class="pr" x="200" y="118" font-size="11" text-anchor="middle">YOU&rsquo;RE TIRED.</text><image href="assets/brand/INC_spine-name_white.svg" x="185.5" y="130" width="29" height="180"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="231.4" y="127.4" width="37.2" height="24.7"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: line across the shoulders, name down the spine"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="200" y="107" font-size="11" text-anchor="middle">THE BAR DOESN&rsquo;T KNOW</text><text class="pr" x="200" y="123" font-size="11" text-anchor="middle">YOU&rsquo;RE TIRED.</text><image href="assets/brand/INC_spine-name_white.svg" x="185.7" y="135" width="28.6" height="176.6"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
           <button type="button" data-face="back" aria-pressed="false">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-005 &middot; CHARCOAL &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-005 &middot; WASHED BLUE &middot; GARMENT-DYED</p>
         <h3 class="prod__name">THE BAR DOESN&rsquo;T KNOW YOU&rsquo;RE TIRED</h3>
         <p class="prod__why">No sympathy, no cruelty. Just a fact.</p>
         <ul class="prod__spec">
@@ -375,15 +311,15 @@
 
     <article class="prod reveal-up" data-view="front" data-sku="INC-006" data-name="THE SPINE TEE" data-price="42">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee g-natural" viewBox="0 0 400 460" role="img" aria-label="Natural white tee, front: circular stamp mark on the left chest"><use href="#teeF"></use><g class="pl"><image href="assets/brand/INC_mark-stamp-circle_black.svg" x="231.5" y="114.5" width="37" height="37"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee g-natural" viewBox="0 0 400 460" role="img" aria-label="Natural white tee, back: full spine print with a small hem line"><use href="#teeB"></use><g class="pl"><image href="assets/brand/INC_spine-full_black.svg" x="186" y="82" width="28" height="170.4"/><text class="pr" x="200" y="394" font-size="8" letter-spacing="1.5" text-anchor="middle">COME BACK TOMORROW</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: circular stamp mark on the left chest"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-stamp-circle_white.svg" x="229.5" y="117.6" width="35" height="35"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: full spine print with a small hem line"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_spine-full_white.svg" x="186.4" y="99.7" width="27.3" height="168.8"/><text class="pr" x="200" y="337" font-size="8" letter-spacing="1.5" text-anchor="middle">COME BACK TOMORROW</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
           <button type="button" data-face="back" aria-pressed="false">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-006 &middot; NATURAL WHITE &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-006 &middot; WASHED BROWN &middot; GARMENT-DYED</p>
         <h3 class="prod__name">THE SPINE TEE</h3>
         <p class="prod__why">The one people wear outside the gym &mdash; and the hem line you only catch on the second look. That&rsquo;s what makes them ask.</p>
         <ul class="prod__spec">
@@ -401,15 +337,15 @@
 
     <article class="prod reveal-up" data-view="front" data-sku="INC-007" data-name="THE HOUSE SHIRT" data-price="34">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><div class="prod__photoWrap"><img class="prod__photo" src="assets/brand/garment-badge-black.png" alt="The primary badge screen printed in white on a black tee" loading="lazy" width="900" height="900"></div><span class="prod__face" aria-hidden="true">FRONT &middot; PRINT PROOF</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, back: blank on purpose"><use href="#teeB"></use><g class="pl"><text class="pr pr--dim" x="200" y="230" font-size="10" letter-spacing="2" text-anchor="middle">BLANK. ON PURPOSE.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: large vintage badge across the chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/vintage-badge_white.png" x="142.9" y="107.7" width="114.2" height="114.2"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: blank on purpose"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr pr--dim" x="200" y="210" font-size="10" letter-spacing="2" text-anchor="middle">BLANK. ON PURPOSE.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
           <button type="button" data-face="back" aria-pressed="false">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-007 &middot; BLACK &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-007 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
         <h3 class="prod__name">THE HOUSE SHIRT</h3>
         <p class="prod__why">Every gym needs the plain one. Members, staff, first-timers. No message &mdash; just the name.</p>
         <ul class="prod__spec">
@@ -426,15 +362,15 @@
 
     <article class="prod reveal-up" data-view="front" data-sku="INC-008" data-name="BUILT BACK" data-price="40">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, front: BUILT BACK printed small over the heart"><use href="#teeF"></use><g class="pl"><text class="pr" x="250" y="136" font-size="9" letter-spacing="3" text-anchor="middle">BUILT BACK</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee g-black" viewBox="0 0 400 460" role="img" aria-label="Black tee, back: large vintage badge over a NOT BORN THIS WAY bar"><use href="#teeB"></use><g class="pl"><image href="assets/brand/vintage-badge_white.png" x="136.5" y="86" width="127" height="127"/><rect x="134" y="230" width="132" height="18" fill="var(--ink)"/><text class="prInv" x="200" y="243" font-size="10" letter-spacing="0.5" text-anchor="middle">NOT BORN THIS WAY</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: BUILT BACK printed small over the heart"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="248.8" y="140" font-size="9" letter-spacing="3" text-anchor="middle">BUILT BACK</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: large vintage badge over a NOT BORN THIS WAY bar"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/vintage-badge_white.png" x="137.7" y="107.8" width="124.7" height="124.7"/><rect x="137.7" y="244" width="124.7" height="18" fill="#f5f4f1"/><text class="prInv" x="200" y="257" font-size="10" letter-spacing="0.5" text-anchor="middle">NOT BORN THIS WAY</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
           <button type="button" data-face="back" aria-pressed="false">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-008 &middot; BLACK &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-008 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
         <h3 class="prod__name">BUILT BACK</h3>
         <p class="prod__why">The comeback shirt. A straight statement that nobody in this gym started here.</p>
         <ul class="prod__spec">

@@ -7,3 +7,8 @@
 
 # Marketing asset generators — repo only, never served.
 /marketing/
+
+# Shirt-photo masters and the processing pipeline — the site serves only
+# the normalized .webp files in /assets/shirts/.
+/assets/shirts/raw/
+/tools/

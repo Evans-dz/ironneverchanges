@@ -1,0 +1,58 @@
+{
+  "washed-black_back": {
+    "bodyW": 275.3,
+    "span": 384,
+    "collarY": 60,
+    "hemY": 359,
+    "upi": 10.39
+  },
+  "washed-black_front": {
+    "bodyW": 275.1,
+    "span": 384,
+    "collarY": 60,
+    "hemY": 357.8,
+    "upi": 10.38
+  },
+  "washed-blue_back": {
+    "bodyW": 275.3,
+    "span": 384,
+    "collarY": 60,
+    "hemY": 365.7,
+    "upi": 10.39
+  },
+  "washed-blue_front": {
+    "bodyW": 281.6,
+    "span": 384,
+    "collarY": 60,
+    "hemY": 363.7,
+    "upi": 10.63
+  },
+  "washed-brown_back": {
+    "bodyW": 263.1,
+    "span": 384,
+    "collarY": 60,
+    "hemY": 359.1,
+    "upi": 9.93
+  },
+  "washed-brown_front": {
+    "bodyW": 265.3,
+    "span": 384,
+    "collarY": 60,
+    "hemY": 359.7,
+    "upi": 10.01
+  },
+  "washed-grey_back": {
+    "bodyW": 268.7,
+    "span": 384,
+    "collarY": 60,
+    "hemY": 339.4,
+    "upi": 10.14
+  },
+  "washed-grey_front": {
+    "bodyW": 272,
+    "span": 384,
+    "collarY": 60,
+    "hemY": 346.4,
+    "upi": 10.26
+  }
+}
