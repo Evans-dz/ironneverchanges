@@ -113,16 +113,29 @@ function pickOrigin(req) {
   return ALLOWED_ORIGINS.includes(origin) ? origin : SITE;
 }
 
+/* STRIPE_SECRET_KEY_TEST wins when it exists. That variable IS the switch:
+   while it is set the shop runs on the sandbox and cannot take a cent, no
+   matter what the live key says. Delete it in Vercel to go live. */
+const resolveKey = () => process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY;
+
 module.exports = async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
-    return res.status(405).json({ error: 'POST only.' });
+  const key = resolveKey();
+
+  /* GET is the till check: which mode am I in, without creating anything in
+     Stripe to find out. Reveals no key, only whether the door is open. */
+  if (req.method === 'GET') {
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json({
+      open: Boolean(key),
+      mode: !key ? 'closed' : (/^(sk|rk)_live/.test(key) ? 'live' : 'test'),
+    });
   }
 
-  /* STRIPE_SECRET_KEY_TEST wins when it exists. That variable IS the switch:
-     while it is set the shop runs on the sandbox and cannot take a cent, no
-     matter what the live key says. Delete it in Vercel to go live. */
-  const key = process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY;
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'GET, POST');
+    return res.status(405).json({ error: 'GET or POST only.' });
+  }
+
   if (!key) {
     return res.status(503).json({ error: 'Checkout is not open yet.' });
   }
