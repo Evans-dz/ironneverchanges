@@ -200,6 +200,7 @@ Nothing else changes; the cart and checkout are already wired.
 | Price authority | server-side only | Client sends `{sku, size, qty}`. Never a price. |
 | Return URLs | origin allowlist in `api/checkout.js` | A forged `Origin` falls back to the canonical domain, so no open redirect. |
 | Secret | `STRIPE_SECRET_KEY` env var in Vercel | A **restricted** key (`rk_`) with one permission: Checkout Sessions → Write. That is enough for the inline prices and shipping rate; it cannot refund, read customers, or move payouts. Never in the repo, never in a response body. Absent → 503 and the honest demo note. |
+| Sandbox switch | `STRIPE_SECRET_KEY_TEST` env var | **Overrides the live key while it exists.** Set it and the shop physically cannot take money; delete it to open the till. Vercel binds env vars at deploy time, so adding or removing either one needs a redeploy before it takes effect. |
 | Seeding key | separate, local, temporary | Restricted key with write on Products, Prices, Payment Links. Used once by `tools/stripe-seed.mjs`, then rolled. Never goes near Vercel. |
 | Coaching | Stripe Payment Link | A subscription needs a recurring Price; `tools/stripe-seed.mjs` creates it and prints the link URL for The Corner's button. |
 | Seeding | `tools/stripe-seed.mjs` | Repo-only, deploy-excluded. Stable product ids so re-running updates instead of duplicating. Run it yourself: the key stays on your machine. |
@@ -222,7 +223,10 @@ what tells you which sizes to reorder.
 - [ ] Real prices confirmed, concept-placeholder notes removed
 - [ ] Waitlist live: Web3Forms access key pasted into `WAITLIST_KEY`
       (`js/main.js`) — the demo note hides itself once the key is set
-- [ ] `STRIPE_SECRET_KEY` set in Vercel (live key, not `sk_test_`), shop CTAs
+- [ ] **`STRIPE_SECRET_KEY_TEST` deleted from Vercel, then redeployed.** While
+      it exists the shop is on the sandbox and every order silently takes no
+      money. This is the single step that opens the till.
+- [ ] `STRIPE_SECRET_KEY` set in Vercel (live restricted key), shop CTAs
       flipped from Coming-soon back to `data-add` buttons
 - [ ] `tools/stripe-seed.mjs` run against the live key; coaching Payment Link
       URL pasted into The Corner's button

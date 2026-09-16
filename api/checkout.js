@@ -12,7 +12,9 @@
 
    Needs one environment variable in Vercel: STRIPE_SECRET_KEY, a
    RESTRICTED key (rk_) whose only permission is Checkout Sessions:
-   Write. That covers the inline prices and the inline shipping rate
+   Write. A second optional variable, STRIPE_SECRET_KEY_TEST, overrides
+   it: while that one exists the shop is on the sandbox and cannot take
+   real money. Deleting it is what opens the till. That covers the inline prices and the inline shipping rate
    below; it cannot refund, read a customer, or move a payout, so a
    leak costs nothing but some junk payment pages. Turning on
    automatic_tax later would also need Tax: Read.
@@ -117,7 +119,10 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'POST only.' });
   }
 
-  const key = process.env.STRIPE_SECRET_KEY;
+  /* STRIPE_SECRET_KEY_TEST wins when it exists. That variable IS the switch:
+     while it is set the shop runs on the sandbox and cannot take a cent, no
+     matter what the live key says. Delete it in Vercel to go live. */
+  const key = process.env.STRIPE_SECRET_KEY_TEST || process.env.STRIPE_SECRET_KEY;
   if (!key) {
     return res.status(503).json({ error: 'Checkout is not open yet.' });
   }
