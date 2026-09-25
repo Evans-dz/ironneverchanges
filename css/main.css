@@ -36,7 +36,7 @@
 
 /* ---------- base ---------- */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;color-scheme:dark}
 html.js{scroll-behavior:auto}
 /* the JS handles reduced motion (html.reduced); this block covers the
    no-JS document and anything CSS-only, and is what the audit checks */
@@ -90,7 +90,7 @@ em{font-style:normal;font-weight:600}
   transition:background .1s steps(2,end),border-color .1s steps(2,end);
 }
 .nav.is-solid{background:rgba(17,17,17,.88);backdrop-filter:blur(10px);border-color:var(--hair);height:64px}
-.nav__brand{display:flex;align-items:center;gap:14px;margin-right:auto}
+.nav__brand{display:flex;align-items:center;gap:14px;margin-right:auto;padding-block:7px;margin-block:-7px}
 .nav__mark{width:44px}
 .nav__word{width:190px}
 .nav__links{display:flex;gap:26px}
@@ -101,6 +101,7 @@ em{font-style:normal;font-weight:600}
 }
 .nav__links a:hover,.nav__links a.is-active{color:var(--bone)}
 .nav__cta{display:inline-flex}
+.nav__cta[hidden]{display:none}
 .nav__burger{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;position:relative}
 .nav__burger span{position:absolute;left:8px;right:8px;height:2px;background:var(--bone);transition:transform .1s steps(2,end)}
 .nav__burger span:nth-child(1){top:17px}
@@ -252,7 +253,8 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
 .tee .pr--dim{fill:#8c8c8c;opacity:.8}
 .tee .prInv{font-family:var(--disp);fill:#2b2b2e}
 
-/* waitlist */
+/* the drop: a statement while the shop is a lookbook; the form rules
+   stay for the day the list is wired (DESIGN.md §9) */
 .list{margin-top:clamp(60px,9vh,100px);border:1px solid var(--hair);background:var(--panel)}
 .list__inner{padding:clamp(36px,6vw,64px);text-align:center;max-width:720px;margin:0 auto}
 .list__kick{font-family:var(--disp);font-size:clamp(24px,3.6vw,42px);text-transform:uppercase;line-height:1.05}
@@ -337,7 +339,7 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
 .foot__cols{display:flex;gap:clamp(40px,8vw,120px);flex-wrap:wrap;margin-bottom:64px}
 .foot__col{display:flex;flex-direction:column;gap:10px;min-width:150px}
 .foot__h{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--ash-dim);margin-bottom:6px}
-.foot__col a{font-size:13.5px;font-weight:500;color:var(--ash);letter-spacing:.04em;padding-block:8px;margin-block:-4px}
+.foot__col a{font-size:13.5px;font-weight:500;color:var(--ash);letter-spacing:.04em;padding-block:11px;margin-block:-5px}
 .foot__col a:hover{color:var(--bone)}
 .foot__dim{font-size:13.5px;color:var(--ash-dim);max-width:230px;line-height:1.6}
 .foot__base{
@@ -345,7 +347,8 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
   border-top:1px solid var(--hair-2);padding-top:22px;
   font-size:11.5px;color:var(--ash-dim);letter-spacing:.04em;
 }
-.foot__ez{color:var(--ash);border-bottom:1px solid var(--ash-dim);display:inline-block;padding-block:6px;margin-block:-6px}
+.foot__ez{color:var(--ash);border-bottom:1px solid var(--ash-dim);display:inline-block;padding-block:6px;margin-block:-6px;position:relative}
+.foot__ez::after{content:'';position:absolute;inset:-7px -6px}
 .foot__ez:hover{color:var(--bone);border-color:var(--bone)}
 
 /* ---------- stamp reveals (JS present only) ----------
@@ -385,7 +388,7 @@ html.js:not(.reduced) .sec__rule{transform:scaleX(0)}
   .nav__links{display:none}
   .nav{gap:16px}
   .nav__brand{min-width:0}
-  .nav__cta{padding:10px 14px;font-size:11px}
+  .nav__cta{padding:10px 14px;font-size:11px;min-height:44px}
   .nav__burger{display:block}
   .nav__word{width:150px;max-width:26vw}
   .name__split{grid-template-columns:1fr}
@@ -433,6 +436,22 @@ html.reduced .load{opacity:1}
 .prod__size button:hover{border-color:var(--ash)}
 .prod__size button.is-on{background:var(--bone);color:var(--iron);border-color:var(--bone)}
 .prod__price{font-family:var(--disp);font-size:15px;color:var(--bone);letter-spacing:.03em}
+/* lookbook label where Add to cart goes once the shop opens */
+.prod__drop{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--ash)}
+
+/* ---------- phones: every tap target clears 44px ----------
+   Chips and the face toggle stay compact under a mouse; a thumb gets
+   the full 44 (professional-polish.md). Six 44px chips hold one row
+   on a 360px phone: 16px card padding, 4px gaps. */
+@media (max-width:640px){
+  .prod__meta{padding-inline:16px}
+  .prod__size{gap:4px}
+  .prod__size button{flex:1 0 44px;min-height:44px}
+  .prod__flip button{min-height:44px;padding-inline:14px}
+  .cart__close{width:44px;height:44px}
+  .cart__ictl button{width:44px;height:44px}
+  .cart__ix{min-width:44px;min-height:44px}
+}
 
 /* ---------- cart drawer ---------- */
 .cartWrap[hidden]{display:none}
@@ -492,5 +511,3 @@ html.reduced .load{opacity:1}
 @media (max-width:480px){
   .nav__word{display:none}
 }
-/* footer "soon" socials are labels, not links */
-.foot__soon{font-size:13.5px;font-weight:500;color:var(--ash-dim);letter-spacing:.04em}

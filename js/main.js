@@ -452,8 +452,11 @@
      the honest concept-mode note. The one sanctioned external request. */
   const WAITLIST_KEY = '';
   const form = $('#listForm');
+  /* lookbook mode: the list section is a statement with no form in it, so
+     there is nothing to wire. Put the form back (DESIGN.md §9) and this runs. */
+  if (!form) return;
   const listDemo = $('#listDemo');
-  if (WAITLIST_KEY) listDemo.hidden = true;
+  if (WAITLIST_KEY && listDemo) listDemo.hidden = true;
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = $('#listEmail').value.trim();
@@ -476,7 +479,7 @@
         body: JSON.stringify({
           access_key: WAITLIST_KEY,
           email,
-          subject: 'Waitlist signup — ironneverchanges.com',
+          subject: 'Waitlist signup · ironneverchanges.com',
           from_name: 'IRON NEVER CHANGES',
         }),
       });

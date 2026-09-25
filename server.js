@@ -18,6 +18,9 @@ const MIME = {
   '.woff2': 'font/woff2',
   '.ico': 'image/x-icon',
   '.json': 'application/json',
+  '.txt': 'text/plain; charset=utf-8',
+  '.xml': 'application/xml; charset=utf-8',
+  '.mp4': 'video/mp4',
 };
 
 http.createServer((req, res) => {
@@ -26,7 +29,11 @@ http.createServer((req, res) => {
   const filePath = path.normalize(path.join(ROOT, urlPath));
   if (!filePath.startsWith(ROOT)) { res.writeHead(403); res.end(); return; }
   fs.readFile(filePath, (err, data) => {
-    if (err) { res.writeHead(404); res.end('Not found'); return; }
+    if (err) {                       /* same as Vercel: the site's own 404.html */
+      res.writeHead(404, { 'Content-Type': MIME['.html'] });
+      res.end(fs.readFileSync(path.join(ROOT, '404.html')));
+      return;
+    }
     const ext = path.extname(filePath).toLowerCase();
     res.writeHead(200, {
       'Content-Type': MIME[ext] || 'application/octet-stream',

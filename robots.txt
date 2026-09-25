@@ -1,0 +1,7 @@
+# The home page carries noindex until the shop opens. Crawling stays open
+# on purpose: a crawler has to fetch the page to read that tag.
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://www.ironneverchanges.com/sitemap.xml

@@ -6,8 +6,8 @@
    the checkout endpoint reads them from this file so a tampered
    cart in somebody's browser can't set its own price.
 
-   Prices are in whole dollars, concept placeholders until the drop
-   date is set. Changing one here changes it everywhere.
+   Prices are in whole dollars, confirmed as final by the owner on
+   2026-09-25. Changing one here changes it everywhere.
    ============================================================ */
 (function (root) {
   'use strict';

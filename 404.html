@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found · IRON NEVER CHANGES</title>
+<meta name="description" content="This page isn't here. The iron still is. Heavyweight gym wear from Iron Never Changes.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="/assets/brand/favicon-64.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/brand/favicon-192.png">
+<link rel="preload" href="/assets/fonts/archivo-black-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/main.css">
+<style>
+  /* Paths are root-absolute: Vercel serves this file at whatever URL missed,
+     /a/b/c included, so a relative css/ would miss too. */
+  .lost__links{display:flex;flex-wrap:wrap;gap:0 26px;margin-top:30px;list-style:none}
+  .lost__links a{
+    display:inline-block;padding-block:13px;
+    font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);
+    transition:color .07s steps(1,end);
+  }
+  .lost__links a:hover{color:var(--bone)}
+  /* no JS here to skip the strike, so reduced motion opts out in CSS
+     (a .01ms stepped animation can park mid-frame) */
+  @media (prefers-reduced-motion: reduce){
+    body.go .hero__l1,body.go .hero__l2,body.go .hero__eyebrow,
+    body.go .hero__lede,body.go .hero__ctas{animation:none}
+  }
+  .foot{margin-top:0}
+  .foot__base{border-top:0;padding-top:0}
+</style>
+</head>
+<body class="go">
+
+<a class="skip" href="#top">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="nav__brand" href="/">
+    <img class="nav__mark" src="/assets/brand/INC_mark-skull-barbell_white.svg" alt="" width="1000" height="665">
+    <img class="nav__word" src="/assets/brand/INC_wordmark-oneline-no-tagline_white.svg" alt="Iron Never Changes" width="1400" height="97">
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="/#standard">The Standard</a>
+    <a href="/#wall">The Wall</a>
+    <a href="/#shop">The Shop</a>
+    <a href="/#corner">The Corner</a>
+  </nav>
+</header>
+
+<main id="top">
+<!-- the home hero's own sheet: three press pulls (body.go), and the second
+     line stays in outline because this bar has nothing on it -->
+<section class="hero">
+  <img class="hero__ring" src="/assets/brand/INC_badge-ring_grey.svg" alt="" aria-hidden="true" width="1000" height="1000">
+  <div class="hero__inner">
+    <p class="hero__eyebrow">404 &middot; PAGE NOT FOUND</p>
+    <h1 class="hero__h1">
+      <span class="hero__l1">EMPTY</span>
+      <span class="hero__l2">BAR.</span>
+    </h1>
+    <p class="hero__lede">The page you asked for isn&rsquo;t here. It moved, or it never existed.
+    The iron didn&rsquo;t go anywhere.</p>
+    <div class="hero__ctas">
+      <a class="btn btn--solid" href="/">Back to the top</a>
+      <a class="btn" href="/#shop">See the line</a>
+    </div>
+    <ul class="lost__links hero__ctas">
+      <li><a href="/#standard">The Standard</a></li>
+      <li><a href="/#wall">The Wall</a></li>
+      <li><a href="/#feed">The Feed</a></li>
+      <li><a href="/#corner">The Corner</a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="foot__base">
+    <p>&copy; 2026 IRON NEVER CHANGES.</p>
+    <p>Digital experience by <a class="foot__ez" href="https://ez-hd.co" target="_blank" rel="noopener">EZHD</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

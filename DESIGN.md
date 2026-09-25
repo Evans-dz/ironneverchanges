@@ -94,7 +94,7 @@ not UI palette.
 | Element | The decision | The reason |
 |---|---|---|
 | Garment photos | Real washed blanks (`assets/shirts/*.webp` — 4 colorways × front/back, ~120KB each), background-removed (Vision, `tools/cutout.swift`) and normalized into the 400×460 card space by `tools/normalize.mjs`: collar top at y=60, hem-width-anchored, ~10.2 units/inch; masters in `assets/shirts/raw/` (deploy-excluded) | The blanks are real now; the cards show the actual garment wash, and one blank image is reused across every SKU in that colorway |
-| Print overlay | Prints stay LIVE — SVG `<image>` marks and page-font `<text>` in the `.pl` group at 93% opacity over the photo, never baked into the raster; placement = print spec in inches (`brand/SHIRT-CONCEPTS.md`) × measured units-per-inch (`assets/shirts/raw/placements.json`); white ink on the dark washes, black ink art on grey, slogan-bar text is a fixed dark knockout (`#2b2b2e`) | Retina-crisp prints, slogans set in the site's own Archivo, and a print change is a markup edit — no reprocessing |
+| Print overlay | Prints stay LIVE — SVG `<image>` marks and page-font `<text>` in the `.pl` group at 93% opacity over the photo, never baked into the raster; placement = print spec in inches (`brand/SHIRT-CONCEPTS.md`) × measured units-per-inch (`assets/shirts/raw/placements.json`); white ink on the dark washes, black ink art on grey, slogan-bar text is a fixed dark knockout (`#2b2b2e`); a thin slogan bar is live text between two drawn `<rect>` bars, as in `INC_tagline-bar`, never dash characters (INC-002) | Retina-crisp prints, slogans set in the site's own Archivo, and a print change is a markup edit — no reprocessing |
 | Ground shadow | `.tsh` ellipse per face, cy/rx from that colorway's measured hem, blurred by `#softHard` — the one filter left in `<defs>` | Cutouts need grounding on the panel or they float |
 | Product card | Front/back cross-fade views + flip toggle; tapping the image flips; size chips S–3X; `data-sku/name/price` on the article drive the cart | The card IS the product database (see §9) |
 | Feed clips | Real training footage in the 9:16 frames (`assets/feed/week-*.mp4`, 540p H.264 ~1.4Mbps, AUDIO STRIPPED — reels carry licensed music; `tools/` has the AVFoundation pipeline); click-to-play one at a time, muted+looping, progress bar fills in 8 discrete notches; photos in `.feed__proof` | Proof of work, honest and silent; masters re-exportable from the Photos album (never committed) |
@@ -102,7 +102,7 @@ not UI palette.
 | HOME letters | INC-011's front is a `clipPath` text knockout — the gym photo (`assets/brand/home-fill.webp`) shows through live HOME letters with a thin dark outline | The one photo-print design; the sanctioned exception to 1-color ink, per the client |
 | Clock & bar mark | INC-012's mark lives as `#clockBar` in the page defs (stroke geometry, reused front and back via nested `<svg><use>`); print masters in `brand/09_SHIRT-ART/` | A new ownable mark — drawn once, used at any size |
 | The Corner | Coaching section (05): photo + `$100/MO` display + a `prod__spec`-style includes list; CTA routes to the same waitlist | Coaching sells on the shirts' own deal — honest, monthly, no portal |
-| Cart drawer | Client-side demo: localStorage `inc-cart`, qty/remove, subtotal; checkout reveals an honest "isn't wired up yet" note; focus-trapped dialog, Esc closes, refcounted scroll lock shared with the menu | Concept build never fakes a working checkout |
+| Cart drawer | Hidden while the shop is a lookbook (`#cartBtn` carries `hidden`; see §9). Client-side: localStorage `inc-cart`, qty/remove, subtotal; a closed checkout shows an honest "isn't open yet" note; focus-trapped dialog, Esc closes, refcounted scroll lock shared with the menu | Concept build never fakes a working checkout |
 | The load | Fixed bottom-right barbell SVG; plates on in pairs per sixth of scroll, caption 45→495 LB, clank on change; hidden <900px and until half a viewport of scroll | Scroll progress in the brand's own units |
 | The wall | Slogan cloud from the brand's slogan bank; click stamps a line permanently lit (`is-stamped`) + `hit` rattle | The merch pipeline as a page section |
 | Ticker | Duplicated track, `xPercent:-50`, 52s loop ratcheting on `steps(460)` | The one continuously-running thing, and even it doesn't glide |
@@ -140,8 +140,10 @@ elevation; keep it that way.
   honestly: the waitlist POST to api.web3forms.com (key-gated in
   `js/main.js`) and the checkout POST to our own `/api/checkout`, which
   talks to Stripe server-side.
-- Keep demo states honest ("checkout isn't wired up yet", "the list isn't wired
-  up yet", footer "Concept build").
+- Keep closed states honest AND finished: while the shop is shut it is a
+  lookbook ("DROP 001" where Add to cart goes, "The shop opens with Drop
+  001."). Never "coming soon", never a form that sends nowhere, never a
+  "soon" label (`ezhd-lab/reference/professional-polish.md`).
 - Keep `.vercelignore` patterns root-anchored (`/brand/` once stripped
   `assets/brand/` too) and `"framework": null` in `vercel.json`.
 - White marks on dark garments, black on light — never the black mark on a dark
@@ -167,9 +169,10 @@ elevation; keep it that way.
   cart drawer (`min(430px,94vw)`) are the real mobile surface.
 - Desktop adds: the 4-col shop wall, pillar row, hero ring at half-off-screen,
   the load meter, inline nav with active-section state.
-- Tap targets: every target clears the 24px floor (audit-clean); chips and
-  flip buttons sit in the 32–40px band, warned but accepted — full 44px
-  would mean redesigning the chip row.
+- Tap targets: 44px on phones (≤640px), audit-clean as of 2026-09-25. Size
+  chips go equal-width `flex:1 0 44px` with 4px gaps and 16px card padding,
+  so all six hold one row on a 360px phone; the flip toggle, cart controls,
+  footer links and nav brand get 44px too. Desktop keeps the compact chips.
 
 ## 9. Data source of truth
 
@@ -184,13 +187,21 @@ attributes in markup are display copy only; keep them in step with this file.
 Everything else still reads from markup: colorway, print spec, the why-copy.
 Copy truth for slogans and placements is `brand/SHIRT-CONCEPTS.md`, identity
 truth is `brand/BRAND-GUIDE.md`, print art is `brand/09_SHIRT-ART/`. Prices
-are concept placeholders ($34–$42).
+($34–$42) were confirmed final by the owner on 2026-09-25.
 
-The shop currently sells nothing: every card CTA is a "Coming soon" link into
-the waitlist. **To open the shop:** set `STRIPE_SECRET_KEY` in Vercel, then
-swap each card's Coming-soon anchor back to
-`<button class="btn btn--tiny" type="button" data-add>Add to cart</button>`.
-Nothing else changes; the cart and checkout are already wired.
+**Lookbook mode (since 2026-09-25, owner's call).** The shop sells nothing and
+says so without "coming soon": each card's action slot is
+`<span class="prod__drop">DROP 001</span>`, the hero eyebrow reads
+"HEAVYWEIGHT GYM WEAR · DROP 001", the `#list` block is a statement ("THE SHOP
+OPENS WITH DROP 001.") with no form, The Corner has no button ("Coaching opens
+alongside Drop 001."), and `#cartBtn` is `hidden`. The waitlist JS returns
+early when `#listForm` is absent.
+
+**To open the shop:** set `STRIPE_SECRET_KEY` in Vercel (and delete
+`STRIPE_SECRET_KEY_TEST`, §9a), swap each `.prod__drop` span back to
+`<button class="btn btn--tiny" type="button" data-add>Add to cart</button>`,
+drop `hidden` from `#cartBtn`, and rewrite the hero eyebrow and `#list`
+statement for an open shop. The cart and checkout are already wired.
 
 ## 9a. Payments
 
@@ -202,7 +213,7 @@ Nothing else changes; the cart and checkout are already wired.
 | Secret | `STRIPE_SECRET_KEY` env var in Vercel | A **restricted** key (`rk_`) with one permission: Checkout Sessions → Write. That is enough for the inline prices and shipping rate; it cannot refund, read customers, or move payouts. Never in the repo, never in a response body. Absent → 503 and the honest demo note. |
 | Sandbox switch | `STRIPE_SECRET_KEY_TEST` env var | **Overrides the live key while it exists.** Set it and the shop physically cannot take money; delete it to open the till. Vercel binds env vars at deploy time, so adding or removing either one needs a redeploy before it takes effect. |
 | Seeding key | separate, local, temporary | Restricted key with write on Products, Prices, Payment Links. Used once by `tools/stripe-seed.mjs`, then rolled. Never goes near Vercel. |
-| Coaching | Stripe Payment Link | A subscription needs a recurring Price; `tools/stripe-seed.mjs` creates it and prints the link URL for The Corner's button. |
+| Coaching | Stripe Payment Link | A subscription needs a recurring Price; `tools/stripe-seed.mjs` creates it and prints the link URL. The Corner has no button in lookbook mode; add one pointing at the link. |
 | Seeding | `tools/stripe-seed.mjs` | Repo-only, deploy-excluded. Stable product ids so re-running updates instead of duplicating. Run it yourself: the key stays on your machine. |
 | Cart limits | `MAX_QTY` / `MAX_LINES` in `js/products.js` | Both sides read them, so the `+` button stops exactly where the server would refuse. |
 
@@ -218,22 +229,47 @@ attributable. **Upgrade path if the catalog gets noisy:** seed a Product per
 sku/size and reference it by id — that also buys per-size sales data, which is
 what tells you which sizes to reorder.
 
+## 9b. Site files (professional polish, 2026-09-25)
+
+`404.html` (root-absolute paths, the hero's own strike via `body.go`, outlined
+"BAR." because nothing is on it, reduced motion opts out in CSS), `robots.txt`
+(crawl open so the noindex can be read; `/api/` disallowed), `sitemap.xml`,
+`llms.txt`, and Organization + Brand + WebSite JSON-LD in the home `<head>`.
+Schema and llms.txt carry brand truth only: no address, phone, email or socials
+until the owner gives them.
+
+**Held on purpose:** privacy policy and terms. The owner has no public contact
+inbox yet (the domain has IONOS mail, address unknown), and both pages need
+one. When it exists, write them plain-language, in this site's design, and
+link them from every footer and the sitemap. What they must say, as decided:
+all sales final unless an item arrives damaged or wrong; US shipping only,
+flat $6 (`SHIPPING_CENTS` in `api/checkout.js`); payments by Stripe; hosting
+and function logs by Vercel; the cart lives in the visitor's own localStorage
+(`inc-cart`); fonts, video and images self-hosted; no analytics yet (add GA4
+to the privacy page the day it goes in); Web3Forms only if the list is ever
+wired. Flag to the owner that neither page is lawyer-reviewed.
+
 ## 10. Launch checklist
 
-- [ ] Real prices confirmed, concept-placeholder notes removed
-- [ ] Waitlist live: Web3Forms access key pasted into `WAITLIST_KEY`
-      (`js/main.js`) — the demo note hides itself once the key is set
+- [x] Real prices confirmed, concept-placeholder notes removed (2026-09-25)
+- [ ] Privacy + terms pages written and linked from every footer (§9b; needs
+      the owner's contact email and home state)
+- [ ] Waitlist, if wanted: put the `#listForm` markup back and paste a
+      Web3Forms access key into `WAITLIST_KEY` (`js/main.js`)
 - [ ] **`STRIPE_SECRET_KEY_TEST` deleted from Vercel, then redeployed.** While
       it exists the shop is on the sandbox and every order silently takes no
       money. This is the single step that opens the till.
-- [ ] `STRIPE_SECRET_KEY` set in Vercel (live restricted key), shop CTAs
-      flipped from Coming-soon back to `data-add` buttons
+- [ ] `STRIPE_SECRET_KEY` set in Vercel (live restricted key), lookbook
+      flipped back to a shop (§9 "To open the shop")
 - [ ] `tools/stripe-seed.mjs` run against the live key; coaching Payment Link
       URL pasted into The Corner's button
 - [ ] One real test order placed and refunded, shipping rate confirmed
-- [ ] Socials linked (footer "soon" labels replaced)
-- [ ] `noindex` removed; robots.txt + sitemap.xml added
+- [ ] Socials linked: add a SOCIAL footer column once real handles exist
+      (the "soon" labels were removed 2026-09-25), plus `sameAs` in the JSON-LD
+- [x] robots.txt + sitemap.xml added (2026-09-25)
+- [ ] `noindex` removed and a canonical tag added (owner kept noindex on
+      2026-09-25; flip both together, never canonical alongside noindex)
 - [ ] GA4 (Armour Crete account) + Search Console + Bing — the standard EZHD
       analytics stack
-- [ ] `node /Users/dylanevans/Downloads/ezhd-lab/verify/audit.mjs --url http://localhost:4175` clean
+- [ ] `node ~/Projects/EZHD/ezhd-lab/verify/audit.mjs --url https://www.ironneverchanges.com` clean
 - [ ] Skill pass: `/web-design-guidelines index.html css/main.css`

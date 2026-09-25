@@ -6,6 +6,7 @@
 <title>IRON NEVER CHANGES · Where Limits Meet Defeat</title>
 <meta name="description" content="Heavyweight gym wear for men with jobs, kids, and a bar in their week. No highlight reels. Iron never changes. You do.">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#111111">
 <meta property="og:title" content="IRON NEVER CHANGES">
 <meta property="og:description" content="Where limits meet defeat. Heavyweight gym wear for the ones who show up anyway.">
 <meta property="og:url" content="https://www.ironneverchanges.com">
@@ -15,6 +16,37 @@
 <link rel="preload" href="assets/fonts/archivo-black-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/archivo-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.ironneverchanges.com/#org",
+      "name": "Iron Never Changes",
+      "url": "https://www.ironneverchanges.com/",
+      "logo": "https://www.ironneverchanges.com/assets/brand/og-square.png",
+      "slogan": "Where limits meet defeat.",
+      "description": "Heavyweight gym wear: garment-dyed cotton tees, screen printed in one color, for men with jobs, kids and a bar in their week.",
+      "brand": { "@id": "https://www.ironneverchanges.com/#brand" }
+    },
+    {
+      "@type": "Brand",
+      "@id": "https://www.ironneverchanges.com/#brand",
+      "name": "Iron Never Changes",
+      "slogan": "Iron never changes. You do.",
+      "logo": "https://www.ironneverchanges.com/assets/brand/og-square.png"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.ironneverchanges.com/#website",
+      "url": "https://www.ironneverchanges.com/",
+      "name": "Iron Never Changes",
+      "publisher": { "@id": "https://www.ironneverchanges.com/#org" }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -23,7 +55,7 @@
 <!-- grain -->
 <div class="grain" aria-hidden="true"></div>
 
-<!-- garments — real washed blanks (assets/shirts/), cut out and normalized
+<!-- garments: real washed blanks (assets/shirts/), cut out and normalized
      into the 400x460 card space by tools/normalize.mjs, collar at y=60 and
      ~10.2 units/inch. Prints overlay live in the .pl groups, same as always:
      SVG marks and page-font text at 93% opacity, sitting in the fabric. -->
@@ -63,7 +95,7 @@
     <a href="#corner" data-scroll>The Corner</a>
     <a href="#name" data-scroll>The Name</a>
   </nav>
-  <button class="btn btn--solid nav__cta" id="cartBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Cart, 0 items">Cart <span id="cartCount">(0)</span></button>
+  <button class="btn btn--solid nav__cta" id="cartBtn" type="button" hidden aria-haspopup="dialog" aria-expanded="false" aria-label="Cart, 0 items">Cart <span id="cartCount">(0)</span></button>
   <button class="nav__burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu">
     <span></span><span></span>
   </button>
@@ -77,7 +109,6 @@
     <a href="#feed" data-scroll>The Feed</a>
     <a href="#corner" data-scroll>The Corner</a>
     <a href="#name" data-scroll>The Name</a>
-    <a href="#list" data-scroll class="menu__cta">Get on the list</a>
   </nav>
   <p class="menu__tag">WHERE LIMITS MEET DEFEAT.</p>
 </div>
@@ -88,7 +119,7 @@
 <section class="hero" id="hero">
   <img class="hero__ring" src="assets/brand/INC_badge-ring_grey.svg" alt="" aria-hidden="true" width="1000" height="1000">
   <div class="hero__inner">
-    <p class="hero__eyebrow">HEAVYWEIGHT GYM WEAR &middot; SHOP OPENING SOON</p>
+    <p class="hero__eyebrow">HEAVYWEIGHT GYM WEAR &middot; DROP 001</p>
     <h1 class="hero__h1">
       <span class="hero__l1">IRON NEVER<br>CHANGES.</span>
       <span class="hero__l2">YOU DO.</span>
@@ -97,7 +128,7 @@
     who trained after the shift, between the job and the kids, in the middle of the worst year
     he&rsquo;s had, and still came back the next day. The bar doesn&rsquo;t know any of that. That&rsquo;s the point.</p>
     <div class="hero__ctas">
-      <a class="btn btn--solid" href="#shop" data-scroll>Shop the line</a>
+      <a class="btn btn--solid" href="#shop" data-scroll>See the line</a>
       <a class="btn" href="#standard" data-scroll>Read the Standard</a>
     </div>
   </div>
@@ -221,14 +252,14 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$42</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
 
     <article class="prod reveal-up" data-view="front" data-sku="INC-002" data-name="I DIDN'T FEEL LIKE IT EITHER" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: thin slogan bar across the chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="200.3" y="137" font-size="7.5" letter-spacing="0.4" text-anchor="middle">&mdash; WHERE LIMITS MEET DEFEAT &mdash;</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: thin slogan bar across the chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><rect class="pr" x="113.9" y="133.8" width="16" height="1.2"/><text class="pr" x="200.3" y="137" font-size="7.5" letter-spacing="0.4" text-anchor="middle">WHERE LIMITS MEET DEFEAT</text><rect class="pr" x="270.3" y="133.8" width="16" height="1.2"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
         <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: I didn’t feel like it either in stacked type"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="199.3" y="130" font-size="21" text-anchor="middle">I DIDN&rsquo;T</text><text class="pr" x="199.3" y="158" font-size="21" text-anchor="middle">FEEL LIKE IT</text><text class="pr" x="199.3" y="186" font-size="21" text-anchor="middle">EITHER</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="179.6" y="200" width="39.5" height="26.3"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
@@ -246,7 +277,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -271,7 +302,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -296,7 +327,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -322,7 +353,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$40</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -348,7 +379,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$42</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -373,7 +404,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$34</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -398,7 +429,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$40</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -423,7 +454,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$42</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -448,7 +479,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -473,7 +504,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$42</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -498,7 +529,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -523,7 +554,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -548,7 +579,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$40</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -573,7 +604,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$40</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -598,7 +629,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -623,7 +654,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$40</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -648,7 +679,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -673,7 +704,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$34</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -698,7 +729,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -723,7 +754,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$34</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -748,7 +779,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -773,7 +804,7 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
@@ -798,24 +829,17 @@
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <a class="btn btn--tiny" href="#list" data-scroll>Coming soon</a>
+          <span class="prod__drop">DROP 001</span>
         </div>
       </div>
     </article>
   </div>
 
-  <!-- waitlist -->
+  <!-- the drop: a statement while the shop is a lookbook -->
   <div class="list" id="list">
     <div class="list__inner">
-      <p class="list__kick">CHECKOUT OPENS SOON.</p>
-      <p class="list__sub">The shop is being stitched up now. Sizes S to 3XL, no restock promises. Leave your email and you&rsquo;ll know the minute it&rsquo;s live.</p>
-      <form class="list__form" id="listForm" novalidate>
-        <label class="sr-only" for="listEmail">Email</label>
-        <input class="list__input" id="listEmail" type="email" name="email" placeholder="YOUR@EMAIL.COM" autocomplete="email" required>
-        <button class="btn btn--solid" type="submit">Notify me</button>
-      </form>
-      <p class="list__done" id="listDone" hidden>YOU&rsquo;RE IN. COME BACK TOMORROW.</p>
-      <p class="list__demo" id="listDemo">Concept build. The list isn&rsquo;t wired up yet.</p>
+      <p class="list__kick">THE SHOP OPENS WITH DROP 001.</p>
+      <p class="list__sub">Every shirt above is in it, S to 3XL, at the price on the card. No preorders and no restock promises. When the till opens, it opens here.</p>
     </div>
   </div>
 </section>
@@ -860,7 +884,7 @@
     <figure class="shot reveal-up"><img src="assets/feed/proof-03.webp" alt="Head down between sets at the cable stack" loading="lazy" width="900" height="1200"><figcaption class="shot__cap">PROOF &middot; 03</figcaption></figure>
     <figure class="shot reveal-up"><img src="assets/feed/proof-04.webp" alt="Sitting on the bench by the kettlebell rack between sets" loading="lazy" width="900" height="1200"><figcaption class="shot__cap">PROOF &middot; 04</figcaption></figure>
   </div>
-  <p class="feed__note reveal">Shot mid-week, not staged. Sound off on purpose. Handles land here when they&rsquo;re locked in.</p>
+  <p class="feed__note reveal">Shot mid-week, not staged. Sound off on purpose.</p>
 </section>
 
 <!-- ============ 05 THE CORNER ============ -->
@@ -890,8 +914,7 @@
         <li><b>PROOF</b>a progress portfolio, your numbers and photos tracked month over month</li>
         <li><b>RESET</b>the plan rebuilt every four weeks from what actually happened, not what should have</li>
       </ul>
-      <a class="btn btn--solid" href="#list" data-scroll>Get in the corner</a>
-      <p class="corner__note">Coaching opens with the shop. The same list covers both.</p>
+      <p class="corner__note">Coaching opens alongside Drop 001.</p>
     </div>
   </div>
 </section>
@@ -934,7 +957,7 @@
   <span class="load__wt" id="loadWt">BAR &middot; 45 LB</span>
 </div>
 
-<!-- cart drawer (demo — client-side only) -->
+<!-- cart drawer: hidden while the shop is a lookbook (DESIGN.md §9) -->
 <div class="cartWrap" id="cartWrap" hidden>
   <div class="cart__scrim" id="cartScrim"></div>
   <aside class="cart" role="dialog" aria-modal="true" aria-label="Cart">
@@ -948,7 +971,7 @@
       <div class="cart__row"><span>SUBTOTAL</span><span id="cartTotal">$0</span></div>
       <p class="cart__ship">Shipping &amp; tax at checkout.</p>
       <button class="btn btn--solid cart__checkout" id="cartCheckout" type="button">Checkout</button>
-      <p class="cart__demo" id="cartDemo" hidden>CHECKOUT ISN&rsquo;T WIRED UP YET. Concept build. Leave your email in &ldquo;Checkout opens soon&rdquo; below and you&rsquo;ll hear the minute it goes live.</p>
+      <p class="cart__demo" id="cartDemo" hidden>CHECKOUT ISN&rsquo;T OPEN YET. The shop opens with Drop 001.</p>
       <p class="cart__err" id="cartError" role="alert" hidden></p>
     </div>
   </aside>
@@ -967,17 +990,12 @@
       <a href="#name" data-scroll>The Name</a>
     </nav>
     <div class="foot__col">
-      <span class="foot__h">SOCIAL</span>
-      <span class="foot__soon">Instagram &middot; soon</span>
-      <span class="foot__soon">TikTok &middot; soon</span>
-    </div>
-    <div class="foot__col">
       <span class="foot__h">TRADE</span>
       <span class="foot__dim">Wholesale &amp; collabs open with the shop.</span>
     </div>
   </div>
   <div class="foot__base">
-    <p>&copy; 2026 IRON NEVER CHANGES. Concept build. Products &amp; copy subject to change before launch.</p>
+    <p>&copy; 2026 IRON NEVER CHANGES.</p>
     <p>Digital experience by <a class="foot__ez" href="https://ez-hd.co" target="_blank" rel="noopener">EZHD</a></p>
   </div>
 </footer>
