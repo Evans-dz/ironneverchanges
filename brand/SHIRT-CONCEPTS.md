@@ -27,11 +27,17 @@ finishes the sentence.
 
 ### 3. "ROCK BOTTOM HAS A SQUAT RACK"
 
+*Off the shop since 2026-10-13 (owner: "we are getting rid of" it): INC-003 is
+now PROUD OF YOU. SOMEBODY SHOULD SAY IT.*
+
 - **Front:** `badge-primary`, 4" left chest
 - **Back:** the line, 13" wide, vintage/distressed
 - **Why:** the hard-times shirt. Dark humor with a hand out — the joke is that the way up starts in the same place you landed. Sells itself to anybody who's used the gym to climb out of something.
 
 ### 4. "45 MINUTES THAT BELONG TO ME"
+
+*Off the shop since 2026-10-13: INC-004 is now NOBODY PROTECTED THAT KID. The
+line stays in the bank and on The Standard.*
 
 - **Front:** `lockup-horizontal-oneline`, 4" left chest
 - **Back:** clean, or `spine-tagline-slim` down the spine
@@ -95,6 +101,22 @@ Pull from these for drops, sleeves, hems, and spine prints.
 - THE IRON DOESN'T CARE HOW YOUR DAY WENT
 - SAME WEIGHT. DIFFERENT MAN.
 - NOBODY IS GOING TO LIFT IT FOR YOU
+
+**Head space** *(added 2026-10-13, the client's picks from 160 lines written for
+younger men going through it; each one is a shirt now)*
+
+- NOBODY PROTECTED THAT KID. I DO NOW.
+- SAY IT OUT LOUD. IT WEIGHS LESS.
+- I CAME HERE INSTEAD.
+- DEFEAT IS A DAY, NOT A NAME
+- IT TEARS BEFORE IT GROWS
+- NOBODY SHOWED ME HOW. I'M LEARNING ANYWAY.
+- HOW ARE YOU, REALLY?
+- I DON'T TRAIN TO LOOK OKAY. I TRAIN TO BE OKAY.
+- LOST, NOT GONE.
+- COULDN'T FIX US. FIXING ME.
+- I TALK TO HIM BETWEEN SETS.
+- PROUD OF YOU. SOMEBODY SHOULD SAY IT.
 
 **Real life**
 
@@ -182,6 +204,9 @@ yelling at you.
 
 ### 11. HOME
 
+*Off the shop since 2026-10-13: INC-011 is now SAY IT OUT LOUD. Masters in
+`09_SHIRT-ART/_retired/`.*
+
 - **Front:** HOME across the chest, 13", the gym printed inside the letters
   (photo knockout — DTG/DTF print, the one exception to 1-color) with
   "THE GYM COUNTS." set small beneath — art in `09_SHIRT-ART/INC-011_home-*`
@@ -190,6 +215,9 @@ yelling at you.
   they ask, that's the point.
 
 ### 12. CLOCK OUT. LOAD UP.
+
+*Off the shop since 2026-10-13: INC-012 is now I CAME HERE INSTEAD. The clock
+and bar mark's masters are in `09_SHIRT-ART/_retired/`.*
 
 - **Front:** clock & bar mark, 6" left chest — a clock face whose hands are a
   barbell, new ownable mark in `09_SHIRT-ART/INC-012_clock-*`
@@ -224,6 +252,43 @@ yelling at you.
     one you buy for your training partner, not yourself.
 
 ---
+
+## Status, October 2026: the head-space rework
+
+The client asked for shirts that carry real feelings for younger men going
+through hard times, in Iron Sanctuary's register: dark, honest, big prints
+that read from across a gym. Eight shirts were rewritten around lines from
+the head-space bank above, four were added, and the whole line got bigger,
+bolder prints.
+
+| SKU | Now | Was |
+|---|---|---|
+| INC-003 | PROUD OF YOU. SOMEBODY SHOULD SAY IT. | ROCK BOTTOM HAS A SQUAT RACK |
+| INC-004 | NOBODY PROTECTED THAT KID. I DO NOW. | 45 MINUTES THAT BELONG TO ME |
+| INC-011 | SAY IT OUT LOUD. IT WEIGHS LESS. | HOME |
+| INC-012 | I CAME HERE INSTEAD. | CLOCK OUT. LOAD UP. |
+| INC-013 | DEFEAT IS A DAY, NOT A NAME. | THE HARD PART WAS THE PARKING LOT |
+| INC-014 | IT TEARS BEFORE IT GROWS. | PROOF OF WORK |
+| INC-015 | NOBODY SHOWED ME HOW. I'M LEARNING ANYWAY. | SAME BAR. DIFFERENT DAY. |
+| INC-016 | HOW ARE YOU, REALLY? | EVERY REP IS A VOTE |
+| INC-025 | I DON'T TRAIN TO LOOK OKAY. I TRAIN TO BE OKAY. | new |
+| INC-026 | LOST, NOT GONE. | new |
+| INC-027 | COULDN'T FIX US. FIXING ME. | new |
+| INC-028 | I TALK TO HIM BETWEEN SETS. | new |
+
+Also: INC-005's back lost the IRON NEVER CHANGES spine text and gained the
+skull mark at the bottom middle; INC-006's spine print got bigger. Second round
+the same day: the words live on the backs and the logo on the fronts (INC-004,
+011, 016, 026), INC-011 lost its plates, INC-028 its rest timer, and every
+front with wording moved down to 3 inches below the neck seam. The shop has no
+drops any more; it stays open. Every shirt
+now comes in all four washes, and brown takes black ink (it reads 5.7:1 to
+white's 3.2:1). The house type treatment is stacked Archivo Black with each
+line fitted to the block's width. The retired designs (idea-bank items 1 to
+4, HOME, CLOCK OUT) can come back in a later drop; their masters are in
+`09_SHIRT-ART/_retired/`. The card prints in `index.html` are now the design
+source: `tools/masters.mjs` builds the printer files in `09_SHIRT-ART/` from
+them.
 
 ## Status, September 2026
 

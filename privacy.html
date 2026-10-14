@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · IRON NEVER CHANGES</title>
+<meta name="description" content="What Iron Never Changes collects, who handles it and what you can ask for. No cookies, no tracking, your card stays with Stripe, and your details are never sold.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#111111">
+<meta property="og:title" content="Privacy · IRON NEVER CHANGES">
+<meta property="og:description" content="No cookies, no tracking, your card stays with Stripe, and your details are never sold. The whole privacy policy in plain words.">
+<meta property="og:url" content="https://www.ironneverchanges.com/privacy.html">
+<meta property="og:image" content="https://www.ironneverchanges.com/assets/brand/og-square.png">
+<link rel="icon" href="/assets/brand/favicon-64.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/brand/favicon-192.png">
+<link rel="preload" href="/assets/fonts/archivo-black-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/main.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.ironneverchanges.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Privacy", "item": "https://www.ironneverchanges.com/privacy.html" }
+  ]
+}
+</script>
+<style>
+  /* Legal page: one reading column inside the site frame. Root-absolute
+     paths like 404.html. No JS here, so the nav starts solid (.is-solid)
+     instead of waiting for a scroll that would otherwise run copy under a
+     clear bar. No motion on this page: it is read, not shown. */
+  /* the head is full bleed so the ring can run off the edge; overflow-x:clip
+     keeps a phone from widening its viewport to fit the ring (as .hero does) */
+  .doc__head{position:relative;isolation:isolate;overflow-x:clip}
+  .doc__ring{position:absolute;z-index:-1;top:calc(50% + 34px);right:-7vw;transform:translateY(-50%);
+    width:min(40vw,500px);opacity:.1;pointer-events:none}
+  .doc__in,.doc{max-width:1460px;margin:0 auto;padding-inline:var(--pad)}
+  .doc__in{padding-block:clamp(116px,17vh,170px) clamp(44px,7vh,76px)}
+  .doc__eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--ash);margin-bottom:22px}
+  .doc__h1{font-family:var(--disp);font-weight:400;text-transform:uppercase;line-height:.95;
+    letter-spacing:-.005em;font-size:clamp(44px,8vw,104px)}
+  .doc__lede{max-width:56ch;color:var(--ash);font-size:17px;margin-top:26px}
+
+  /* the short version: four plain facts on the site's hairline grid */
+  .doc__short{position:relative;border:1px solid var(--hair);background:var(--panel)}
+  .doc__label{font-family:var(--mono);font-weight:400;font-size:12px;letter-spacing:.2em;color:var(--ash);
+    padding:18px 24px;border-bottom:1px solid var(--hair);scroll-margin-top:84px}
+  .doc__facts{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair)}
+  .doc__facts li{background:var(--panel);padding:24px 24px 28px}
+  .doc__facts h3{font-family:var(--disp);font-weight:400;font-size:18px;line-height:1.2;letter-spacing:.03em;
+    text-transform:uppercase;color:var(--bone);margin-bottom:10px}
+  .doc__facts p{color:var(--ash)}
+
+  /* sections: the home page's numbered head, at reading size */
+  .doc__sec{padding-top:clamp(56px,9vh,92px)}
+  .doc .sec__head{margin-bottom:22px}
+  .doc .sec__no{color:var(--ash)}
+  .doc .sec__title{font-size:clamp(22px,2.6vw,32px);white-space:normal;color:var(--bone)}
+  .doc__body{max-width:70ch;color:var(--ash)}
+  .doc__body > * + *{margin-top:16px}
+  .doc__body strong{color:var(--bone)}
+  .doc__list{list-style:none;border-top:1px solid var(--hair-2)}
+  .doc__list li{padding:11px 0 11px 22px;border-bottom:1px solid var(--hair-2);position:relative}
+  .doc__list li::before{content:"";position:absolute;left:2px;top:23px;width:8px;height:2px;background:var(--ash)}
+  .doc__spec{border-top:1px solid var(--hair-2)}
+  .doc__spec > div{display:grid;grid-template-columns:118px 1fr;gap:4px 22px;padding:15px 0;border-bottom:1px solid var(--hair-2)}
+  .doc__spec dt{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--bone);padding-top:4px}
+  .doc__spec dd{color:var(--ash)}
+  .doc code{font-family:var(--mono);font-size:.9em;color:var(--bone)}
+
+  /* links read as links: underlined, bone on ash. Inline ones carry padding
+     that grows the tap area without moving the line; standalone ones are
+     blocks a thumb can find. */
+  .doc a:not(.btn){color:var(--bone);text-decoration:underline;text-decoration-thickness:1px;
+    text-underline-offset:3px;text-decoration-color:var(--ash);transition:text-decoration-color .07s steps(1,end)}
+  .doc a:not(.btn):hover{text-decoration-color:var(--bone)}
+  .doc__body p a{padding-block:14px}
+  .doc__out{display:inline-block;padding-block:9px;margin-block:2px -6px}
+  .doc__mail{text-transform:none;letter-spacing:.04em;font-size:14px;margin-top:22px}
+
+  /* footer: the links row this page needs, over the 404's base line */
+  .foot{margin-top:clamp(90px,14vh,150px);padding-top:clamp(30px,5vh,48px)}
+  .foot__links{display:flex;flex-wrap:wrap;gap:0 28px;margin-bottom:26px}
+  .foot__links a{display:inline-block;padding-block:13px;font-size:12px;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ash);transition:color .07s steps(1,end)}
+  .foot__links a:hover,.foot__links a[aria-current="page"]{color:var(--bone)}
+  .foot__links .foot__mail{text-transform:none;letter-spacing:.04em;font-size:13px}
+  /* main.css keeps the base line clear of the home page's load meter; this
+     page has none, so the credit can sit at the edge */
+  @media (min-width:901px){.foot__base{padding-right:0}}
+
+  @media (max-width:1000px){.doc__facts{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:640px){
+    .doc__ring{width:86vw;right:-36vw;opacity:.08}
+    .nav__brand{padding-block:8px;margin-block:-8px}
+    .doc__facts{grid-template-columns:1fr}
+    .doc__facts li{padding:20px 20px 24px}
+    .doc__label{padding-inline:20px}
+    .doc__spec > div{grid-template-columns:1fr}
+    .foot__links{gap:0 22px}
+    /* the credit's hit area measured 43.97px here; a hair more reach clears 44 */
+    .foot__ez::after{inset:-9px -6px}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#top">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav is-solid">
+  <a class="nav__brand" href="/">
+    <img class="nav__mark" src="/assets/brand/INC_mark-skull-barbell_white.svg" alt="" width="1000" height="665">
+    <img class="nav__word" src="/assets/brand/INC_wordmark-oneline-no-tagline_white.svg" alt="Iron Never Changes" width="1400" height="97">
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="/#standard">The Standard</a>
+    <a href="/#wall">The Wall</a>
+    <a href="/#shop">The Shop</a>
+    <a href="/#corner">The Corner</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<header class="doc__head">
+  <img class="doc__ring" src="/assets/brand/INC_badge-ring_grey.svg" alt="" aria-hidden="true" width="1000" height="1000">
+  <div class="doc__in">
+    <p class="doc__eyebrow">LEGAL &middot; UPDATED OCTOBER 13, 2026</p>
+    <h1 class="doc__h1">Privacy <br>policy</h1>
+    <p class="doc__lede">What we collect, who else handles it, and what you can ask us to do with it.
+    Plain words, no fine print.</p>
+  </div>
+</header>
+
+<div class="doc">
+
+<section class="doc__short" aria-labelledby="short-h">
+  <h2 class="doc__label" id="short-h">THE SHORT VERSION</h2>
+  <ul class="doc__facts">
+    <li>
+      <h3>No cookies</h3>
+      <p>This site sets none. No analytics, no ads, no tracking pixels.</p>
+    </li>
+    <li>
+      <h3>Your card stays with Stripe</h3>
+      <p>You pay on Stripe&rsquo;s own checkout page. Your card never touches this site.</p>
+    </li>
+    <li>
+      <h3>Never sold</h3>
+      <p>Your details fill your order and answer your messages. They&rsquo;re never sold or shared for advertising.</p>
+    </li>
+    <li>
+      <h3>Ask any time</h3>
+      <p>Email us to see what we hold about you, or to have it deleted.</p>
+    </li>
+  </ul>
+</section>
+
+<section class="doc__sec" id="collect">
+  <div class="sec__head">
+    <span class="sec__no">01</span>
+    <h2 class="sec__title">What we collect</h2>
+    <span class="sec__rule" aria-hidden="true"></span>
+  </div>
+  <div class="doc__body">
+    <p>Here&rsquo;s what we get, and when.</p>
+    <dl class="doc__spec">
+      <div>
+        <dt>BROWSING</dt>
+        <dd>No cookies, no analytics, no ads, no tracking pixels. Fonts, images and video come from
+        this site itself, so looking around sends no requests to anyone else.</dd>
+      </div>
+      <div>
+        <dt>YOUR CART</dt>
+        <dd>The shirts you add, with size, wash and quantity, are saved in your own browser (under the
+        name <code>inc-cart</code>) so they&rsquo;re still there when you come back. It stays on your device until your order goes through, or until you clear it.</dd>
+      </div>
+      <div>
+        <dt>YOUR ORDER</dt>
+        <dd>At checkout, Stripe collects your email, name, card and US shipping address. The order
+        lists each shirt with its size, wash and quantity. Your card details go to Stripe and never touch
+        this site.</dd>
+      </div>
+      <div>
+        <dt>MESSAGES</dt>
+        <dd>If you use the coaching form, it sends us your name, email and message. If you email us,
+        we get whatever you write.</dd>
+      </div>
+      <div>
+        <dt>SERVER LOGS</dt>
+        <dd>Our host, Vercel, keeps logs for the checkout function. Those can include your IP address
+        and browser details.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="doc__sec" id="who">
+  <div class="sec__head">
+    <span class="sec__no">02</span>
+    <h2 class="sec__title">Who handles it</h2>
+    <span class="sec__rule" aria-hidden="true"></span>
+  </div>
+  <div class="doc__body">
+    <p>Us, and the services this site runs on.</p>
+    <dl class="doc__spec">
+      <div>
+        <dt>US</dt>
+        <dd>Iron Never Changes. We use your details to pack and ship your order, and your messages
+        to answer you.</dd>
+      </div>
+      <div>
+        <dt>STRIPE</dt>
+        <dd>Runs the checkout page and takes the payment, so it handles your card, email, name, shipping
+        address and what&rsquo;s in your order.<br>
+        <a class="doc__out" href="https://stripe.com/privacy" target="_blank" rel="noopener">Stripe&rsquo;s privacy policy</a></dd>
+      </div>
+      <div>
+        <dt>VERCEL</dt>
+        <dd>Hosts this site. Its logs for the checkout function can include your IP address and
+        browser details.</dd>
+      </div>
+      <div>
+        <dt>WEB3FORMS</dt>
+        <dd>Carries the coaching form to our inbox: your name, email and message.<br>
+        <a class="doc__out" href="https://web3forms.com/privacy" target="_blank" rel="noopener">Web3Forms&rsquo; privacy policy</a></dd>
+      </div>
+      <div>
+        <dt>GMAIL</dt>
+        <dd>Our inbox, run by Google. Your emails and coaching form messages land there.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="doc__sec" id="why">
+  <div class="sec__head">
+    <span class="sec__no">03</span>
+    <h2 class="sec__title">Why we use it</h2>
+    <span class="sec__rule" aria-hidden="true"></span>
+  </div>
+  <div class="doc__body">
+    <p>Three reasons, and only these:</p>
+    <ul class="doc__list">
+      <li>To fill and ship your order.</li>
+      <li>To answer your messages, coaching included.</li>
+      <li>To keep the records a business has to keep.</li>
+    </ul>
+    <p><strong>We never sell your information, and we never share it for advertising.</strong></p>
+  </div>
+</section>
+
+<section class="doc__sec" id="keep">
+  <div class="sec__head">
+    <span class="sec__no">04</span>
+    <h2 class="sec__title">How long we keep it</h2>
+    <span class="sec__rule" aria-hidden="true"></span>
+  </div>
+  <div class="doc__body">
+    <p>We keep your details for the reasons above and no others: your order, your messages, and the
+    records a business has to keep. You can ask us to delete them any time, except the records the
+    law requires us to keep. Your saved cart lives in your own browser, and you can clear it whenever
+    you like.</p>
+  </div>
+</section>
+
+<section class="doc__sec" id="choices">
+  <div class="sec__head">
+    <span class="sec__no">05</span>
+    <h2 class="sec__title">Your choices</h2>
+    <span class="sec__rule" aria-hidden="true"></span>
+  </div>
+  <div class="doc__body">
+    <dl class="doc__spec">
+      <div>
+        <dt>SEE IT</dt>
+        <dd>Email us and ask what we hold about you.</dd>
+      </div>
+      <div>
+        <dt>DELETE IT</dt>
+        <dd>Ask, and we&rsquo;ll delete it. The only exception is records the law requires us to keep.</dd>
+      </div>
+      <div>
+        <dt>CLEAR THE CART</dt>
+        <dd>Clear this site&rsquo;s data in your browser settings and the saved cart is gone.</dd>
+      </div>
+      <div>
+        <dt>JUST LOOK</dt>
+        <dd>Browsing asks nothing of you. You only give us details when you order or write to us.</dd>
+      </div>
+    </dl>
+    <p>Seeing or deleting your data takes one email to <a href="mailto:ironneverchanges@gmail.com">ironneverchanges@gmail.com</a>.</p>
+  </div>
+</section>
+
+<section class="doc__sec" id="children">
+  <div class="sec__head">
+    <span class="sec__no">06</span>
+    <h2 class="sec__title">Children</h2>
+    <span class="sec__rule" aria-hidden="true"></span>
+  </div>
+  <div class="doc__body">
+    <p>This site isn&rsquo;t meant for children under 13. If you think a child has sent us their
+    details, email us and we&rsquo;ll delete them.</p>
+  </div>
+</section>
+
+<section class="doc__sec" id="changes">
+  <div class="sec__head">
+    <span class="sec__no">07</span>
+    <h2 class="sec__title">Changes to this page</h2>
+    <span class="sec__rule" aria-hidden="true"></span>
+  </div>
+  <div class="doc__body">
+    <p>If anything here changes, this page changes with it and the date at the top moves. This version
+    took effect October 13, 2026.</p>
+  </div>
+</section>
+
+<section class="doc__sec" id="contact">
+  <div class="sec__head">
+    <span class="sec__no">08</span>
+    <h2 class="sec__title">Contact</h2>
+    <span class="sec__rule" aria-hidden="true"></span>
+  </div>
+  <div class="doc__body">
+    <p>One address for everything, privacy questions included.</p>
+    <a class="btn btn--solid doc__mail" href="mailto:ironneverchanges@gmail.com">ironneverchanges@gmail.com</a>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer class="foot">
+  <nav class="foot__links" aria-label="Footer">
+    <a href="/">Home</a>
+    <a href="/#shop">The Shop</a>
+    <a href="/privacy.html" aria-current="page">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a class="foot__mail" href="mailto:ironneverchanges@gmail.com">ironneverchanges@gmail.com</a>
+  </nav>
+  <div class="foot__base">
+    <p>&copy; 2026 IRON NEVER CHANGES.</p>
+    <p>Digital experience by <a class="foot__ez" href="https://ez-hd.co" target="_blank" rel="noopener">EZHD</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

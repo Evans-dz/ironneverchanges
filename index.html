@@ -27,6 +27,7 @@
       "url": "https://www.ironneverchanges.com/",
       "logo": "https://www.ironneverchanges.com/assets/brand/og-square.png",
       "slogan": "Where limits meet defeat.",
+      "email": "ironneverchanges@gmail.com",
       "description": "Heavyweight gym wear: garment-dyed cotton tees, screen printed in one color, for men with jobs, kids and a bar in their week.",
       "brand": { "@id": "https://www.ironneverchanges.com/#brand" }
     },
@@ -57,26 +58,15 @@
 
 <!-- garments: real washed blanks (assets/shirts/), cut out and normalized
      into the 400x460 card space by tools/normalize.mjs, collar at y=60 and
-     ~10.2 units/inch. Prints overlay live in the .pl groups, same as always:
-     SVG marks and page-font text at 93% opacity, sitting in the fabric. -->
+     ~10.2 units/inch. Prints overlay live in the .pl groups: SVG marks and
+     page-font text in one ink per wash, sitting in the fabric. Pick a wash
+     and js/main.js swaps the blank, the ink and the fit (DESIGN.md §4). -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <filter id="softHard" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
-    <!-- INC-012 mark: the clock whose hands are a barbell -->
-    <g id="clockBar" fill="none" stroke="#f5f4f1" stroke-linecap="round">
-      <circle cx="50" cy="50" r="43" stroke-width="5"/>
-      <path d="M50 12v8 M50 80v8 M12 50h8 M80 50h8" stroke-width="4"/>
-      <g transform="rotate(-34 50 50)">
-        <path d="M23 50h54" stroke-width="4.5"/>
-        <path d="M33 40v20 M67 40v20" stroke-width="6"/>
-        <path d="M26.5 43.5v13 M73.5 43.5v13" stroke-width="5"/>
-      </g>
-    </g>
-    <!-- INC-016 mark: the checked ballot box -->
-    <g id="vcheck" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="14" y="14" width="72" height="72" rx="10" stroke-width="8"/>
-      <path d="M30 52 L45 66 L71 34" stroke-width="10"/>
-    </g>
+    <!-- screen-print wear: every print cracks where assets/brand/ink-wear.png is dark -->
+    <pattern id="wearP" width="200" height="200" patternUnits="userSpaceOnUse"><image href="assets/brand/ink-wear.png" width="200" height="200"/></pattern>
+    <mask id="wear" maskUnits="userSpaceOnUse" x="0" y="0" width="400" height="460"><rect width="400" height="460" fill="url(#wearP)"/></mask>
   </defs>
 </svg>
 
@@ -95,7 +85,7 @@
     <a href="#corner" data-scroll>The Corner</a>
     <a href="#name" data-scroll>The Name</a>
   </nav>
-  <button class="btn btn--solid nav__cta" id="cartBtn" type="button" hidden aria-haspopup="dialog" aria-expanded="false" aria-label="Cart, 0 items">Cart <span id="cartCount">(0)</span></button>
+  <button class="btn btn--solid nav__cta" id="cartBtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Cart, 0 items">Cart <span id="cartCount">(0)</span></button>
   <button class="nav__burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu">
     <span></span><span></span>
   </button>
@@ -119,7 +109,7 @@
 <section class="hero" id="hero">
   <img class="hero__ring" src="assets/brand/INC_badge-ring_grey.svg" alt="" aria-hidden="true" width="1000" height="1000">
   <div class="hero__inner">
-    <p class="hero__eyebrow">HEAVYWEIGHT GYM WEAR &middot; DROP 001</p>
+    <p class="hero__eyebrow">HEAVYWEIGHT GYM WEAR &middot; THE SHOP IS OPEN</p>
     <h1 class="hero__h1">
       <span class="hero__l1">IRON NEVER<br>CHANGES.</span>
       <span class="hero__l2">YOU DO.</span>
@@ -165,9 +155,9 @@
     <article class="pillar reveal-up">
       <span class="pillar__plate" aria-hidden="true">35</span>
       <h3 class="pillar__title">HARD TIMES</h3>
-      <p class="pillar__slogan">&ldquo;Rock bottom has a squat rack.&rdquo;</p>
-      <p class="pillar__body">Some men find the gym on a good year. Most of us found it on the
-      worst one. The way up starts where you landed.</p>
+      <p class="pillar__slogan">&ldquo;Proud of you. Somebody should say it.&rdquo;</p>
+      <p class="pillar__body">Most of us found the gym in the worst year we&rsquo;ve had, and nobody
+      said a word about the fact that we kept coming back. So we&rsquo;ll say it.</p>
     </article>
     <article class="pillar reveal-up">
       <span class="pillar__plate" aria-hidden="true">25</span>
@@ -227,619 +217,747 @@
     <h2 class="sec__title">THE SHOP</h2>
     <span class="sec__rule" aria-hidden="true"></span>
   </div>
-  <p class="sec__lede reveal">Twenty-four shirts. Four washes of cotton, one color of ink. Heavyweight,
-  garment&#8209;dyed, screen printed, so it cracks and fades exactly the way it should. No tech fabric,
-  no neon, no motivation-speak in cursive.</p>
+  <p class="sec__lede reveal">Twenty-eight shirts, every one in all four washes of cotton, one color of ink.
+  Heavyweight, garment&#8209;dyed, screen printed, so it cracks and fades exactly the way it should. Tap a wash
+  under any shirt to see the print on it. No tech fabric, no neon, no motivation-speak in cursive.</p>
 
   <div class="line__grid" id="lineGrid">
-    <article class="prod reveal-up" data-view="front" data-sku="INC-001" data-name="THE FLAGSHIP" data-price="42">
+    <article class="prod reveal-up" data-color="washed-black" data-color-default="washed-black" data-ink="light" data-view="back" data-sku="INC-001" data-name="THE FLAGSHIP" data-price="42">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="215.7" y="116.5" width="67.5" height="44.9"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: large vintage wordmark with YOU DO. beneath"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/vintage-wordmark-stacked_white.png" x="136.5" y="107.8" width="124.7" height="107.6"/><text class="pr" x="198.8" y="245" font-size="26" letter-spacing="2" text-anchor="middle">YOU DO.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="226.65" y="121.47" width="46.7" height="31.06"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: large vintage stacked wordmark with YOU DO. fitted to its width beneath"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/vintage-wordmark-stacked_white.png" x="131.14" y="100" width="135.92" height="117.32"/><text class="pr" x="199.1" y="248" font-size="29.57" text-anchor="middle">YOU DO.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
-          <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
-          <button type="button" data-face="back" aria-pressed="false">BACK</button>
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-001 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-001 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">THE FLAGSHIP</h3>
         <p class="prod__why">The whole promise in one line. The iron is the constant; you&rsquo;re the variable. The shirt people buy twice.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 6.5&#8243;</li>
-      <li><b>BACK</b>stacked wordmark, vintage print &middot; 12&#8243; &middot; &ldquo;YOU DO.&rdquo; beneath</li>
+      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 4.5&#8243;</li>
+      <li><b>BACK</b>stacked wordmark, vintage print &middot; 13&#8243; &middot; &ldquo;YOU DO.&rdquo; fitted to 13&#8243; beneath</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLACK</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$42</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front" data-sku="INC-002" data-name="I DIDN'T FEEL LIKE IT EITHER" data-price="38">
+    <article class="prod reveal-up" data-color="washed-blue" data-color-default="washed-blue" data-ink="light" data-view="back" data-sku="INC-002" data-name="I DIDN'T FEEL LIKE IT EITHER" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: thin slogan bar across the chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><rect class="pr" x="113.9" y="133.8" width="16" height="1.2"/><text class="pr" x="200.3" y="137" font-size="7.5" letter-spacing="0.4" text-anchor="middle">WHERE LIMITS MEET DEFEAT</text><rect class="pr" x="270.3" y="133.8" width="16" height="1.2"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: I didn’t feel like it either in stacked type"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="199.3" y="130" font-size="21" text-anchor="middle">I DIDN&rsquo;T</text><text class="pr" x="199.3" y="158" font-size="21" text-anchor="middle">FEEL LIKE IT</text><text class="pr" x="199.3" y="186" font-size="21" text-anchor="middle">EITHER</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="179.6" y="200" width="39.5" height="26.3"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: slogan bar across the chest, WHERE LIMITS MEET DEFEAT stacked in two lines between two short bars"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><rect x="133.7" y="142.9" width="12" height="4" fill="currentColor"/><text class="pr" x="198.7" y="142.39" font-size="11.98" text-anchor="middle">WHERE LIMITS</text><text class="pr" x="198.7" y="155.81" font-size="12.77" text-anchor="middle">MEET DEFEAT</text><rect x="251.7" y="142.9" width="12" height="4" fill="currentColor"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: I DIDN&rsquo;T FEEL LIKE IT EITHER stacked in heavy type, skull mark beneath"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.5" y="121.17" font-size="30.77" text-anchor="middle">I DIDN&rsquo;T</text><text class="pr" x="200.5" y="139.32" font-size="19.12" text-anchor="middle">FEEL LIKE IT</text><text class="pr" x="200.5" y="167.2" font-size="33.26" text-anchor="middle">EITHER</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="181" y="178.2" width="39" height="25.94"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
-          <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
-          <button type="button" data-face="back" aria-pressed="false">BACK</button>
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-002 &middot; WASHED BLUE &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-002 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">I DIDN&rsquo;T FEEL LIKE IT EITHER</h3>
         <p class="prod__why">The most relatable sentence in any gym. It says <em>I see you</em> without saying anything soft.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>slogan bar across the chest &middot; 14&#8243;</li>
-      <li><b>BACK</b>the line in stacked type &middot; 14&#8243; &middot; mark centered beneath</li>
+      <li><b>FRONT</b>slogan bar across the chest, two lines &middot; 12&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; mark beneath</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLUE</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front" data-sku="INC-003" data-name="ROCK BOTTOM HAS A SQUAT RACK" data-price="38">
+    <article class="prod reveal-up" data-color="washed-black" data-color-default="washed-black" data-ink="light" data-view="back" data-sku="INC-003" data-name="PROUD OF YOU" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: circular badge on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_badge-primary_white.svg" x="218.5" y="107.8" width="62.3" height="62.3"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: rock bottom has a squat rack in heavy type"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="198.8" y="132" font-size="20" text-anchor="middle">ROCK BOTTOM</text><text class="pr" x="198.8" y="160" font-size="20" text-anchor="middle">HAS A</text><text class="pr" x="198.8" y="188" font-size="20" text-anchor="middle">SQUAT RACK.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: circular badge on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_badge-primary_white.svg" x="224.05" y="111.05" width="51.9" height="51.9"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: PROUD OF YOU. stacked large in heavy type, SOMEBODY SHOULD SAY IT. stacked smaller beneath, skull and barbell mark under the words"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="199.1" y="122.8" font-size="35.47" text-anchor="middle">PROUD</text><text class="pr" x="199.1" y="149.2" font-size="30.62" text-anchor="middle">OF YOU.</text><text class="pr" x="199.1" y="175.2" font-size="21.43" text-anchor="middle">SOMEBODY</text><text class="pr" x="199.1" y="191.1" font-size="15.5" text-anchor="middle">SHOULD SAY IT.</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="179.62" y="203.1" width="38.96" height="25.91"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
-          <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
-          <button type="button" data-face="back" aria-pressed="false">BACK</button>
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-003 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
-        <h3 class="prod__name">ROCK BOTTOM HAS A SQUAT RACK</h3>
-        <p class="prod__why">The hard-times shirt. Dark humor with a hand out. The way up starts in the same place you landed.</p>
+        <p class="prod__sku">INC-003 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">PROUD OF YOU</h3>
+        <p class="prod__why">Plenty of men go years without hearing it from anybody. Wear it, or buy one for the friend who should hear it.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>primary badge &middot; left chest &middot; 6&#8243;</li>
-      <li><b>BACK</b>the line, vintage print &middot; 13&#8243;</li>
+      <li><b>FRONT</b>primary badge &middot; left chest &middot; 5&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; &ldquo;PROUD OF YOU.&rdquo; carries the weight &middot; &ldquo;SOMEBODY SHOULD SAY IT.&rdquo; beneath &middot; skull &amp; bar mark 3.75&#8243;</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLACK</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front" data-sku="INC-004" data-name="45 MINUTES THAT BELONG TO ME" data-price="38">
+    <article class="prod reveal-up" data-color="washed-grey" data-color-default="washed-grey" data-ink="dark" data-view="back" data-sku="INC-004" data-name="NOBODY PROTECTED THAT KID" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, front: one-line lockup on the left chest"><ellipse class="tsh" cx="200" cy="349" rx="151" ry="13"/><image href="assets/shirts/washed-grey_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_lockup-horizontal-oneline_black.svg" x="77.7" y="126.4" width="246.2" height="17.05"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, back: slim tagline printed down the spine"><ellipse class="tsh" cx="200" cy="342" rx="149" ry="13"/><image href="assets/shirts/washed-grey_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_spine-tagline-slim_black.svg" x="178.5" y="92" width="33" height="220"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="349" rx="151" ry="13"/><image href="assets/shirts/washed-grey_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="226.9" y="121.65" width="46.2" height="30.72"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, back: NOBODY PROTECTED THAT KID. stacked, I DO NOW. knocked out of an ink bar, skull mark beneath"><ellipse class="tsh" cx="200" cy="342" rx="149" ry="13"/><image href="assets/shirts/washed-grey_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.2" y="119.6" font-size="27.98" text-anchor="middle">NOBODY</text><text class="pr" x="200.2" y="138.6" font-size="19.95" text-anchor="middle">PROTECTED</text><text class="pr" x="200.2" y="160" font-size="23.78" text-anchor="middle">THAT KID.</text><rect x="134.2" y="168" width="132" height="27" fill="currentColor"/><text class="prInv" x="200.2" y="189.2" font-size="21.3" text-anchor="middle">I DO NOW.</text><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="181.2" y="204" width="38" height="25.3"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
-          <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
-          <button type="button" data-face="back" aria-pressed="false">BACK</button>
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-004 &middot; WASHED GREY &middot; GARMENT-DYED</p>
-        <h3 class="prod__name">45 MINUTES THAT BELONG TO ME</h3>
-        <p class="prod__why">The dad shirt. The worker shirt. Not selfish. Necessary.</p>
+        <p class="prod__sku">INC-004 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">NOBODY PROTECTED THAT KID</h3>
+        <p class="prod__why">For the man who grew up with nobody in his corner. He can&rsquo;t go back for that kid. He can stand in front of him now.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>one-line lockup &middot; full chest, seam to seam</li>
-      <li><b>SPINE</b>slim tagline &middot; 3&#8243; &times; 20&#8243; down the center back</li>
+      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 4.5&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; &ldquo;I DO NOW.&rdquo; knocked out of a bar &middot; mark beneath</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="true" class="is-on"></button><span class="prod__cw">WASHED GREY</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front" data-sku="INC-005" data-name="THE BAR DOESN'T KNOW YOU'RE TIRED" data-price="40">
+    <article class="prod reveal-up" data-color="washed-blue" data-color-default="washed-blue" data-ink="light" data-view="back" data-sku="INC-005" data-name="THE BAR DOESN'T KNOW YOU'RE TIRED" data-price="40">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="217.9" y="117.8" width="69.1" height="46"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: line across the shoulders, name down the spine"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="199.3" y="108" font-size="14" text-anchor="middle">THE BAR DOESN&rsquo;T KNOW</text><text class="pr" x="199.3" y="126" font-size="14" text-anchor="middle">YOU&rsquo;RE TIRED.</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="187.3" y="132" width="24" height="16"/><text class="pr" font-size="12.5" letter-spacing="2.8" text-anchor="middle" dominant-baseline="central" transform="translate(199.3 258) rotate(90)">IRON NEVER CHANGES</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="226.1" y="121.1" width="47.8" height="31.79"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: THE BAR DOESN&rsquo;T KNOW YOU&rsquo;RE TIRED. stacked across the shoulder blades, skull and barbell mark at the bottom middle"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.5" y="118.1" font-size="27.72" text-anchor="middle">THE BAR</text><text class="pr" x="200.5" y="142.85" font-size="28.22" text-anchor="middle">DOESN&rsquo;T</text><text class="pr" x="200.5" y="175.8" font-size="39.69" text-anchor="middle">KNOW</text><text class="pr" x="200.5" y="192.9" font-size="16.61" text-anchor="middle">YOU&rsquo;RE TIRED.</text></g><g class="pl" data-anchor="hem" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="166.75" y="279.5" width="67.5" height="44.9"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
-          <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
-          <button type="button" data-face="back" aria-pressed="false">BACK</button>
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-005 &middot; WASHED BLUE &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-005 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">THE BAR DOESN&rsquo;T KNOW YOU&rsquo;RE TIRED</h3>
-        <p class="prod__why">No sympathy, no cruelty. Just a fact.</p>
+        <p class="prod__why">No sympathy, no cruelty. Just a fact. It doesn&rsquo;t need you fresh. It just needs you here, and here you are.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 6.5&#8243;</li>
-      <li><b>BACK</b>the line across the shoulder blades &middot; 11&#8243;</li>
-      <li><b>SPINE</b>name print &middot; 3&#8243; &times; 18&#8243;</li>
+      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 4.5&#8243;</li>
+      <li><b>BACK</b>the line stacked across the shoulder blades &middot; 13&#8243;</li>
+      <li><b>LOWER BACK</b>skull &amp; bar mark &middot; bottom middle &middot; 6.5&#8243; &middot; 4&#8243; above the hem</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLUE</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$40</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front" data-sku="INC-006" data-name="THE SPINE TEE" data-price="42">
+    <article class="prod reveal-up" data-color="washed-brown" data-color-default="washed-brown" data-ink="dark" data-view="back" data-sku="INC-006" data-name="THE SPINE TEE" data-price="42">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: circular stamp mark on the left chest"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-stamp-circle_white.svg" x="217" y="103.6" width="65.1" height="65.1"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: full spine print with a small hem line"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="189.8" y="100" width="22" height="14.6"/><path d="M193.8 122h14" stroke="#f5f4f1" stroke-width="1"/><text class="pr" font-size="11" letter-spacing="2.5" text-anchor="middle" dominant-baseline="central" transform="translate(200.8 218) rotate(90)">IRON NEVER CHANGES</text><path d="M193.8 314h14" stroke="#f5f4f1" stroke-width="1"/><text class="pr" x="200.8" y="337" font-size="9" letter-spacing="1.5" text-anchor="middle">COME BACK TOMORROW</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: circular stamp mark on the left chest"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-stamp-circle_black.svg" x="217" y="103.6" width="65.1" height="65.1"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: skull mark at the top, IRON NEVER CHANGES stacked down the spine between two rules, COME BACK TOMORROW stacked on the lower back just below it"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="179.35" y="90" width="39.7" height="26.4"/><path d="M178.9 123h40.6" stroke="currentColor" stroke-width="2.2"/><text class="pr" font-size="22.42" text-anchor="middle" transform="translate(203.8 206.6) rotate(90)">IRON NEVER</text><text class="pr" font-size="28.43" text-anchor="middle" transform="translate(178.9 206.6) rotate(90)">CHANGES</text><path d="M178.9 290.2h40.6" stroke="currentColor" stroke-width="2.2"/></g><g class="pl" data-place="lower" mask="url(#wear)"><text class="pr" x="199.2" y="307.1" font-size="11.15" text-anchor="middle">COME BACK</text><text class="pr" x="199.2" y="319" font-size="11.25" text-anchor="middle">TOMORROW</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
-          <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
-          <button type="button" data-face="back" aria-pressed="false">BACK</button>
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-006 &middot; WASHED BROWN &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-006 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">THE SPINE TEE</h3>
         <p class="prod__why">The one people wear outside the gym, with the hem line you only catch on the second look. That&rsquo;s what makes them ask.</p>
         <ul class="prod__spec">
       <li><b>FRONT</b>stamp mark &middot; left chest &middot; 6.5&#8243;</li>
-      <li><b>SPINE</b>full spine print &middot; 3&#8243; &times; 18&#8243;</li>
-      <li><b>HEM</b>&ldquo;COME BACK TOMORROW&rdquo; &middot; 5&#8243;</li>
+      <li><b>SPINE</b>mark, rules &amp; &ldquo;IRON NEVER CHANGES&rdquo; stacked down the spine &middot; 4&#8243; &times; 20&#8243;</li>
+      <li><b>LOWER BACK</b>&ldquo;COME BACK TOMORROW&rdquo; stacked &middot; 7.5&#8243; &middot; 0.8&#8243; below the spine</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BROWN</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$42</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front" data-sku="INC-007" data-name="THE HOUSE SHIRT" data-price="34">
+    <article class="prod reveal-up" data-color="washed-black" data-color-default="washed-black" data-ink="light" data-view="front" data-sku="INC-007" data-name="THE HOUSE SHIRT" data-price="34">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: large vintage badge across the chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/vintage-badge_white.png" x="141.6" y="107.7" width="114.2" height="114.2"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: blank on purpose"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr pr--dim" x="198.8" y="210" font-size="10" letter-spacing="2" text-anchor="middle">BLANK. ON PURPOSE.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: large vintage badge, skull and barbell inside the ring, across the chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/vintage-badge_white.png" x="134.58" y="105" width="130.7" height="130.7"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: blank, no print, on purpose"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
           <button type="button" data-face="back" aria-pressed="false">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-007 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-007 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">THE HOUSE SHIRT</h3>
         <p class="prod__why">Every gym needs the plain one. Members, staff, first-timers. No message, just the name.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>primary badge, vintage print &middot; 11&#8243; full front</li>
-      <li><b>BACK</b>blank</li>
+      <li><b>FRONT</b>primary badge, vintage print &middot; 12&#8243; full front</li>
+      <li><b>BACK</b>blank on purpose &middot; no print</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLACK</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$34</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front" data-sku="INC-008" data-name="BUILT BACK" data-price="40">
+    <article class="prod reveal-up" data-color="washed-black" data-color-default="washed-black" data-ink="light" data-view="back" data-sku="INC-008" data-name="BUILT BACK" data-price="40">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: BUILT BACK printed small over the heart"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="243" y="143" font-size="13" letter-spacing="2" text-anchor="middle">BUILT BACK</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: large vintage badge over a NOT BORN THIS WAY bar"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/vintage-badge_white.png" x="136.5" y="107.8" width="124.7" height="124.7"/><rect x="136.5" y="244" width="124.7" height="18" fill="#f5f4f1"/><text class="prInv" x="198.8" y="257" font-size="10" letter-spacing="0.5" text-anchor="middle">NOT BORN THIS WAY</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
-        <div class="prod__flip" role="group" aria-label="View side">
-          <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
-          <button type="button" data-face="back" aria-pressed="false">BACK</button>
-        </div>
-      </div>
-      <div class="prod__meta">
-        <p class="prod__sku">INC-008 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
-        <h3 class="prod__name">BUILT BACK</h3>
-        <p class="prod__why">The comeback shirt. A straight statement that nobody in this gym started here.</p>
-        <ul class="prod__spec">
-      <li><b>FRONT</b>&ldquo;BUILT BACK&rdquo; &middot; over the heart</li>
-      <li><b>BACK</b>vintage badge &middot; 12&#8243; &middot; &ldquo;NOT BORN THIS WAY&rdquo; slogan bar</li>
-        </ul>
-        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
-        <div class="prod__foot">
-          <span class="prod__price">$40</span>
-          <span class="prod__drop">DROP 001</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="prod reveal-up" data-view="back" data-sku="INC-009" data-name="THE WALL" data-price="42">
-      <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="215.7" y="116.5" width="67.5" height="44.9"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: the whole slogan wall stacked in one print"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="198.8" y="118" font-size="7.1" text-anchor="middle">I DIDN&rsquo;T FEEL LIKE IT EITHER</text><text class="pr" x="198.8" y="137" font-size="11.8" text-anchor="middle">SHOWED UP ANYWAY</text><text class="pr" x="198.8" y="160" font-size="16" text-anchor="middle">NO ZERO DAYS</text><text class="pr" x="198.8" y="175" font-size="6.8" text-anchor="middle">ROCK BOTTOM HAS A SQUAT RACK</text><text class="pr" x="198.8" y="192" font-size="9" text-anchor="middle">THE WEIGHT NEVER LIES</text><text class="pr" x="198.8" y="207" font-size="7" text-anchor="middle">SAME WEIGHT. DIFFERENT MAN.</text><text class="pr" x="198.8" y="223" font-size="7.4" text-anchor="middle">STILL HERE. STILL LIFTING.</text><text class="pr" x="198.8" y="241" font-size="10.4" text-anchor="middle">COME BACK TOMORROW</text><rect x="133.8" y="252" width="130" height="14" fill="#f5f4f1"/><text class="prInv" x="198.8" y="262" font-size="7.5" text-anchor="middle">WHERE LIMITS MEET DEFEAT</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: BUILT BACK stacked over the heart"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="250" y="140.1" font-size="16.16" text-anchor="middle">BUILT</text><text class="pr" x="250" y="156.6" font-size="17.05" text-anchor="middle">BACK</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: vintage badge over NOT BORN THIS WAY stacked in heavy type"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/vintage-badge_white.png" x="141.6" y="96" width="115" height="115"/><text class="pr" x="199.1" y="232.64" font-size="22.97" text-anchor="middle">NOT BORN</text><text class="pr" x="199.1" y="253.69" font-size="24.36" text-anchor="middle">THIS WAY</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-009 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-008 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">BUILT BACK</h3>
+        <p class="prod__why">The comeback shirt. A straight statement that nobody in this gym started here.</p>
+        <ul class="prod__spec">
+      <li><b>FRONT</b>&ldquo;BUILT BACK&rdquo; stacked &middot; over the heart &middot; 5&#8243;</li>
+      <li><b>BACK</b>vintage badge &middot; 10.6&#8243; &middot; &ldquo;NOT BORN THIS WAY&rdquo; stacked beneath &middot; 12.75&#8243; wide &middot; 12.75&#8243; &times; 15&#8243; overall</li>
+        </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLACK</span></div>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
+        <div class="prod__foot">
+          <span class="prod__price">$40</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="prod reveal-up" data-color="washed-black" data-color-default="washed-black" data-ink="light" data-view="back" data-sku="INC-009" data-name="THE WALL" data-price="42">
+      <div class="prod__views">
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="215.7" y="116.5" width="67.5" height="44.9"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: seven lines from the wall stacked to one width, I DIDN&rsquo;T FEEL LIKE IT EITHER, SHOWED UP ANYWAY, NO ZERO DAYS, HARD TIMES BUILT THIS, PROOF OF WORK, STILL HERE. STILL LIFTING., COME BACK TOMORROW, with ANYWAY the biggest"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="199.1" y="109.19" font-size="17.71" text-anchor="middle">I DIDN&rsquo;T FEEL</text><text class="pr" x="199.1" y="124.02" font-size="15.74" text-anchor="middle">LIKE IT EITHER</text><text class="pr" x="199.1" y="141.97" font-size="19.93" text-anchor="middle">SHOWED UP</text><text class="pr" x="199.1" y="164.87" font-size="27.47" text-anchor="middle">ANYWAY</text><text class="pr" x="199.1" y="180.30" font-size="16.33" text-anchor="middle">NO ZERO DAYS</text><text class="pr" x="199.1" y="191.18" font-size="9.83" text-anchor="middle">HARD TIMES BUILT THIS</text><text class="pr" x="199.1" y="205.17" font-size="14.27" text-anchor="middle">PROOF OF WORK</text><text class="pr" x="199.1" y="222.89" font-size="19.6" text-anchor="middle">STILL HERE.</text><text class="pr" x="199.1" y="238.19" font-size="16.14" text-anchor="middle">STILL LIFTING.</text><text class="pr" x="199.1" y="249.00" font-size="9.72" text-anchor="middle">COME BACK TOMORROW</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__flip" role="group" aria-label="View side">
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
+        </div>
+      </div>
+      <div class="prod__meta">
+        <p class="prod__sku">INC-009 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">THE WALL</h3>
         <p class="prod__why">Section 02, wearable. Every line on the wall came out of somebody&rsquo;s week. This one carries all of them.</p>
         <ul class="prod__spec">
       <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 6.5&#8243;</li>
-      <li><b>BACK</b>the wall &middot; 12&#8243; &times; 15&#8243; stacked block &middot; house bar at the base</li>
+      <li><b>BACK</b>the wall &middot; seven lines stacked to one width in ten rows &middot; 12.8&#8243; &times; 14.6&#8243;</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLACK</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$42</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="back" data-sku="INC-010" data-name="SMALL EFFORTS, REPEATED" data-price="38">
+    <article class="prod reveal-up" data-color="washed-brown" data-color-default="washed-brown" data-ink="dark" data-view="back" data-sku="INC-010" data-name="SMALL EFFORTS, REPEATED" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: circular badge on the left chest"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_badge-primary_white.svg" x="219.4" y="106.1" width="60.1" height="60.1"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: success is the sum of small efforts, repeated day in and day out, stacked"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="200.8" y="120" font-size="10.6" text-anchor="middle">SUCCESS IS THE SUM</text><text class="pr" x="200.8" y="137" font-size="11.9" text-anchor="middle">OF SMALL EFFORTS</text><text class="pr" x="200.8" y="165" font-size="23.9" text-anchor="middle">REPEATED</text><text class="pr" x="200.8" y="182" font-size="10.6" text-anchor="middle">DAY IN AND DAY OUT</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="187.8" y="196" width="26" height="17.3"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: circular badge on the left chest"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_badge-primary_black.svg" x="219.4" y="106.1" width="60.1" height="60.1"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: SUCCESS IS THE SUM OF SMALL EFFORTS REPEATED DAY IN AND DAY OUT stacked to one width, REPEATED biggest, skull mark beneath"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="199.2" y="105.49" font-size="10.7" text-anchor="middle">SUCCESS IS THE SUM</text><text class="pr" x="199.2" y="118.73" font-size="11.77" text-anchor="middle">OF SMALL EFFORTS</text><text class="pr" x="199.2" y="140.16" font-size="22.43" text-anchor="middle">REPEATED</text><text class="pr" x="199.2" y="153.92" font-size="11.09" text-anchor="middle">DAY IN AND DAY OUT</text><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="179.35" y="164" width="39.7" height="26.4"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-010 &middot; WASHED BROWN &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-010 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">SMALL EFFORTS, REPEATED</h3>
         <p class="prod__why">The old line, printed the way it actually works, with one word doing all the lifting. Nothing about talent anywhere on it.</p>
         <ul class="prod__spec">
       <li><b>FRONT</b>primary badge &middot; left chest &middot; 6&#8243;</li>
-      <li><b>BACK</b>the quote stacked &middot; 13&#8243; &middot; mark beneath</li>
+      <li><b>BACK</b>the quote stacked to one width &middot; 13&#8243; &middot; REPEATED biggest &middot; 4&#8243; mark beneath</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BROWN</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front" data-sku="INC-011" data-name="HOME" data-price="42">
+    <article class="prod reveal-up" data-color="washed-grey" data-color-default="washed-grey" data-ink="dark" data-view="back" data-sku="INC-011" data-name="SAY IT OUT LOUD" data-price="42">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, front: HOME in large letters with a photo of the gym printed inside them"><ellipse class="tsh" cx="200" cy="349" rx="151" ry="13"/><image href="assets/shirts/washed-grey_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><clipPath id="homeClip"><text x="200.8" y="152" font-size="46" letter-spacing="4" text-anchor="middle" style="font-family:'Archivo Black','Archivo',sans-serif">HOME</text></clipPath><g clip-path="url(#homeClip)"><image href="assets/brand/home-fill.webp" x="126" y="112" width="150" height="44" preserveAspectRatio="xMidYMid slice"/></g><text x="200.8" y="152" font-size="46" letter-spacing="4" text-anchor="middle" fill="none" stroke="#1a1a1b" stroke-width="1.2" style="font-family:'Archivo Black','Archivo',sans-serif">HOME</text><text class="pr pr--d" x="200.8" y="172" font-size="7" letter-spacing="2" text-anchor="middle">THE GYM COUNTS.</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, back: blank"><ellipse class="tsh" cx="200" cy="342" rx="149" ry="13"/><image href="assets/shirts/washed-grey_back.webp" x="0" y="0" width="400" height="460"/></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="349" rx="151" ry="13"/><image href="assets/shirts/washed-grey_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="226.92" y="121.65" width="46.17" height="30.7"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, back: SAY IT OUT LOUD. stacked large in heavy type, IT WEIGHS LESS. smaller beneath"><ellipse class="tsh" cx="200" cy="342" rx="149" ry="13"/><image href="assets/shirts/washed-grey_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.2" y="125.9" font-size="36.96" text-anchor="middle">SAY IT</text><text class="pr" x="200.2" y="146.2" font-size="21.88" text-anchor="middle">OUT LOUD.</text><text class="pr" x="200.2" y="166.8" font-size="14.18" text-anchor="middle">IT WEIGHS LESS.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
-          <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
-          <button type="button" data-face="back" aria-pressed="false">BACK</button>
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-011 &middot; WASHED GREY &middot; GARMENT-DYED</p>
-        <h3 class="prod__name">HOME</h3>
-        <p class="prod__why">The word over the place it means. The floor, the bag and the loaded bar, printed inside the letters. If you know, you know.</p>
+        <p class="prod__sku">INC-011 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">SAY IT OUT LOUD</h3>
+        <p class="prod__why">Whatever you are carrying gets lighter the minute somebody else hears it. Say it to a friend, a brother, the guy at the next rack.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>&ldquo;HOME&rdquo;, the gym printed inside the letters &middot; 13&#8243;</li>
-      <li><b>BACK</b>blank</li>
+      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 4.5&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; &ldquo;SAY IT OUT LOUD.&rdquo; carries the weight &middot; &ldquo;IT WEIGHS LESS.&rdquo; beneath</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="true" class="is-on"></button><span class="prod__cw">WASHED GREY</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$42</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="back" data-sku="INC-012" data-name="CLOCK OUT. LOAD UP." data-price="38">
+    <article class="prod reveal-up" data-color="washed-blue" data-color-default="washed-blue" data-ink="light" data-view="back" data-sku="INC-012" data-name="I CAME HERE INSTEAD" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: clock and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><svg x="220.5" y="108.9" width="63.8" height="63.8" viewBox="0 0 100 100"><use href="#clockBar"/></svg></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: CLOCK OUT above and LOAD UP below a large clock whose hands are a barbell"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="199.3" y="126" font-size="22" text-anchor="middle">CLOCK OUT.</text><svg x="152.5" y="140" width="93.5" height="93.5" viewBox="0 0 100 100"><use href="#clockBar"/></svg><text class="pr" x="199.3" y="256" font-size="22" text-anchor="middle">LOAD UP.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: skull and barbell stamp circle on the left chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-stamp-circle_white.svg" x="223.4" y="110.6" width="53.2" height="53.2"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: I CAME HERE INSTEAD. in huge stacked type, small skull mark beneath"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.5" y="123.8" font-size="35.4" text-anchor="middle">I CAME</text><text class="pr" x="200.5" y="160.5" font-size="46" text-anchor="middle">HERE</text><text class="pr" x="200.5" y="183.9" font-size="26.39" text-anchor="middle">INSTEAD.</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="182.3" y="195.9" width="36.4" height="24.2"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-012 &middot; WASHED BLUE &middot; GARMENT-DYED</p>
-        <h3 class="prod__name">CLOCK OUT. LOAD UP.</h3>
-        <p class="prod__why">For everybody training after the shift. The hands on the clock are a barbell. Quitting time and starting time are the same minute.</p>
+        <p class="prod__sku">INC-012 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">I CAME HERE INSTEAD</h3>
+        <p class="prod__why">There were other places he could have gone. He came here. The rest of the story is his to tell, if you ask.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>clock &amp; bar mark &middot; left chest &middot; 6&#8243;</li>
-      <li><b>BACK</b>clock &amp; bar &middot; 9&#8243; &middot; the line split above and below</li>
+      <li><b>FRONT</b>stamp circle mark &middot; left chest &middot; 5&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; mark beneath</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLUE</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="back" data-sku="INC-013" data-name="THE PARKING LOT" data-price="38">
+    <article class="prod reveal-up" data-color="washed-grey" data-color-default="washed-grey" data-ink="dark" data-view="back" data-sku="INC-013" data-name="DEFEAT IS A DAY" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, front: skull and barbell mark in black on the left chest"><ellipse class="tsh" cx="200" cy="349" rx="151" ry="13"/><image href="assets/shirts/washed-grey_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="217.8" y="115.8" width="66.7" height="44.4"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, back: the hard part was the parking lot in stacked type"><ellipse class="tsh" cx="200" cy="342" rx="149" ry="13"/><image href="assets/shirts/washed-grey_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr pr--d" x="198.5" y="132" font-size="19" text-anchor="middle">THE HARD PART</text><text class="pr pr--d" x="198.5" y="157" font-size="17" text-anchor="middle">WAS THE</text><text class="pr pr--d" x="198.5" y="188" font-size="24" text-anchor="middle">PARKING LOT</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="349" rx="151" ry="13"/><image href="assets/shirts/washed-grey_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="225.4" y="120.6" width="49.2" height="32.7"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, back: DEFEAT IS A DAY, stacked, NOT A NAME. knocked out of an ink bar, skull mark beneath"><ellipse class="tsh" cx="200" cy="342" rx="149" ry="13"/><image href="assets/shirts/washed-grey_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.2" y="115.3" font-size="23.35" text-anchor="middle">DEFEAT IS</text><text class="pr" x="200.2" y="146.9" font-size="38.62" text-anchor="middle">A DAY,</text><rect x="134.2" y="158" width="132" height="26" fill="currentColor"/><text class="prInv" x="200.2" y="176.6" font-size="15.95" text-anchor="middle">NOT A NAME.</text><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="181.2" y="194" width="38" height="25.3"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-013 &middot; WASHED GREY &middot; GARMENT-DYED</p>
-        <h3 class="prod__name">THE PARKING LOT</h3>
-        <p class="prod__why">Everybody who almost drove home knows. The workout was never the hard part.</p>
+        <p class="prod__sku">INC-013 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">DEFEAT IS A DAY</h3>
+        <p class="prod__why">Everybody gets the day the weight wins. That day does not get to be your name. Tomorrow you load the bar again.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 6.5&#8243;</li>
-      <li><b>BACK</b>the line stacked &middot; 12&#8243;</li>
+      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 4.8&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; &ldquo;NOT A NAME.&rdquo; knocked out of a bar &middot; mark beneath</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="true" class="is-on"></button><span class="prod__cw">WASHED GREY</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="back" data-sku="INC-014" data-name="PROOF OF WORK" data-price="40">
+    <article class="prod reveal-up" data-color="washed-black" data-color-default="washed-black" data-ink="light" data-view="back" data-sku="INC-014" data-name="IT TEARS BEFORE IT GROWS" data-price="40">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: PROOF OF WORK in small receipt type on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="prMono" x="249.6" y="138" font-size="7" letter-spacing="1" text-anchor="middle">PROOF OF WORK</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: a gym receipt with sets as line items, marked paid in full"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="prMono" x="198.8" y="110" font-size="8.5" letter-spacing="1" text-anchor="middle">IRON NEVER CHANGES</text><text class="prMono" x="198.8" y="122" font-size="6.5" letter-spacing="1" text-anchor="middle">MEMBER: YOU</text><path d="M148.8 130h100" stroke="#f5f4f1" stroke-width=".8" stroke-dasharray="3 2.5"/><text class="prMono" x="152" y="144" font-size="7">SQUATS</text><text class="prMono" x="245.6" y="144" font-size="7" text-anchor="end">5 X 5</text><text class="prMono" x="152" y="157" font-size="7">BENCH</text><text class="prMono" x="245.6" y="157" font-size="7" text-anchor="end">5 X 5</text><text class="prMono" x="152" y="170" font-size="7">DEADLIFT</text><text class="prMono" x="245.6" y="170" font-size="7" text-anchor="end">1 X 5</text><text class="prMono" x="152" y="183" font-size="7">SHOWED UP</text><text class="prMono" x="245.6" y="183" font-size="7" text-anchor="end">1 X 1</text><path d="M148.8 191h100" stroke="#f5f4f1" stroke-width=".8" stroke-dasharray="3 2.5"/><text class="prMono" x="152" y="205" font-size="7.5">TOTAL</text><text class="prMono" x="245.6" y="205" font-size="7.5" text-anchor="end">PAID IN FULL</text><path d="M168 214v16 M172 214v16 M177.5 214v16 M180 214v16 M186 214v16 M191.5 214v16 M194 214v16 M200 214v16 M204.5 214v16 M207 214v16 M213 214v16 M217.5 214v16 M221 214v16 M227 214v16" stroke="#f5f4f1" stroke-width="1.6"/><text class="prMono" x="198.8" y="243" font-size="5.5" letter-spacing="2" text-anchor="middle">COME BACK TOMORROW</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="226.6" y="121.5" width="46.7" height="31.1"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: IT TEARS BEFORE IT GROWS. stacked, the word TEARS torn in two along a jagged line, skull mark beneath"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><defs><clipPath id="inc014-tear-top"><path d="M164 88L164 108.0L167.5 110.2L170 107.4L174.5 109.6L176.5 106.8L181 108.9L184.5 107.6L187 110.8L191.5 107.9L194 109.2L198.5 106.4L201 108.6L205.5 107.2L208 110.6L212.5 108.1L215 109.9L219.5 106.9L223 109.5L226 108.0L229.5 111.0L233 108.4L236.5 109.7L240 106.6L244 109.3L246.5 107.9L250 110.5L254.5 107.5L257 109.8L261 107.1L264.5 109.6L268 108.2L272 110.0L280 109.0L280 88Z"/></clipPath><clipPath id="inc014-tear-bot"><path d="M164 130L164 108.0L167.5 110.2L170 107.4L174.5 109.6L176.5 106.8L181 108.9L184.5 107.6L187 110.8L191.5 107.9L194 109.2L198.5 106.4L201 108.6L205.5 107.2L208 110.6L212.5 108.1L215 109.9L219.5 106.9L223 109.5L226 108.0L229.5 111.0L233 108.4L236.5 109.7L240 106.6L244 109.3L246.5 107.9L250 110.5L254.5 107.5L257 109.8L261 107.1L264.5 109.6L268 108.2L272 110.0L280 109.0L280 130Z"/></clipPath></defs><text class="pr" x="130" y="117.7" font-size="26.75">IT</text><g transform="translate(-3 -2.2)"><g clip-path="url(#inc014-tear-top)"><text class="pr" x="199.1" y="117.7" font-size="26.75" text-anchor="middle">IT TEARS</text></g></g><g transform="translate(3 2.2)"><g clip-path="url(#inc014-tear-bot)"><text class="pr" x="199.1" y="117.7" font-size="26.75" text-anchor="middle">IT TEARS</text></g></g><text class="pr" x="199.1" y="139.9" font-size="23.1" text-anchor="middle">BEFORE IT</text><text class="pr" x="199.1" y="166.6" font-size="30.96" text-anchor="middle">GROWS.</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="180.9" y="178.6" width="36.4" height="24.2"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-014 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
-        <h3 class="prod__name">PROOF OF WORK</h3>
-        <p class="prod__why">A receipt for the only bill that always clears. Sets in, strength out, paid in full.</p>
+        <p class="prod__sku">INC-014 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">IT TEARS BEFORE IT GROWS</h3>
+        <p class="prod__why">Muscle has to tear before it grows back stronger. So do people. If you are in the torn part right now, you are not finished.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>PROOF OF WORK &middot; left chest &middot; 3.5&#8243;</li>
-      <li><b>BACK</b>the receipt &middot; 10&#8243; &times; 13&#8243; &middot; barcode at the base</li>
+      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 4.5&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; &ldquo;TEARS&rdquo; torn in two &middot; mark beneath</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLACK</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$40</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="back" data-sku="INC-015" data-name="SAME BAR. DIFFERENT DAY." data-price="40">
+    <article class="prod reveal-up" data-color="washed-brown" data-color-default="washed-brown" data-ink="dark" data-view="back" data-sku="INC-015" data-name="LEARNING ANYWAY" data-price="40">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="216.9" y="114.4" width="65.1" height="43.3"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: same bar different day over a month of struck-through calendar days"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><defs><g id="cday"><rect x="0" y="0" width="16" height="16" rx="1.5" fill="none" stroke="#f5f4f1" stroke-width="1.1"/><path d="M3.5 12.5 12.5 3.5" stroke="#f5f4f1" stroke-width="1.4" stroke-linecap="round"/></g></defs><text class="pr" x="200.8" y="118" font-size="16" text-anchor="middle">SAME BAR.</text><text class="pr" x="200.8" y="139" font-size="16" text-anchor="middle">DIFFERENT DAY.</text><use href="#cday" x="135.8" y="152"/><use href="#cday" x="154.8" y="152"/><use href="#cday" x="173.8" y="152"/><use href="#cday" x="192.8" y="152"/><use href="#cday" x="211.8" y="152"/><use href="#cday" x="230.8" y="152"/><use href="#cday" x="249.8" y="152"/><use href="#cday" x="135.8" y="171"/><use href="#cday" x="154.8" y="171"/><use href="#cday" x="173.8" y="171"/><use href="#cday" x="192.8" y="171"/><use href="#cday" x="211.8" y="171"/><use href="#cday" x="230.8" y="171"/><use href="#cday" x="249.8" y="171"/><use href="#cday" x="135.8" y="190"/><use href="#cday" x="154.8" y="190"/><use href="#cday" x="173.8" y="190"/><use href="#cday" x="192.8" y="190"/><use href="#cday" x="211.8" y="190"/><use href="#cday" x="230.8" y="190"/><use href="#cday" x="249.8" y="190"/><use href="#cday" x="135.8" y="209"/><use href="#cday" x="154.8" y="209"/><use href="#cday" x="173.8" y="209"/><use href="#cday" x="192.8" y="209"/><use href="#cday" x="211.8" y="209"/><use href="#cday" x="230.8" y="209"/><use href="#cday" x="249.8" y="209"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="227.5" y="122" width="45" height="29.9"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: NOBODY SHOWED ME HOW. over I&rsquo;M LEARNING ANYWAY. stacked, a tally of reps beneath"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><defs><g id="inc015-five"><rect x="0" y="0" width="2.4" height="15" fill="currentColor"/><rect x="4.8" y="0" width="2.4" height="15" fill="currentColor"/><rect x="9.6" y="0" width="2.4" height="15" fill="currentColor"/><rect x="14.4" y="0" width="2.4" height="15" fill="currentColor"/><line x1="-2" y1="12" x2="18.8" y2="3" stroke="currentColor" stroke-width="2.4"/></g></defs><text class="pr" x="199.2" y="107.5" font-size="13.56" text-anchor="middle">NOBODY SHOWED</text><text class="pr" x="199.2" y="122" font-size="13.56" text-anchor="middle">ME HOW.</text><text class="pr" x="199.2" y="143.5" font-size="17.56" text-anchor="middle">I&rsquo;M LEARNING</text><text class="pr" x="199.2" y="167.1" font-size="27.05" text-anchor="middle">ANYWAY.</text><use href="#inc015-five" x="143.6" y="178"/><use href="#inc015-five" x="168.4" y="178"/><use href="#inc015-five" x="193.2" y="178"/><use href="#inc015-five" x="218" y="178"/><rect x="242.8" y="178" width="2.4" height="15" fill="currentColor"/><rect x="247.6" y="178" width="2.4" height="15" fill="currentColor"/><rect x="252.4" y="178" width="2.4" height="15" fill="currentColor"/><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="184.3" y="204" width="30" height="20"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-015 &middot; WASHED BROWN &middot; GARMENT-DYED</p>
-        <h3 class="prod__name">SAME BAR. DIFFERENT DAY.</h3>
-        <p class="prod__why">A month of showing up, struck through one day at a time. The bar never changed once.</p>
+        <p class="prod__sku">INC-015 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">LEARNING ANYWAY</h3>
+        <p class="prod__why">For the guy who grew up without a dad around. Nobody showed him how. He shows up and figures it out anyway, one rep at a time.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 6.5&#8243;</li>
-      <li><b>BACK</b>the line over 28 struck days &middot; 13&#8243;</li>
+      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 4.5&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13.5&#8243; &middot; a tally of reps &middot; mark beneath</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BROWN</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$40</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="back" data-sku="INC-016" data-name="EVERY REP IS A VOTE" data-price="38">
+    <article class="prod reveal-up" data-color="washed-blue" data-color-default="washed-blue" data-ink="light" data-view="back" data-sku="INC-016" data-name="HOW ARE YOU, REALLY?" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: a bold checked ballot box on the left chest with the line beneath"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><svg x="223.2" y="111.6" width="58.5" height="58.5" viewBox="0 0 100 100" style="color:#f5f4f1"><use href="#vcheck"/></svg><text class="pr" x="252.4" y="182" font-size="5.5" letter-spacing="0.5" text-anchor="middle">EVERY REP IS A VOTE</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: EVERY REP IS A VOTE in heavy type over a ballot of three checked boxes"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="199.3" y="128" font-size="23" text-anchor="middle">EVERY REP</text><text class="pr" x="199.3" y="158" font-size="23" text-anchor="middle">IS A VOTE</text><svg x="146.3" y="178" width="14" height="14" viewBox="0 0 100 100" style="color:#f5f4f1"><use href="#vcheck"/></svg><text class="pr" x="166.3" y="189" font-size="10.5">SHOWED UP</text><svg x="146.3" y="200" width="14" height="14" viewBox="0 0 100 100" style="color:#f5f4f1"><use href="#vcheck"/></svg><text class="pr" x="166.3" y="211" font-size="10.5">ONE MORE SET</text><svg x="146.3" y="222" width="14" height="14" viewBox="0 0 100 100" style="color:#f5f4f1"><use href="#vcheck"/></svg><text class="pr" x="166.3" y="233" font-size="10.5">CAME BACK</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="226.08" y="121.09" width="47.84" height="31.81"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: HOW ARE YOU, over REALLY? stacked across the back in heavy type, REALLY? largest, skull and barbell mark beneath"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.5" y="109.6" font-size="16.57" text-anchor="middle">HOW ARE YOU,</text><text class="pr" x="200.5" y="135.3" font-size="28.11" text-anchor="middle">REALLY?</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="181.02" y="147.3" width="38.96" height="25.91"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-016 &middot; WASHED BLUE &middot; GARMENT-DYED</p>
-        <h3 class="prod__name">EVERY REP IS A VOTE</h3>
-        <p class="prod__why">You don&rsquo;t vote once a year in here. Every rep counts toward who you&rsquo;re becoming.</p>
+        <p class="prod__sku">INC-016 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">HOW ARE YOU, REALLY?</h3>
+        <p class="prod__why">The check-in shirt. Wear it for the friend who always says he&rsquo;s fine. Ask twice, and mean it.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>checked-box mark &middot; left chest &middot; 5.5&#8243;</li>
-      <li><b>BACK</b>the line &middot; 13&#8243; &middot; three votes checked beneath</li>
+      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 4.5&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; &ldquo;REALLY?&rdquo; carries the weight &middot; skull &amp; bar mark beneath &middot; 3.75&#8243;</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLUE</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="back" data-sku="INC-017" data-name="OPEN 24 HOURS" data-price="40">
+    <article class="prod reveal-up" data-color="washed-black" data-color-default="washed-black" data-ink="light" data-view="back" data-sku="INC-017" data-name="OPEN 24 HOURS" data-price="40">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: a small neon-style OPEN sign on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><rect x="225" y="118" width="49" height="32" rx="7" fill="none" stroke="#f5f4f1" stroke-width="1.3"/><text class="pr" x="249.6" y="138" font-size="12.5" letter-spacing="1" text-anchor="middle" style="fill:none;stroke:#f5f4f1;stroke-width:.7">OPEN</text><text class="pr" x="249.6" y="146.5" font-size="5" letter-spacing="1.6" text-anchor="middle">24 HOURS</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: a large neon-style sign reading OPEN 24 HOURS"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><rect x="138.8" y="108" width="120" height="76" rx="11" fill="none" stroke="#f5f4f1" stroke-width="1.7"/><text class="pr" x="198.8" y="152" font-size="33" letter-spacing="2" text-anchor="middle" style="fill:none;stroke:#f5f4f1;stroke-width:.95">OPEN</text><text class="pr" x="198.8" y="172" font-size="11" letter-spacing="3.5" text-anchor="middle">24 HOURS</text><text class="pr" x="198.8" y="204" font-size="7" letter-spacing="1.5" text-anchor="middle">THE GYM NEVER CLOSED. IT MOVED IN.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: a small neon-style OPEN sign on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><rect x="225.25" y="130.8" width="49.5" height="22" rx="5" fill="none" stroke="currentColor" stroke-width="2.4"/><text class="pr" x="250.47" y="145.89" font-size="11.76" letter-spacing="0.94" text-anchor="middle">OPEN</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: a large neon-style sign reading OPEN 24 HOURS, with THE GYM NEVER CLOSED. IT MOVED IN. stacked under it"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><rect x="138.35" y="99.6" width="121.5" height="64" rx="12" fill="none" stroke="currentColor" stroke-width="3.2"/><text class="pr" x="200.34" y="133.07" font-size="30.95" letter-spacing="2.48" text-anchor="middle">OPEN</text><text class="pr" x="200.06" y="152.76" font-size="15.94" letter-spacing="1.91" text-anchor="middle">24 HOURS</text><text class="pr" x="199.1" y="185.1" font-size="14.12" text-anchor="middle">THE GYM</text><text class="pr" x="199.1" y="200.2" font-size="14.12" text-anchor="middle">NEVER CLOSED.</text><text class="pr" x="199.1" y="217.5" font-size="17.32" text-anchor="middle">IT MOVED IN.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-017 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-017 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">OPEN 24 HOURS</h3>
-        <p class="prod__why">The sign never turns off because the gym lives in you now. Companion piece to HOME.</p>
+        <p class="prod__why">The sign never turns off because the gym lives in you now.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>neon sign &middot; left chest &middot; 4.5&#8243;</li>
-      <li><b>BACK</b>the sign &middot; 11.5&#8243; &middot; one line under it</li>
+      <li><b>FRONT</b>neon OPEN sign &middot; left chest &middot; 5&#8243;</li>
+      <li><b>BACK</b>the sign &middot; 12&#8243; &middot; &ldquo;THE GYM NEVER CLOSED. IT MOVED IN.&rdquo; stacked under it</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLACK</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$40</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="back" data-sku="INC-018" data-name="NOBODY IS GOING TO LIFT IT FOR YOU" data-price="38">
+    <article class="prod reveal-up" data-color="washed-blue" data-color-default="washed-blue" data-ink="light" data-view="back" data-sku="INC-018" data-name="NOBODY IS GOING TO LIFT IT FOR YOU" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: the brand barbell over the heart"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_barbell_white.png" x="216.4" y="131.5" width="72" height="18.6"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: NOBODY IS GOING TO LIFT IT above the brand barbell, FOR YOU below it"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="199.3" y="130" font-size="28" text-anchor="middle">NOBODY</text><text class="pr" x="199.3" y="152" font-size="12.5" letter-spacing="0.5" text-anchor="middle">IS GOING TO LIFT IT</text><image href="assets/brand/INC_barbell_white.png" x="134.3" y="164" width="130" height="33.6"/><text class="pr" x="199.3" y="238" font-size="22" text-anchor="middle">FOR YOU.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: the brand barbell over the heart"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_barbell_white.png" x="214.3" y="130.4" width="74.4" height="19.24"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: NOBODY IS GOING TO LIFT IT stacked above the brand barbell, FOR YOU. below it"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.5" y="118" font-size="28.62" text-anchor="middle">NOBODY</text><text class="pr" x="200.5" y="136.8" font-size="19.59" text-anchor="middle">IS GOING TO</text><text class="pr" x="200.5" y="166.3" font-size="35.64" text-anchor="middle">LIFT IT</text><image href="assets/brand/INC_barbell_white.png" x="133" y="176.3" width="135" height="34.91"/><text class="pr" x="200.5" y="239.5" font-size="26.16" text-anchor="middle">FOR YOU.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-018 &middot; WASHED BLUE &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-018 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">NOBODY IS GOING TO LIFT IT FOR YOU</h3>
         <p class="prod__why">The bar is on the floor and it&rsquo;s staying there until you pick it up. That&rsquo;s the whole deal.</p>
         <ul class="prod__spec">
       <li><b>FRONT</b>bar-on-the-floor mark &middot; over the heart &middot; 7&#8243;</li>
-      <li><b>BACK</b>NOBODY over the bar, FOR YOU. under it &middot; 14&#8243;</li>
+      <li><b>BACK</b>the line stacked over the bar, FOR YOU. under it &middot; 13&#8243;</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLUE</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front" data-sku="INC-019" data-name="IT FIXES ENOUGH" data-price="34">
+    <article class="prod reveal-up" data-color="washed-grey" data-color-default="washed-grey" data-ink="dark" data-view="front" data-sku="INC-019" data-name="IT FIXES ENOUGH" data-price="34">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, front: it doesn't fix everything, it fixes enough, in small type over the heart"><ellipse class="tsh" cx="200" cy="349" rx="151" ry="13"/><image href="assets/shirts/washed-grey_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr pr--d" x="247" y="128" font-size="6.8" text-anchor="middle">IT DOESN&rsquo;T</text><text class="pr pr--d" x="247" y="138" font-size="6.8" text-anchor="middle">FIX EVERYTHING.</text><text class="pr pr--d" x="247" y="148" font-size="6.8" text-anchor="middle">IT FIXES ENOUGH.</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, back: skull and barbell mark in black at the upper back"><ellipse class="tsh" cx="200" cy="342" rx="149" ry="13"/><image href="assets/shirts/washed-grey_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="173.2" y="110" width="50.7" height="33.7"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, front: IT DOESN&rsquo;T FIX EVERYTHING. IT FIXES ENOUGH. stacked at the center chest"><ellipse class="tsh" cx="200" cy="349" rx="151" ry="13"/><image href="assets/shirts/washed-grey_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.7" y="143" font-size="12.8" text-anchor="middle">IT DOESN&rsquo;T FIX</text><text class="pr" x="200.7" y="158" font-size="14.26" text-anchor="middle">EVERYTHING.</text><text class="pr" x="200.7" y="184.4" font-size="23.4" text-anchor="middle">IT FIXES</text><text class="pr" x="200.7" y="204.2" font-size="21.18" text-anchor="middle">ENOUGH.</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, back: skull and barbell mark at the upper back"><ellipse class="tsh" cx="200" cy="342" rx="149" ry="13"/><image href="assets/shirts/washed-grey_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="174.85" y="110" width="50.7" height="33.72"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
           <button type="button" data-face="back" aria-pressed="false">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-019 &middot; WASHED GREY &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-019 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">IT FIXES ENOUGH</h3>
         <p class="prod__why">Some days the gym saves you. Most days it just helps. That&rsquo;s plenty.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>three quiet lines &middot; over the heart &middot; 4&#8243;</li>
+      <li><b>FRONT</b>the quiet line stacked &middot; center chest &middot; 10.5&#8243;</li>
       <li><b>BACK</b>skull &amp; bar mark &middot; upper back &middot; 5&#8243;</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="true" class="is-on"></button><span class="prod__cw">WASHED GREY</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$34</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="back" data-sku="INC-020" data-name="STRONGER THAN THE YEAR" data-price="38">
+    <article class="prod reveal-up" data-color="washed-black" data-color-default="washed-black" data-ink="light" data-view="back" data-sku="INC-020" data-name="STRONGER THAN THE YEAR" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="215.7" y="116.5" width="67.5" height="44.9"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: stronger than the year that tried me, with the brand barbell between the lines"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="198.8" y="122" font-size="14" text-anchor="middle">STRONGER THAN</text><text class="pr" x="198.8" y="156" font-size="26" text-anchor="middle">THE YEAR</text><image href="assets/brand/INC_barbell_white.png" x="138.8" y="168" width="120" height="31"/><text class="pr" x="198.8" y="234" font-size="14" text-anchor="middle">THAT TRIED ME</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="215.7" y="116.5" width="67.5" height="44.9"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: STRONGER THAN THE YEAR THAT TRIED ME. stacked, the brand barbell beneath"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="199.1" y="113.4" font-size="22.02" text-anchor="middle">STRONGER</text><text class="pr" x="199.1" y="128.6" font-size="14.82" text-anchor="middle">THAN THE YEAR</text><text class="pr" x="199.1" y="144" font-size="15.07" text-anchor="middle">THAT TRIED ME.</text><image href="assets/brand/INC_barbell_white.png" x="131.6" y="154" width="135" height="34.91"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-020 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-020 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">STRONGER THAN THE YEAR</h3>
         <p class="prod__why">For whoever&rsquo;s year it was. You outlifted it.</p>
         <ul class="prod__spec">
       <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 6.5&#8243;</li>
-      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; the barbell between the lines</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; barbell beneath</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLACK</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="front" data-sku="INC-021" data-name="THE SPOTTER" data-price="34">
+    <article class="prod reveal-up" data-color="washed-brown" data-color-default="washed-brown" data-ink="dark" data-view="front" data-sku="INC-021" data-name="THE SPOTTER" data-price="34">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: I GOT YOU printed small over the heart"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="249.5" y="138" font-size="9.5" letter-spacing="2" text-anchor="middle">I GOT YOU.</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: skull and barbell mark at the upper back"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="175.9" y="110" width="49.7" height="33"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: I GOT YOU. stacked at the center chest"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="199" y="157.6" font-size="33.64" text-anchor="middle">I GOT</text><text class="pr" x="201" y="190.4" font-size="38.23" text-anchor="middle">YOU.</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: skull and barbell mark at the upper back"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="174.4" y="110" width="49.65" height="33.02"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button class="is-on" type="button" data-face="front" aria-pressed="true">FRONT</button>
           <button type="button" data-face="back" aria-pressed="false">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-021 &middot; WASHED BROWN &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-021 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">THE SPOTTER</h3>
         <p class="prod__why">Nothing on it but a promise. The one you buy for your training partner.</p>
         <ul class="prod__spec">
-      <li><b>FRONT</b>&ldquo;I GOT YOU.&rdquo; &middot; over the heart &middot; 4&#8243;</li>
+      <li><b>FRONT</b>&ldquo;I GOT YOU.&rdquo; stacked &middot; center chest &middot; 10&#8243;</li>
       <li><b>BACK</b>skull &amp; bar mark &middot; upper back &middot; 5&#8243;</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BROWN</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$34</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="back" data-sku="INC-022" data-name="SHOWED UP ANYWAY" data-price="38">
+    <article class="prod reveal-up" data-color="washed-blue" data-color-default="washed-blue" data-ink="light" data-view="back" data-sku="INC-022" data-name="SHOWED UP ANYWAY" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: circular stamp mark on the left chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-stamp-circle_white.svg" x="217.9" y="106.3" width="69.1" height="69.1"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: SHOWED UP ANYWAY in heavy stacked type"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="199.3" y="140" font-size="21.5" text-anchor="middle">SHOWED UP</text><text class="pr" x="199.3" y="176" font-size="30" text-anchor="middle">ANYWAY</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="183.7" y="194" width="31.2" height="20.7"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: circular stamp mark on the left chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-stamp-circle_white.svg" x="217.9" y="106.3" width="69.1" height="69.1"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: SHOWED UP ANYWAY stacked in heavy type, skull and barbell mark beneath"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.5" y="113.2" font-size="20.24" text-anchor="middle">SHOWED UP</text><text class="pr" x="200.5" y="137.4" font-size="27.9" text-anchor="middle">ANYWAY</text><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="180.5" y="148" width="40" height="26.6"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-022 &middot; WASHED BLUE &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-022 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">SHOWED UP ANYWAY</h3>
-        <p class="prod__why">The two words that beat every excuse you had that day.</p>
+        <p class="prod__why">Three words that beat every excuse you had that day.</p>
         <ul class="prod__spec">
       <li><b>FRONT</b>stamp mark &middot; left chest &middot; 6.5&#8243;</li>
-      <li><b>BACK</b>the line stacked &middot; 12&#8243; &middot; mark beneath</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; mark beneath</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLUE</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="back" data-sku="INC-023" data-name="THE WEIGHT NEVER LIES" data-price="38">
+    <article class="prod reveal-up" data-color="washed-black" data-color-default="washed-black" data-ink="light" data-view="back" data-sku="INC-023" data-name="THE WEIGHT NEVER LIES" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: circular stamp mark on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-stamp-circle_white.svg" x="218.5" y="107.8" width="62.3" height="62.3"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: the weight never lies over the brand barbell"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="198.8" y="128" font-size="20" text-anchor="middle">THE WEIGHT</text><text class="pr" x="198.8" y="154" font-size="20" text-anchor="middle">NEVER LIES</text><image href="assets/brand/INC_barbell_white.png" x="133.8" y="170" width="130" height="33.6"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, front: circular stamp mark on the left chest"><ellipse class="tsh" cx="200" cy="361" rx="152" ry="13"/><image href="assets/shirts/washed-black_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-stamp-circle_white.svg" x="218.5" y="107.8" width="62.3" height="62.3"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed black tee, back: THE WEIGHT NEVER LIES stacked in heavy type, LIES largest, over the brand loaded barbell at the same width"><ellipse class="tsh" cx="200" cy="362" rx="152" ry="13"/><image href="assets/shirts/washed-black_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="199.1" y="110" font-size="19.12" text-anchor="middle">THE WEIGHT</text><text class="pr" x="199.1" y="140.1" font-size="36.21" text-anchor="middle">NEVER</text><text class="pr" x="199.1" y="184.6" font-size="56.49" text-anchor="middle">LIES</text><image href="assets/brand/INC_barbell_white.png" x="131.6" y="195.3" width="135" height="34.91"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-023 &middot; WASHED BLACK &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-023 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">THE WEIGHT NEVER LIES</h3>
         <p class="prod__why">No spin, no filter, no opinion. The plates weigh what they weigh.</p>
         <ul class="prod__spec">
       <li><b>FRONT</b>stamp mark &middot; left chest &middot; 6&#8243;</li>
-      <li><b>BACK</b>the line &middot; 12&#8243; &middot; loaded bar beneath</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; &ldquo;LIES&rdquo; 3.9&#8243; tall &middot; loaded bar beneath &middot; 13&#8243;</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLACK</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
 
-    <article class="prod reveal-up" data-view="back" data-sku="INC-024" data-name="COME BACK TOMORROW" data-price="38">
+    <article class="prod reveal-up" data-color="washed-brown" data-color-default="washed-brown" data-ink="dark" data-view="back" data-sku="INC-024" data-name="COME BACK TOMORROW" data-price="38">
       <div class="prod__views">
-        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="216.9" y="114.4" width="65.1" height="43.3"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
-        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: come back tomorrow in heavy type, and the day after in small type beneath"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl"><text class="pr" x="200.8" y="130" font-size="20" text-anchor="middle">COME BACK</text><text class="pr" x="200.8" y="158" font-size="22" text-anchor="middle">TOMORROW</text><text class="pr" x="200.8" y="176" font-size="6" letter-spacing="1" text-anchor="middle">AND THE DAY AFTER.</text><text class="pr" x="200.8" y="186" font-size="6" letter-spacing="1" text-anchor="middle">AND THE DAY AFTER THAT.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="216.9" y="114.4" width="65.1" height="43.3"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: COME BACK TOMORROW. stacked in heavy type, COME and BACK largest, AND THE DAY AFTER. AND THE DAY AFTER THAT. stacked beneath in smaller type"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="199.2" y="128.4" font-size="42.06" text-anchor="middle">COME</text><text class="pr" x="199.2" y="164.7" font-size="44.02" text-anchor="middle">BACK</text><text class="pr" x="199.2" y="183.9" font-size="19.56" text-anchor="middle">TOMORROW.</text><text class="pr" x="199.2" y="200.4" font-size="11.35" text-anchor="middle">AND THE DAY AFTER.</text><text class="pr" x="199.2" y="210.6" font-size="8.95" text-anchor="middle">AND THE DAY AFTER THAT.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
         <div class="prod__flip" role="group" aria-label="View side">
           <button type="button" data-face="front" aria-pressed="false">FRONT</button>
           <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
         </div>
       </div>
       <div class="prod__meta">
-        <p class="prod__sku">INC-024 &middot; WASHED BROWN &middot; GARMENT-DYED</p>
+        <p class="prod__sku">INC-024 &middot; GARMENT-DYED &middot; 4 WASHES</p>
         <h3 class="prod__name">COME BACK TOMORROW</h3>
         <p class="prod__why">The whole program in three words. See you at the same bar.</p>
         <ul class="prod__spec">
       <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 6.5&#8243;</li>
-      <li><b>BACK</b>the line &middot; 12&#8243; &middot; the fine print beneath</li>
+      <li><b>BACK</b>the line stacked &middot; 13.5&#8243; &middot; &ldquo;COME BACK&rdquo; 6.7&#8243; tall &middot; the fine print beneath</li>
         </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BROWN</span></div>
         <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
         <div class="prod__foot">
           <span class="prod__price">$38</span>
-          <span class="prod__drop">DROP 001</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="prod reveal-up" data-color="washed-grey" data-color-default="washed-grey" data-ink="dark" data-view="back" data-sku="INC-025" data-name="TRAIN TO BE OKAY" data-price="38">
+      <div class="prod__views">
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, front: BE OKAY. stacked on the left chest"><ellipse class="tsh" cx="200" cy="349" rx="151" ry="13"/><image href="assets/shirts/washed-grey_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="250" y="151.9" font-size="33.33" text-anchor="middle">BE</text><text class="pr" x="250" y="167" font-size="14.4" text-anchor="middle">OKAY.</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, back: I DON&rsquo;T TRAIN TO LOOK OKAY. with LOOK struck through, over I TRAIN TO BE OKAY. stacked large"><ellipse class="tsh" cx="200" cy="342" rx="149" ry="13"/><image href="assets/shirts/washed-grey_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.2" y="109.8" font-size="16.81" text-anchor="middle">I DON&rsquo;T TRAIN</text><text class="pr" x="200.2" y="125.6" font-size="15.41" text-anchor="middle">TO LOOK OKAY.</text><rect x="161.4" y="118.9" width="51.1" height="2.6" fill="currentColor"/><text class="pr" x="200.2" y="157.9" font-size="32.43" text-anchor="middle">I TRAIN</text><text class="pr" x="200.2" y="192" font-size="40.12" text-anchor="middle">TO BE</text><text class="pr" x="200.2" y="226.9" font-size="41.25" text-anchor="middle">OKAY.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__flip" role="group" aria-label="View side">
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
+        </div>
+      </div>
+      <div class="prod__meta">
+        <p class="prod__sku">INC-025 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">TRAIN TO BE OKAY</h3>
+        <p class="prod__why">Some of us started lifting to look the part. We kept going because it&rsquo;s the hour that keeps our head straight.</p>
+        <ul class="prod__spec">
+      <li><b>FRONT</b>&ldquo;BE OKAY.&rdquo; stacked &middot; left chest &middot; 4.5&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; LOOK struck through</li>
+        </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="true" class="is-on"></button><span class="prod__cw">WASHED GREY</span></div>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
+        <div class="prod__foot">
+          <span class="prod__price">$38</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="prod reveal-up" data-color="washed-brown" data-color-default="washed-brown" data-ink="dark" data-view="back" data-sku="INC-026" data-name="LOST, NOT GONE." data-price="38">
+      <div class="prod__views">
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="363" rx="147" ry="13"/><image href="assets/shirts/washed-brown_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="227.48" y="122.02" width="45.05" height="29.96"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed brown tee, back: LOST, large, NOT GONE. knocked out of an ink bar, skull mark beneath"><ellipse class="tsh" cx="200" cy="362" rx="146" ry="13"/><image href="assets/shirts/washed-brown_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="199.2" y="128.3" font-size="43.29" text-anchor="middle">LOST,</text><rect x="134.7" y="141" width="129" height="28" fill="currentColor"/><text class="prInv" x="199.2" y="161.7" font-size="19.1" text-anchor="middle">NOT GONE.</text><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="181.8" y="180" width="34.8" height="23.1"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__flip" role="group" aria-label="View side">
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
+        </div>
+      </div>
+      <div class="prod__meta">
+        <p class="prod__sku">INC-026 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">LOST, NOT GONE.</h3>
+        <p class="prod__why">For the guy who has no idea where he&rsquo;s headed. He doesn&rsquo;t have to know yet. He&rsquo;s still here, and that counts.</p>
+        <ul class="prod__spec">
+      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 4.5&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; &ldquo;NOT GONE.&rdquo; knocked out of a bar &middot; mark beneath</li>
+        </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BROWN</span></div>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
+        <div class="prod__foot">
+          <span class="prod__price">$38</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="prod reveal-up" data-color="washed-grey" data-color-default="washed-grey" data-ink="dark" data-view="back" data-sku="INC-027" data-name="FIXING ME" data-price="38">
+      <div class="prod__views">
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, front: FIXING ME. stacked on the left chest"><ellipse class="tsh" cx="200" cy="349" rx="151" ry="13"/><image href="assets/shirts/washed-grey_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="250" y="138" font-size="12.79" text-anchor="middle">FIXING</text><text class="pr" x="250" y="160.1" font-size="25.55" text-anchor="middle">ME.</text></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed grey tee, back: COULDN&rsquo;T FIX US. above FIXING ME. stacked large, skull mark beneath"><ellipse class="tsh" cx="200" cy="342" rx="149" ry="13"/><image href="assets/shirts/washed-grey_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.2" y="108.3" font-size="13.29" text-anchor="middle">COULDN&rsquo;T FIX US.</text><text class="pr" x="200.2" y="142.1" font-size="35.45" text-anchor="middle">FIXING</text><text class="pr" x="200.2" y="195.8" font-size="70.78" text-anchor="middle">ME.</text><image href="assets/brand/INC_mark-skull-barbell_black.svg" x="182" y="207" width="36.4" height="24.2"/></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__flip" role="group" aria-label="View side">
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
+        </div>
+      </div>
+      <div class="prod__meta">
+        <p class="prod__sku">INC-027 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">FIXING ME</h3>
+        <p class="prod__why">The breakup shirt. You tried to hold it together and it came apart anyway. Now every rep goes into the one thing you can fix.</p>
+        <ul class="prod__spec">
+      <li><b>FRONT</b>&ldquo;FIXING ME.&rdquo; stacked &middot; left chest &middot; 4.7&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243; &middot; &ldquo;ME.&rdquo; 4.8&#8243; tall &middot; mark beneath</li>
+        </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="false"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="true" class="is-on"></button><span class="prod__cw">WASHED GREY</span></div>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
+        <div class="prod__foot">
+          <span class="prod__price">$38</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="prod reveal-up" data-color="washed-blue" data-color-default="washed-blue" data-ink="light" data-view="back" data-sku="INC-028" data-name="BETWEEN SETS" data-price="38">
+      <div class="prod__views">
+        <div class="prod__view prod__view--front"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, front: skull and barbell mark on the left chest"><ellipse class="tsh" cx="200" cy="367" rx="156" ry="13"/><image href="assets/shirts/washed-blue_front.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><image href="assets/brand/INC_mark-skull-barbell_white.svg" x="226.1" y="121.1" width="47.8" height="31.8"/></g></svg><span class="prod__face" aria-hidden="true">FRONT</span></div>
+        <div class="prod__view prod__view--back"><svg class="tee" viewBox="0 0 400 460" role="img" aria-label="Washed blue tee, back: I TALK TO HIM BETWEEN SETS. stacked in heavy type"><ellipse class="tsh" cx="200" cy="369" rx="152" ry="13"/><image href="assets/shirts/washed-blue_back.webp" x="0" y="0" width="400" height="460"/><g class="pl" mask="url(#wear)"><text class="pr" x="200.5" y="125.1" font-size="37.96" text-anchor="middle">I TALK</text><text class="pr" x="200.5" y="154.1" font-size="34.29" text-anchor="middle">TO HIM</text><text class="pr" x="200.5" y="176.46" font-size="25.23" text-anchor="middle">BETWEEN</text><text class="pr" x="200.5" y="211.77" font-size="43.3" text-anchor="middle">SETS.</text></g></svg><span class="prod__face" aria-hidden="true">BACK</span></div>
+        <div class="prod__flip" role="group" aria-label="View side">
+          <button type="button" data-face="front" aria-pressed="false">FRONT</button>
+          <button class="is-on" type="button" data-face="back" aria-pressed="true">BACK</button>
+        </div>
+      </div>
+      <div class="prod__meta">
+        <p class="prod__sku">INC-028 &middot; GARMENT-DYED &middot; 4 WASHES</p>
+        <h3 class="prod__name">BETWEEN SETS</h3>
+        <p class="prod__why">For the dad, the brother or the friend who isn&rsquo;t there to spot you anymore. You still tell him how the set went.</p>
+        <ul class="prod__spec">
+      <li><b>FRONT</b>skull &amp; bar mark &middot; left chest &middot; 4.5&#8243;</li>
+      <li><b>BACK</b>the line stacked &middot; 13&#8243;</li>
+        </ul>
+        <div class="prod__color" role="group" aria-label="Choose wash"><button type="button" data-color="washed-black" title="Washed black" aria-label="Washed black" aria-pressed="false"></button><button type="button" data-color="washed-blue" title="Washed blue" aria-label="Washed blue" aria-pressed="true" class="is-on"></button><button type="button" data-color="washed-brown" title="Washed brown" aria-label="Washed brown" aria-pressed="false"></button><button type="button" data-color="washed-grey" title="Washed grey" aria-label="Washed grey" aria-pressed="false"></button><span class="prod__cw">WASHED BLUE</span></div>
+        <div class="prod__size" role="group" aria-label="Choose size"><button type="button" aria-pressed="false">S</button><button type="button" aria-pressed="true" class="is-on">M</button><button type="button" aria-pressed="false">L</button><button type="button" aria-pressed="false">XL</button><button type="button" aria-pressed="false">2X</button><button type="button" aria-pressed="false">3X</button></div>
+        <div class="prod__foot">
+          <span class="prod__price">$38</span>
+          <button class="btn btn--tiny" type="button" data-add>Add to cart</button>
         </div>
       </div>
     </article>
   </div>
 
-  <!-- the drop: a statement while the shop is a lookbook -->
+  <!-- the standing promise: no drops, the shop stays open -->
   <div class="list" id="list">
     <div class="list__inner">
-      <p class="list__kick">THE SHOP OPENS WITH DROP 001.</p>
-      <p class="list__sub">Every shirt above is in it, S to 3XL, at the price on the card. No preorders and no restock promises. When the till opens, it opens here.</p>
+      <p class="list__kick">NO DROPS. NO COUNTDOWN. THE SHOP STAYS OPEN.</p>
+      <p class="list__sub">Every shirt above, in every wash, S to 3XL, at the price on the card, any day you need one. Pick the wash, pick the size, rack it. Ships anywhere in the US at one flat rate.</p>
     </div>
   </div>
 </section>
@@ -914,7 +1032,24 @@
         <li><b>PROOF</b>a progress portfolio, your numbers and photos tracked month over month</li>
         <li><b>RESET</b>the plan rebuilt every four weeks from what actually happened, not what should have</li>
       </ul>
-      <p class="corner__note">Coaching opens alongside Drop 001.</p>
+      <!-- coaching contact: the email button works today; the form takes over
+           once a Web3Forms key is in FORMS_KEY (js/main.js, DESIGN.md §9) -->
+      <div class="corner__ask" id="coachMail">
+        <a class="btn btn--solid" href="mailto:ironneverchanges@gmail.com?subject=Coaching%20with%20Zac">Email Zac About Coaching</a>
+        <p>Tell him where you&rsquo;re at and what you want. It goes straight to ironneverchanges@gmail.com.</p>
+      </div>
+      <form class="corner__form" id="coachForm" hidden novalidate>
+        <p class="corner__formh">TALK TO ZAC</p>
+        <label class="corner__field"><span>Name</span>
+          <input class="list__input" name="name" type="text" autocomplete="name" required></label>
+        <label class="corner__field"><span>Email</span>
+          <input class="list__input" name="email" type="email" autocomplete="email" spellcheck="false" required></label>
+        <label class="corner__field"><span>Where you&rsquo;re at, and what you want</span>
+          <textarea class="list__input" name="message" rows="4" required placeholder="Down 20 lb since spring, want to keep my strength&hellip;"></textarea></label>
+        <input class="corner__trap" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn--solid" type="submit">Send It to Zac</button>
+        <p class="corner__status" id="coachStatus" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -957,7 +1092,7 @@
   <span class="load__wt" id="loadWt">BAR &middot; 45 LB</span>
 </div>
 
-<!-- cart drawer: hidden while the shop is a lookbook (DESIGN.md §9) -->
+<!-- cart drawer: opens from the nav Cart button (DESIGN.md §9) -->
 <div class="cartWrap" id="cartWrap" hidden>
   <div class="cart__scrim" id="cartScrim"></div>
   <aside class="cart" role="dialog" aria-modal="true" aria-label="Cart">
@@ -969,9 +1104,9 @@
     <p class="cart__empty" id="cartEmpty">NOTHING ON THE BAR YET.</p>
     <div class="cart__foot" id="cartFoot" hidden>
       <div class="cart__row"><span>SUBTOTAL</span><span id="cartTotal">$0</span></div>
-      <p class="cart__ship">Shipping &amp; tax at checkout.</p>
+      <p class="cart__ship">Shipping at checkout.</p>
       <button class="btn btn--solid cart__checkout" id="cartCheckout" type="button">Checkout</button>
-      <p class="cart__demo" id="cartDemo" hidden>CHECKOUT ISN&rsquo;T OPEN YET. The shop opens with Drop 001.</p>
+      <p class="cart__demo" id="cartDemo" hidden>CHECKOUT ISN&rsquo;T TAKING PAYMENTS RIGHT NOW. Your cart is saved on this device.</p>
       <p class="cart__err" id="cartError" role="alert" hidden></p>
     </div>
   </aside>
@@ -991,8 +1126,14 @@
     </nav>
     <div class="foot__col">
       <span class="foot__h">TRADE</span>
-      <span class="foot__dim">Wholesale &amp; collabs open with the shop.</span>
+      <span class="foot__dim">Wholesale &amp; collabs:</span>
+      <a href="mailto:ironneverchanges@gmail.com">ironneverchanges@gmail.com</a>
     </div>
+    <nav class="foot__col" aria-label="Legal">
+      <span class="foot__h">LEGAL</span>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
   </div>
   <div class="foot__base">
     <p>&copy; 2026 IRON NEVER CHANGES.</p>

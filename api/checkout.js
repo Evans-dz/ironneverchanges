@@ -6,7 +6,7 @@
    HTTPS, so plain fetch keeps this site's promise of no build
    step and no npm packages in the deploy.
 
-   The client sends SKUs, sizes and quantities. It never sends
+   The client sends SKUs, sizes, washes and quantities. It never sends
    prices — those are read from js/products.js on this side, so a
    rewritten cart in somebody's devtools buys nothing cheaper.
 
@@ -24,7 +24,7 @@
    ============================================================ */
 'use strict';
 
-const { SIZES, CATALOG, MAX_QTY, MAX_LINES } = require('../js/products.js');
+const { SIZES, COLORS, CATALOG, MAX_QTY, MAX_LINES } = require('../js/products.js');
 
 const SHIPPING_CENTS = 600;    /* flat US rate; 0 ships free */
 const CURRENCY = 'usd';
@@ -73,14 +73,16 @@ function buildLineItems(items) {
   return items.map((item) => {
     const sku = String((item && item.sku) || '');
     const size = String((item && item.size) || '');
+    const color = String((item && item.color) || '');
     const qty = Number((item && item.qty) || 0);
     const product = Object.prototype.hasOwnProperty.call(CATALOG, sku) ? CATALOG[sku] : null;
 
     if (!product) throw new Error('unknown item');
     if (!SIZES.includes(size)) throw new Error('unknown size');
+    if (!Object.prototype.hasOwnProperty.call(COLORS, color)) throw new Error('unknown color');
     if (!Number.isInteger(qty) || qty < 1 || qty > MAX_QTY) throw new Error('bad quantity');
 
-    const line = `${sku}/${size}`;
+    const line = `${sku}/${size}/${color}`;
     if (seen.has(line)) throw new Error('duplicate line');
     seen.add(line);
 
@@ -93,15 +95,15 @@ function buildLineItems(items) {
         unit_amount: Math.round(product.price * 100),
         /* Inline product_data rather than a seeded price id, so checkout works
            without tools/stripe-seed.mjs having been run and so the customer
-           sees their size before paying. The cost: Stripe mints a Product per
-           line, so the dashboard catalog accumulates duplicates. Size lives in
-           the description, not the name, to hold that at one name per SKU
-           instead of one per SKU-and-size. Upgrade path when it gets noisy:
+           sees their size and wash before paying. The cost: Stripe mints a
+           Product per line, so the dashboard catalog accumulates duplicates.
+           Size and wash live in the description, not the name, to hold that at
+           one name per SKU instead of one per SKU, size and wash. Upgrade path when it gets noisy:
            seed a product per sku/size and reference it by id here. */
         product_data: {
           name: product.name,
-          description: `Size ${size}`,
-          metadata: { sku, size },
+          description: `Size ${size} · ${COLORS[color].name}`,
+          metadata: { sku, size, color },
         },
       },
     };

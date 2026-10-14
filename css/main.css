@@ -244,17 +244,22 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
 /* garment photos — real washed blanks (assets/shirts/) normalized into the
    400x460 card space by tools/normalize.mjs; .tsh grounds each on the panel */
 .tsh{fill:#000;opacity:.35;filter:url(#softHard)}
-/* prints sit in the fabric, not on it — white ink on the dark washes, black
-   ink art on grey; the slogan-bar knockout text reads as bare garment */
-.pl{opacity:.93}
-.tee .pr{font-family:var(--disp);fill:#f5f4f1}
-.tee .prMono{font-family:var(--mono);font-weight:500;fill:#f5f4f1}
-.tee .pr--d{fill:#1a1a1b}
-.tee .pr--dim{fill:#8c8c8c;opacity:.8}
-.tee .prInv{font-family:var(--disp);fill:#2b2b2e}
+/* prints sit in the fabric, not on it. One ink per wash (js/products.js):
+   white on black and blue, black on brown and grey. Text, rules and drawn
+   marks take it from --ink / currentColor; mark files swap _white/_black in
+   js/main.js. Knockout text on an ink bar is the bare garment (--knock).
+   The .pl group wears the screen-print texture (#wear in the page defs). */
+.tee{--ink:#f5f4f1;--knock:#3e4149}
+.prod[data-ink="dark"] .tee{--ink:#161617}
+.prod[data-color="washed-blue"] .tee{--knock:#395dbe}
+.prod[data-color="washed-brown"] .tee{--knock:#a58b81}
+.prod[data-color="washed-grey"] .tee{--knock:#90949a}
+.pl{color:var(--ink);opacity:.97}
+.tee .pr{font-family:var(--disp);fill:var(--ink)}
+.tee .prInv{font-family:var(--disp);fill:var(--knock)}
 
-/* the drop: a statement while the shop is a lookbook; the form rules
-   stay for the day the list is wired (DESIGN.md §9) */
+/* the standing promise under the shop: no drops, always open; the form
+   rules stay for the day a list is wired (DESIGN.md §9) */
 .list{margin-top:clamp(60px,9vh,100px);border:1px solid var(--hair);background:var(--panel)}
 .list__inner{padding:clamp(36px,6vw,64px);text-align:center;max-width:720px;margin:0 auto}
 .list__kick{font-family:var(--disp);font-size:clamp(24px,3.6vw,42px);text-transform:uppercase;line-height:1.05}
@@ -319,6 +324,19 @@ body.go .hero__ctas{animation:stampIn .14s steps(2,end) .48s both}
 .corner__spec li{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--hair-2);font-size:14px;color:var(--ash);line-height:1.55}
 .corner__spec b{font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.12em;color:var(--bone);min-width:48px;padding-top:2px}
 .corner__note{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ash-dim);margin-top:16px}
+/* coaching contact: a mailto today, the Web3Forms form once keyed */
+.corner__ask p{color:var(--ash);font-size:14px;margin-top:14px;max-width:46ch}
+.corner__form{display:grid;gap:14px;max-width:580px}
+.corner__form[hidden],.corner__ask[hidden]{display:none}
+.corner__formh{font-family:var(--disp);font-size:19px;letter-spacing:.04em}
+.corner__field{display:grid;gap:7px}
+.corner__field span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ash)}
+.corner__field .list__input{width:100%;min-width:0}
+.corner__field textarea{resize:vertical;line-height:1.5}
+.corner__form .btn{justify-self:start}
+.corner__trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.corner__status{font-size:14px;color:var(--ash);min-height:1.5em}
+.corner__status a{color:var(--bone);text-decoration:underline}
 @media (max-width:880px){
   .corner__split{grid-template-columns:1fr}
   .corner__photo{max-width:340px}
@@ -425,6 +443,24 @@ html.reduced .load{opacity:1}
 @media (max-width:900px){.load{display:none}}
 @media (min-width:901px){.foot__base{padding-right:164px}}
 
+/* ---------- wash chips ----------
+   The swatch is the garment, not UI palette: each fill is sampled from
+   its blank photo in assets/shirts/, so the chip matches the shirt above */
+.prod__color{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:12px}
+.prod__color button{
+  width:34px;height:34px;padding:3px;background:transparent;cursor:pointer;
+  border:1px solid var(--hair);transition:border-color .06s steps(1,end);
+}
+.prod__color button::before{content:"";display:block;width:100%;height:100%;background:var(--sw)}
+.prod__color button:hover{border-color:var(--ash)}
+.prod__color button.is-on{border-color:var(--bone);outline:1px solid var(--bone);outline-offset:-2px}
+.prod__color button:focus-visible{outline:2px solid var(--bone);outline-offset:3px}
+.prod__color [data-color="washed-black"]{--sw:#3e4149}
+.prod__color [data-color="washed-blue"]{--sw:#395dbe}
+.prod__color [data-color="washed-brown"]{--sw:#a58b81}
+.prod__color [data-color="washed-grey"]{--sw:#90949a}
+.prod__cw{margin-left:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--ash)}
+
 /* ---------- size chips ---------- */
 .prod__size{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
 .prod__size button{
@@ -436,8 +472,6 @@ html.reduced .load{opacity:1}
 .prod__size button:hover{border-color:var(--ash)}
 .prod__size button.is-on{background:var(--bone);color:var(--iron);border-color:var(--bone)}
 .prod__price{font-family:var(--disp);font-size:15px;color:var(--bone);letter-spacing:.03em}
-/* lookbook label where Add to cart goes once the shop opens */
-.prod__drop{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--ash)}
 
 /* ---------- phones: every tap target clears 44px ----------
    Chips and the face toggle stay compact under a mouse; a thumb gets
@@ -447,6 +481,9 @@ html.reduced .load{opacity:1}
   .prod__meta{padding-inline:16px}
   .prod__size{gap:4px}
   .prod__size button{flex:1 0 44px;min-height:44px}
+  .prod__foot .btn{min-height:44px}
+  .prod__color{gap:4px}
+  .prod__color button{width:44px;height:44px}
   .prod__flip button{min-height:44px;padding-inline:14px}
   .cart__close{width:44px;height:44px}
   .cart__ictl button{width:44px;height:44px}

@@ -220,8 +220,70 @@
     });
   });
 
+  /* ---------------- 03 the shop: washes ----------------
+     Every shirt comes in all four washes. A card's prints are drawn on the
+     wash it ships in by default (data-color in the markup). Picking another
+     wash swaps the blank photo, the ink (white on the dark washes, black on
+     the light ones, js/products.js), and refits the prints to that blank:
+     the blanks are normalized with the collar at y=60, so one scale by the
+     ratio of units-per-inch about the collar centre puts every print back
+     at its real size in inches. A print a printer places from the hem (a
+     lower-back mark, a hem line) sits in its own .pl with data-anchor="hem"
+     and is refit about the hem instead, since the blank photos differ in
+     length. upi and hem from assets/shirts/raw/placements.json, cx = the
+     measured body centre line, tsh = ground shadow cy and rx. */
+  const COLORS = (window.INC_CATALOG && window.INC_CATALOG.COLORS) || {};
+  const GARMENT = {
+    'washed-black': { front: { cx: 200.0, upi: 10.38, hem: 357.8, tsh: [361, 152] }, back: { cx: 199.1, upi: 10.39, hem: 359.0, tsh: [362, 152] } },
+    'washed-blue':  { front: { cx: 198.7, upi: 10.63, hem: 363.7, tsh: [367, 156] }, back: { cx: 200.5, upi: 10.39, hem: 365.7, tsh: [369, 152] } },
+    'washed-brown': { front: { cx: 200.0, upi: 10.01, hem: 359.7, tsh: [363, 147] }, back: { cx: 199.2, upi: 9.93, hem: 359.1, tsh: [362, 146] } },
+    'washed-grey':  { front: { cx: 200.7, upi: 10.26, hem: 346.4, tsh: [349, 151] }, back: { cx: 200.2, upi: 10.14, hem: 339.4, tsh: [342, 149] } },
+  };
+  const washLabel = (name) => name.charAt(0) + name.slice(1).toLowerCase();
+
+  function setWash(card, key) {
+    const wash = COLORS[key];
+    const from = card.dataset.colorDefault;
+    if (!wash || !GARMENT[key] || !GARMENT[from]) return;
+    card.dataset.color = key;
+    card.dataset.ink = wash.ink;
+    ['front', 'back'].forEach((face) => {
+      const svg = $('.prod__view--' + face + ' .tee', card);
+      if (!svg) return;
+      const g0 = GARMENT[from][face];
+      const g = GARMENT[key][face];
+      $(':scope > image', svg).setAttribute('href', 'assets/shirts/' + key + '_' + face + '.webp');
+      const tsh = $('.tsh', svg);
+      tsh.setAttribute('cy', g.tsh[0]);
+      tsh.setAttribute('rx', g.tsh[1]);
+      const k = (g.upi / g0.upi).toFixed(4);
+      $$('.pl', svg).forEach((pl) => {
+        const hem = pl.dataset.anchor === 'hem';
+        if (key === from) pl.removeAttribute('transform');
+        else pl.setAttribute('transform', 'translate(' + g.cx + ' ' + (hem ? g.hem : 60) + ') scale(' + k +
+          ') translate(' + -g0.cx + ' ' + -(hem ? g0.hem : 60) + ')');
+      });
+      /* marks are files with a _white and a _black cut; text and drawn
+         strokes follow the ink through CSS (--ink, currentColor) */
+      $$('.pl image', svg).forEach((im) => {
+        const h = im.getAttribute('href');
+        im.setAttribute('href', wash.ink === 'dark' ? h.replace('_white.', '_black.') : h.replace('_black.', '_white.'));
+      });
+      svg.setAttribute('aria-label', svg.getAttribute('aria-label').replace(/^Washed \w+/, washLabel(wash.name)));
+    });
+    $$('.prod__color button', card).forEach((b) => {
+      const on = b.dataset.color === key;
+      b.classList.toggle('is-on', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
+    const label = $('.prod__cw', card);
+    if (label) label.textContent = wash.name;
+  }
+
   /* ---------------- 03 the shop: front/back views ---------------- */
   $$('.prod').forEach((card) => {
+    $$('.prod__color button', card).forEach((b) =>
+      b.addEventListener('click', () => setWash(card, b.dataset.color)));
     const set = (face) => {
       card.dataset.view = face;
       $$('.prod__flip button', card).forEach((b) => {
@@ -257,6 +319,12 @@
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { cart = []; }
   if (Object.keys(CATALOG).length) cart = cart.filter((i) => i && CATALOG[i.sku]);
+  /* lines saved before washes were a choice get the wash their card ships in */
+  const defaultWash = (sku) => {
+    const card = $('.prod[data-sku="' + sku + '"]');
+    return (card && card.dataset.colorDefault) || 'washed-black';
+  };
+  cart.forEach((i) => { if (!COLORS[i.color]) i.color = defaultWash(i.sku); });
   const save = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {} };
   const nameOf = (item) => (CATALOG[item.sku] && CATALOG[item.sku].name) || item.name;
   const priceOf = (item) => (CATALOG[item.sku] && CATALOG[item.sku].price) || item.price;
@@ -307,7 +375,8 @@
         '<span class="cart__iprice">' + money(priceOf(item) * item.qty) + '</span>' +
         '<button class="cart__ix" type="button">×</button>';
       $('.cart__iname', li).textContent = name;
-      $('.cart__imeta', li).textContent = item.sku + ' · SIZE ' + item.size;
+      $('.cart__imeta', li).textContent = item.sku + ' · SIZE ' + item.size +
+        (COLORS[item.color] ? ' · ' + COLORS[item.color].name : '');
       $('[data-q="-1"]', li).setAttribute('aria-label', 'One fewer ' + name);
       $('[data-q="1"]', li).setAttribute('aria-label', 'One more ' + name);
       $('.cart__ix', li).setAttribute('aria-label', 'Remove ' + name);
@@ -375,9 +444,10 @@
     const card = b.closest('.prod');
     const size = ($('.prod__size .is-on', card) || {}).textContent || 'M';
     const sku = card.dataset.sku;
-    const found = cart.find((i) => i.sku === sku && i.size === size);
+    const color = card.dataset.color || card.dataset.colorDefault;
+    const found = cart.find((i) => i.sku === sku && i.size === size && i.color === color);
     if (found) found.qty += 1;
-    else cart.push({ sku, name: card.dataset.name, price: Number(card.dataset.price), size, qty: 1 });
+    else cart.push({ sku, name: card.dataset.name, price: Number(card.dataset.price), size, color, qty: 1 });
     save(); renderCart();
     const label = b.textContent;
     b.textContent = 'RACKED.';
@@ -410,7 +480,7 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          items: cart.map((i) => ({ sku: i.sku, size: i.size, qty: i.qty })),
+          items: cart.map((i) => ({ sku: i.sku, size: i.size, color: i.color, qty: i.qty })),
         }),
       });
       const data = await r.json().catch(() => ({}));
@@ -446,14 +516,68 @@
   renderCart();
   if (paid) openCart();
 
+  /* ---------------- forms: Web3Forms ----------------
+     One free Web3Forms access key wires every form on the page; web3forms.com
+     emails it to the inbox it delivers to (ironneverchanges@gmail.com). It is
+     a public key, made to sit in page code. Empty key: the coaching form stays
+     hidden and the Corner's email button does the job. The one sanctioned
+     external request (DESIGN.md §7). */
+  const FORMS_KEY = '';
+  const send = (fields) => fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({ access_key: FORMS_KEY, from_name: 'IRON NEVER CHANGES', ...fields }),
+  }).then((r) => r.json()).then((d) => { if (!d.success) throw new Error('rejected'); });
+
+  /* coaching: a real message to Zac, or the mailto when there's no key */
+  const coach = $('#coachForm');
+  if (coach && FORMS_KEY) {
+    coach.hidden = false;
+    $('#coachMail').hidden = true;
+    const status = $('#coachStatus');
+    const fallback = 'Email <a href="mailto:ironneverchanges@gmail.com">ironneverchanges@gmail.com</a> instead.';
+    coach.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const missing = [...coach.querySelectorAll('[required]')].find((el) => !el.value.trim() || !el.checkValidity());
+      if (missing) {
+        status.textContent = missing.value.trim() && missing.type === 'email'
+          ? 'That email address doesn\u2019t look right.'
+          : 'Add your ' + missing.closest('label').querySelector('span').textContent.toLowerCase() + ' first.';
+        missing.focus();
+        return;
+      }
+      const btn = $('button[type="submit"]', coach);
+      const label = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      status.textContent = '';
+      try {
+        await send({
+          subject: 'Coaching · ' + coach.elements.name.value.trim(),
+          name: coach.elements.name.value.trim(),
+          email: coach.elements.email.value.trim(),
+          message: coach.elements.message.value.trim(),
+          botcheck: coach.elements.botcheck.checked,
+        });
+        coach.reset();
+        status.textContent = 'Sent. It\u2019s in the inbox at ironneverchanges@gmail.com.';
+        status.classList.remove('stamped'); void status.offsetWidth; status.classList.add('stamped');
+      } catch (err) {
+        status.innerHTML = 'That didn\u2019t send. ' + fallback;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = label;
+      }
+    });
+  }
+
   /* ---------------- waitlist ----------------
-     Paste a Web3Forms access key (free — web3forms.com emails it to you) to
-     wire the list for real: submissions land in that inbox. Empty key keeps
-     the honest concept-mode note. The one sanctioned external request. */
-  const WAITLIST_KEY = '';
+     Same key. The shop is open, so the list section is a statement today. */
+  const WAITLIST_KEY = FORMS_KEY;
   const form = $('#listForm');
-  /* lookbook mode: the list section is a statement with no form in it, so
-     there is nothing to wire. Put the form back (DESIGN.md §9) and this runs. */
+  /* the list section is a statement with no form in it (the shop is open,
+     there is nothing to wait for), so there is nothing to wire. Put a form
+     back (DESIGN.md §9) and this runs. */
   if (!form) return;
   const listDemo = $('#listDemo');
   if (WAITLIST_KEY && listDemo) listDemo.hidden = true;

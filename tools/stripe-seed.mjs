@@ -1,7 +1,7 @@
 /* ============================================================
    Seed the Iron Never Changes Stripe account.
 
-   Creates a Product for all 24 shirts (stable ids, so re-running
+   Creates a Product for every shirt in the catalog (stable ids, so re-running
    updates instead of duplicating), a $100/month coaching Product
    with a recurring Price, and a Payment Link for the coaching
    subscription — that link is what The Corner's button points at.
