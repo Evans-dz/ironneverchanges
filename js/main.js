@@ -318,7 +318,18 @@
   const CATALOG = (window.INC_CATALOG && window.INC_CATALOG.CATALOG) || {};
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { cart = []; }
-  if (Object.keys(CATALOG).length) cart = cart.filter((i) => i && CATALOG[i.sku]);
+  /* The saved cart is our own JSON, but anything on this device can edit it.
+     Keep only well-formed lines for real shirts, inside the checkout's limits,
+     so a planted value can't reach the page or build a cart the server refuses. */
+  const LIMITS = window.INC_CATALOG || {};
+  const MAX_LINES = LIMITS.MAX_LINES || 24;
+  const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  if (!Array.isArray(cart)) cart = [];
+  if (Object.keys(CATALOG).length) {
+    cart = cart.filter((i) => i && typeof i === 'object' && own(CATALOG, i.sku) &&
+      (LIMITS.SIZES || []).includes(i.size) && Number.isInteger(i.qty) && i.qty >= 1).slice(0, MAX_LINES);
+    cart.forEach((i) => { i.qty = Math.min(i.qty, LIMITS.MAX_QTY || 10); });
+  }
   /* lines saved before washes were a choice get the wash their card ships in */
   const defaultWash = (sku) => {
     const card = $('.prod[data-sku="' + sku + '"]');
@@ -326,6 +337,7 @@
   };
   cart.forEach((i) => { if (!COLORS[i.color]) i.color = defaultWash(i.sku); });
   const save = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {} };
+  save();   /* write back the cleaned cart, so a bad line doesn't sit in storage */
   const nameOf = (item) => (CATALOG[item.sku] && CATALOG[item.sku].name) || item.name;
   const priceOf = (item) => (CATALOG[item.sku] && CATALOG[item.sku].price) || item.price;
 
@@ -369,12 +381,13 @@
         '<span class="cart__imeta"></span>' +
         '<span class="cart__ictl">' +
           '<button type="button" data-q="-1">−</button>' +
-          '<b>' + item.qty + '</b>' +
+          '<b class="cart__iqty"></b>' +
           '<button type="button" data-q="1">+</button>' +
         '</span>' +
         '<span class="cart__iprice">' + money(priceOf(item) * item.qty) + '</span>' +
         '<button class="cart__ix" type="button">×</button>';
       $('.cart__iname', li).textContent = name;
+      $('.cart__iqty', li).textContent = item.qty;
       $('.cart__imeta', li).textContent = item.sku + ' · SIZE ' + item.size +
         (COLORS[item.color] ? ' · ' + COLORS[item.color].name : '');
       $('[data-q="-1"]', li).setAttribute('aria-label', 'One fewer ' + name);
@@ -446,11 +459,15 @@
     const sku = card.dataset.sku;
     const color = card.dataset.color || card.dataset.colorDefault;
     const found = cart.find((i) => i.sku === sku && i.size === size && i.color === color);
-    if (found) found.qty += 1;
+    /* the same limits the checkout enforces, so the cart never asks for more */
+    let beat = 'RACKED.';
+    if (found && found.qty >= MAX_QTY) beat = 'MAX ' + MAX_QTY + '.';
+    else if (found) found.qty += 1;
+    else if (cart.length >= MAX_LINES) beat = 'CART FULL.';
     else cart.push({ sku, name: card.dataset.name, price: Number(card.dataset.price), size, color, qty: 1 });
     save(); renderCart();
     const label = b.textContent;
-    b.textContent = 'RACKED.';
+    b.textContent = beat;
     b.classList.add('is-hit');
     setTimeout(() => { b.textContent = label; b.classList.remove('is-hit'); }, 900);
   }));
@@ -504,14 +521,17 @@
   });
 
   /* back from a paid session: the bar is racked. Clear the cart and open the
-     drawer, or the confirmation lands inside a panel nobody has opened. */
-  const paid = new URLSearchParams(window.location.search).get('paid') === '1';
+     drawer, or the confirmation lands inside a panel nobody has opened.
+     Stripe writes the session id into the return URL, so a bare ?paid=1
+     link from anywhere else can't fake an order or wipe a cart. */
+  const paidId = new URLSearchParams(window.location.search).get('paid');
+  const paid = /^cs_(live|test)_[A-Za-z0-9]+$/.test(paidId || '');
   if (paid) {
     cart = [];
     save();
     cartEmpty.textContent = 'ORDER IN. RECEIPT SENT. COME BACK TOMORROW.';
-    history.replaceState(null, '', window.location.pathname);
   }
+  if (paidId !== null) history.replaceState(null, '', window.location.pathname);
 
   renderCart();
   if (paid) openCart();

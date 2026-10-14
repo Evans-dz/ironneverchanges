@@ -45,7 +45,7 @@ html.js{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
 }
 /* anchored sections land clear of the fixed nav (native + no-JS jumps) */
-main section[id]{scroll-margin-top:84px}
+main section[id],.prod[id]{scroll-margin-top:84px}
 body{
   background:var(--iron);color:var(--bone);
   font-family:var(--body);font-weight:400;font-size:16px;line-height:1.65;

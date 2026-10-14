@@ -1,30 +1,48 @@
 # Iron Never Changes
 
-> Iron Never Changes is a heavyweight gym wear brand for men with jobs, kids and a bar in their week. Garment-dyed cotton tees, screen printed in one color of ink. The name finishes as "Iron never changes. You do." House slogan: "Where limits meet defeat."
+> Iron Never Changes is a heavyweight gym wear brand for everyday men with jobs, kids and a bar in their week. It sells 28 screen-printed, garment-dyed gym shirts at $34 to $42 on ironneverchanges.com, shipped to US addresses, plus coaching with Zac at $100 a month.
 
-Status: the shop is open and stays open. There are no drops and no preorders: every shirt, wash and size is on sale at the price shown, shipped anywhere in the US at one flat rate.
+The shirts carry plain, honest lines about showing up, hard times and keeping your head straight: "I didn't feel like it either", "Proud of you. Somebody should say it.", "Say it out loud. It weighs less.", "The bar doesn't know you're tired", "Lost, not gone." The name finishes as "Iron never changes. You do." House slogan: "Where limits meet defeat."
 
 ## The line
 
-- 28 shirts, each in all four washes (washed black, blue, grey and brown), sizes S to 3XL, $34 to $42.
-- Heavyweight, garment-dyed, screen printed, so the print cracks and fades with wear. No tech fabric, no neon.
-- Designs come from the brand's slogan bank and from real hard stretches: "I didn't feel like it either", "Proud of you. Somebody should say it.", "Say it out loud. It weighs less.", "The bar doesn't know you're tired", "Lost, not gone." and more.
-- [The Shop](https://www.ironneverchanges.com/#shop): every shirt, front and back, with its print spec and price.
+- 28 shirts, SKUs INC-001 to INC-028, $34 to $42 each in US dollars.
+- Every shirt comes in all four garment-dyed washes: washed black, washed blue, washed brown and washed grey.
+- Every shirt comes in sizes S, M, L, XL, 2X and 3X.
+- Heavyweight tees, screen printed in one color of ink: white ink on washed black and washed blue, black ink on washed brown and washed grey. The print cracks and fades with wear. No tech fabric, no neon.
+- Garment dye varies a little from shirt to shirt, so a wash may not match the photos exactly.
+- $34: [THE HOUSE SHIRT](https://www.ironneverchanges.com/#inc007), [IT FIXES ENOUGH](https://www.ironneverchanges.com/#inc019), [THE SPOTTER](https://www.ironneverchanges.com/#inc021)
+- $38: [I DIDN'T FEEL LIKE IT EITHER](https://www.ironneverchanges.com/#inc002), [PROUD OF YOU](https://www.ironneverchanges.com/#inc003), [NOBODY PROTECTED THAT KID](https://www.ironneverchanges.com/#inc004), [SMALL EFFORTS, REPEATED](https://www.ironneverchanges.com/#inc010), [I CAME HERE INSTEAD](https://www.ironneverchanges.com/#inc012), [DEFEAT IS A DAY](https://www.ironneverchanges.com/#inc013), [HOW ARE YOU, REALLY?](https://www.ironneverchanges.com/#inc016), [NOBODY IS GOING TO LIFT IT FOR YOU](https://www.ironneverchanges.com/#inc018), [STRONGER THAN THE YEAR](https://www.ironneverchanges.com/#inc020), [SHOWED UP ANYWAY](https://www.ironneverchanges.com/#inc022), [THE WEIGHT NEVER LIES](https://www.ironneverchanges.com/#inc023), [COME BACK TOMORROW](https://www.ironneverchanges.com/#inc024), [TRAIN TO BE OKAY](https://www.ironneverchanges.com/#inc025), [LOST, NOT GONE.](https://www.ironneverchanges.com/#inc026), [FIXING ME](https://www.ironneverchanges.com/#inc027), [BETWEEN SETS](https://www.ironneverchanges.com/#inc028)
+- $40: [THE BAR DOESN'T KNOW YOU'RE TIRED](https://www.ironneverchanges.com/#inc005), [BUILT BACK](https://www.ironneverchanges.com/#inc008), [IT TEARS BEFORE IT GROWS](https://www.ironneverchanges.com/#inc014), [LEARNING ANYWAY](https://www.ironneverchanges.com/#inc015), [OPEN 24 HOURS](https://www.ironneverchanges.com/#inc017)
+- $42: [THE FLAGSHIP](https://www.ironneverchanges.com/#inc001), [THE SPINE TEE](https://www.ironneverchanges.com/#inc006), [THE WALL](https://www.ironneverchanges.com/#inc009), [SAY IT OUT LOUD](https://www.ironneverchanges.com/#inc011)
+- [Every shirt with the exact words printed on it](https://www.ironneverchanges.com/llms-full.txt)
+
+## How buying works
+
+- The shop is always open. No drops, no countdown: every shirt, wash and size is on sale at the price on its card.
+- Pick a wash and a size, add it to the cart, and pay on Stripe Checkout. Card details go to Stripe and never touch the site.
+- Ships to US addresses only, at a flat $6 per order however many shirts are in it.
+- All sales are final, with no returns or exchanges. If an item arrives damaged or isn't what you ordered, email ironneverchanges@gmail.com with your order details and a photo for a replacement or a refund.
 
 ## Coaching
 
-- [The Corner](https://www.ironneverchanges.com/#corner): coaching with Zac, $100 a month, month to month. Meal plans from real groceries, lifting programs built around your schedule, unlimited talk and text, video form checks, monthly progress tracking. Coaching sign-up is not on the site yet.
+- [The Corner](https://www.ironneverchanges.com/#corner): coaching with Zac, $100 a month, month to month, no contract, cancel any time.
+- Included: meal plans built from real groceries, lifting programs built around your schedule and equipment, unlimited talk and text with your coach, video form checks on the big lifts, a progress portfolio tracked month over month, and the plan rebuilt every four weeks.
+- Most of Zac's clients are losing weight, keeping their strength and getting back to feeling like themselves. Nobody is trained for a stage.
+- To start, email ironneverchanges@gmail.com. Coaching is set up with Zac directly, not through the shirt checkout.
 
 ## Pages
 
-- [Home](https://www.ironneverchanges.com/)
-- [The Standard](https://www.ironneverchanges.com/#standard): what the brand stands for
+- [Home](https://www.ironneverchanges.com/): the whole site is one page; the links below jump to its sections
+- [The Standard](https://www.ironneverchanges.com/#standard): what the brand stands for: show up, hard times, the iron, real life
 - [The Wall](https://www.ironneverchanges.com/#wall): the slogan bank every shirt starts from
-- [The Feed](https://www.ironneverchanges.com/#feed): real training footage, shot mid-week
+- [The Shop](https://www.ironneverchanges.com/#shop): all 28 shirts, front and back, with washes, sizes, print spec and price; each shirt has its own link, #inc001 to #inc028
+- [The Feed](https://www.ironneverchanges.com/#feed): real training footage and photos, shot mid-week, not staged
+- [The Corner](https://www.ironneverchanges.com/#corner): coaching with Zac
 - [The Name](https://www.ironneverchanges.com/#name): why iron never changes
-- [Privacy](https://www.ironneverchanges.com/privacy.html): what the site collects (very little) and who handles it
-- [Terms](https://www.ironneverchanges.com/terms.html): prices, US shipping, all sales final unless it arrives damaged or wrong
+- [Privacy](https://www.ironneverchanges.com/privacy.html): no cookies and no analytics; Stripe takes payments, Vercel hosts the site
+- [Terms](https://www.ironneverchanges.com/terms.html): prices, US shipping, all sales final unless damaged or wrong, coaching terms
 
 ## Contact
 
-- ironneverchanges@gmail.com: orders, coaching, wholesale and collabs
+- ironneverchanges@gmail.com: orders, damaged or wrong items, coaching, privacy requests, wholesale and collabs. It is the only contact the site publishes.

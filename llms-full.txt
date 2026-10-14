@@ -1,0 +1,273 @@
+# Iron Never Changes
+
+> Iron Never Changes is a heavyweight gym wear brand for everyday men with jobs, kids and a bar in their week. It sells 28 screen-printed, garment-dyed gym shirts at $34 to $42 on ironneverchanges.com, shipped to US addresses, plus coaching with Zac at $100 a month.
+
+This is the full fact sheet behind https://www.ironneverchanges.com/llms.txt: the same facts, plus the brand's beliefs and every shirt in the line with the exact words printed on it.
+
+The shirts carry plain, honest lines about showing up, hard times and keeping your head straight: "I didn't feel like it either", "Proud of you. Somebody should say it.", "Say it out loud. It weighs less.", "The bar doesn't know you're tired", "Lost, not gone." The name finishes as "Iron never changes. You do." House slogan: "Where limits meet defeat."
+
+## The line
+
+- 28 shirts, SKUs INC-001 to INC-028, $34 to $42 each in US dollars.
+- Every shirt comes in all four garment-dyed washes: washed black, washed blue, washed brown and washed grey.
+- Every shirt comes in sizes S, M, L, XL, 2X and 3X.
+- Heavyweight tees, screen printed in one color of ink: white ink on washed black and washed blue, black ink on washed brown and washed grey. The print cracks and fades with wear. No tech fabric, no neon.
+- Garment dye varies a little from shirt to shirt, so a wash may not match the photos exactly.
+- $34: [THE HOUSE SHIRT](https://www.ironneverchanges.com/#inc007), [IT FIXES ENOUGH](https://www.ironneverchanges.com/#inc019), [THE SPOTTER](https://www.ironneverchanges.com/#inc021)
+- $38: [I DIDN'T FEEL LIKE IT EITHER](https://www.ironneverchanges.com/#inc002), [PROUD OF YOU](https://www.ironneverchanges.com/#inc003), [NOBODY PROTECTED THAT KID](https://www.ironneverchanges.com/#inc004), [SMALL EFFORTS, REPEATED](https://www.ironneverchanges.com/#inc010), [I CAME HERE INSTEAD](https://www.ironneverchanges.com/#inc012), [DEFEAT IS A DAY](https://www.ironneverchanges.com/#inc013), [HOW ARE YOU, REALLY?](https://www.ironneverchanges.com/#inc016), [NOBODY IS GOING TO LIFT IT FOR YOU](https://www.ironneverchanges.com/#inc018), [STRONGER THAN THE YEAR](https://www.ironneverchanges.com/#inc020), [SHOWED UP ANYWAY](https://www.ironneverchanges.com/#inc022), [THE WEIGHT NEVER LIES](https://www.ironneverchanges.com/#inc023), [COME BACK TOMORROW](https://www.ironneverchanges.com/#inc024), [TRAIN TO BE OKAY](https://www.ironneverchanges.com/#inc025), [LOST, NOT GONE.](https://www.ironneverchanges.com/#inc026), [FIXING ME](https://www.ironneverchanges.com/#inc027), [BETWEEN SETS](https://www.ironneverchanges.com/#inc028)
+- $40: [THE BAR DOESN'T KNOW YOU'RE TIRED](https://www.ironneverchanges.com/#inc005), [BUILT BACK](https://www.ironneverchanges.com/#inc008), [IT TEARS BEFORE IT GROWS](https://www.ironneverchanges.com/#inc014), [LEARNING ANYWAY](https://www.ironneverchanges.com/#inc015), [OPEN 24 HOURS](https://www.ironneverchanges.com/#inc017)
+- $42: [THE FLAGSHIP](https://www.ironneverchanges.com/#inc001), [THE SPINE TEE](https://www.ironneverchanges.com/#inc006), [THE WALL](https://www.ironneverchanges.com/#inc009), [SAY IT OUT LOUD](https://www.ironneverchanges.com/#inc011)
+
+## How buying works
+
+- The shop is always open. No drops, no countdown: every shirt, wash and size is on sale at the price on its card.
+- Pick a wash and a size, add it to the cart, and pay on Stripe Checkout. Card details go to Stripe and never touch the site.
+- Ships to US addresses only, at a flat $6 per order however many shirts are in it.
+- All sales are final, with no returns or exchanges. If an item arrives damaged or isn't what you ordered, email ironneverchanges@gmail.com with your order details and a photo for a replacement or a refund.
+
+## Coaching
+
+- [The Corner](https://www.ironneverchanges.com/#corner): coaching with Zac, $100 a month, month to month, no contract, cancel any time.
+- Included: meal plans built from real groceries, lifting programs built around your schedule and equipment, unlimited talk and text with your coach, video form checks on the big lifts, a progress portfolio tracked month over month, and the plan rebuilt every four weeks.
+- Most of Zac's clients are losing weight, keeping their strength and getting back to feeling like themselves. Nobody is trained for a stage.
+- To start, email ironneverchanges@gmail.com. Coaching is set up with Zac directly, not through the shirt checkout.
+
+## The Standard
+
+The brand's four beliefs, from The Standard on the home page:
+
+- SHOW UP: "I didn't feel like it either." Everybody in that room negotiated with themselves to get there. You came anyway.
+- HARD TIMES: "Proud of you. Somebody should say it." Most of us found the gym in the worst year we've had, and kept coming back.
+- THE IRON: "Same weight. Different man." The bar doesn't care how work went. It gives back exactly what you put in.
+- REAL LIFE: "45 minutes that belong to me." Between the job and the kids there's a window, and you keep it like an appointment.
+
+No transformation photos, no twelve-week miracle, no one yelling from a stage. The name is the point: the job, the paycheck, the knees and the year all change, and the bar weighs the same the day you start and the day your kid graduates. Iron never changes. You do.
+
+## The shirts
+
+Every shirt below comes in all four washes (washed black, washed blue, washed brown, washed grey) and sizes S, M, L, XL, 2X and 3X, and ships to US addresses for a flat $6 per order. Quoted words are printed exactly as shown, in capitals; print sizes in inches come from each shirt's print spec on the site.
+
+### INC-001 THE FLAGSHIP ($42)
+
+- Link: https://www.ironneverchanges.com/#inc001
+- Front: Skull and barbell mark on the left chest, 4.5 in. No words.
+- Back: The vintage stacked wordmark (IRON NEVER CHANGES, with WHERE LIMITS MEET DEFEAT in small type under it), 13 in wide, with "YOU DO." fitted to its width beneath.
+- Why: The whole promise in one line. The iron is the constant; you’re the variable. The shirt people buy twice.
+
+### INC-002 I DIDN’T FEEL LIKE IT EITHER ($38)
+
+- Link: https://www.ironneverchanges.com/#inc002
+- Front: "WHERE LIMITS MEET DEFEAT" in two lines between two short bars, across the chest, 12 in.
+- Back: "I DIDN’T FEEL LIKE IT EITHER" stacked in heavy type, 13 in wide, skull and barbell mark beneath.
+- Why: The most relatable sentence in any gym. It says I see you without saying anything soft.
+
+### INC-003 PROUD OF YOU ($38)
+
+- Link: https://www.ironneverchanges.com/#inc003
+- Front: Primary badge on the left chest, 5 in (IRON NEVER CHANGES and WHERE LIMITS MEET DEFEAT around a skull and barbell).
+- Back: "PROUD OF YOU." stacked large, "SOMEBODY SHOULD SAY IT." smaller beneath, skull and barbell mark under the words, 13 in wide.
+- Why: Plenty of men go years without hearing it from anybody. Wear it, or buy one for the friend who should hear it.
+
+### INC-004 NOBODY PROTECTED THAT KID ($38)
+
+- Link: https://www.ironneverchanges.com/#inc004
+- Front: Skull and barbell mark on the left chest, 4.5 in. No words.
+- Back: "NOBODY PROTECTED THAT KID." stacked, "I DO NOW." knocked out of an ink bar, skull and barbell mark beneath, 13 in wide.
+- Why: For the man who grew up with nobody in his corner. He can’t go back for that kid. He can stand in front of him now.
+
+### INC-005 THE BAR DOESN’T KNOW YOU’RE TIRED ($40)
+
+- Link: https://www.ironneverchanges.com/#inc005
+- Front: Skull and barbell mark on the left chest, 4.5 in. No words.
+- Back: "THE BAR DOESN’T KNOW YOU’RE TIRED." stacked across the shoulder blades, 13 in wide, and a 6.5 in skull and barbell mark at the bottom middle, 4 in above the hem.
+- Why: No sympathy, no cruelty. Just a fact. It doesn’t need you fresh. It just needs you here, and here you are.
+
+### INC-006 THE SPINE TEE ($42)
+
+- Link: https://www.ironneverchanges.com/#inc006
+- Front: Circular stamp mark (a skull and barbell in a ring) on the left chest, 6.5 in. No words.
+- Back: Skull and barbell mark at the top, "IRON NEVER CHANGES" stacked down the spine between two rules (4 in by 20 in), and "COME BACK TOMORROW" stacked on the lower back just below it, 7.5 in.
+- Why: The one people wear outside the gym, with the hem line you only catch on the second look. That’s what makes them ask.
+
+### INC-007 THE HOUSE SHIRT ($34)
+
+- Link: https://www.ironneverchanges.com/#inc007
+- Front: Large vintage badge across the full front, 12 in (IRON NEVER CHANGES and WHERE LIMITS MEET DEFEAT around a skull and barbell).
+- Back: Blank on purpose. No print.
+- Why: Every gym needs the plain one. Members, staff, first-timers. No message, just the name.
+
+### INC-008 BUILT BACK ($40)
+
+- Link: https://www.ironneverchanges.com/#inc008
+- Front: "BUILT BACK" stacked over the heart, 5 in.
+- Back: Vintage badge (IRON NEVER CHANGES and WHERE LIMITS MEET DEFEAT around a skull and barbell), 10.6 in, over "NOT BORN THIS WAY" stacked in heavy type, 12.75 in wide.
+- Why: The comeback shirt. A straight statement that nobody in this gym started here.
+
+### INC-009 THE WALL ($42)
+
+- Link: https://www.ironneverchanges.com/#inc009
+- Front: Skull and barbell mark on the left chest, 6.5 in. No words.
+- Back: Seven lines from The Wall stacked to one width in ten rows, 12.8 in by 14.6 in: "I DIDN’T FEEL LIKE IT EITHER", "SHOWED UP ANYWAY", "NO ZERO DAYS", "HARD TIMES BUILT THIS", "PROOF OF WORK", "STILL HERE. STILL LIFTING.", "COME BACK TOMORROW", with ANYWAY the biggest.
+- Why: Section 02, wearable. Every line on the wall came out of somebody’s week. This one carries all of them.
+
+### INC-010 SMALL EFFORTS, REPEATED ($38)
+
+- Link: https://www.ironneverchanges.com/#inc010
+- Front: Primary badge on the left chest, 6 in (IRON NEVER CHANGES and WHERE LIMITS MEET DEFEAT around a skull and barbell).
+- Back: "SUCCESS IS THE SUM OF SMALL EFFORTS REPEATED DAY IN AND DAY OUT" stacked to one width, 13 in, REPEATED biggest, with a 4 in skull and barbell mark beneath.
+- Why: The old line, printed the way it actually works, with one word doing all the lifting. Nothing about talent anywhere on it.
+
+### INC-011 SAY IT OUT LOUD ($42)
+
+- Link: https://www.ironneverchanges.com/#inc011
+- Front: Skull and barbell mark on the left chest, 4.5 in. No words.
+- Back: "SAY IT OUT LOUD." stacked large in heavy type, "IT WEIGHS LESS." smaller beneath, 13 in wide.
+- Why: Whatever you are carrying gets lighter the minute somebody else hears it. Say it to a friend, a brother, the guy at the next rack.
+
+### INC-012 I CAME HERE INSTEAD ($38)
+
+- Link: https://www.ironneverchanges.com/#inc012
+- Front: Circular stamp mark (a skull and barbell in a ring) on the left chest, 5 in. No words.
+- Back: "I CAME HERE INSTEAD." in huge stacked type, 13 in wide, small skull and barbell mark beneath.
+- Why: There were other places he could have gone. He came here. The rest of the story is his to tell, if you ask.
+
+### INC-013 DEFEAT IS A DAY ($38)
+
+- Link: https://www.ironneverchanges.com/#inc013
+- Front: Skull and barbell mark on the left chest, 4.8 in. No words.
+- Back: "DEFEAT IS A DAY," stacked, "NOT A NAME." knocked out of an ink bar, skull and barbell mark beneath, 13 in wide.
+- Why: Everybody gets the day the weight wins. That day does not get to be your name. Tomorrow you load the bar again.
+
+### INC-014 IT TEARS BEFORE IT GROWS ($40)
+
+- Link: https://www.ironneverchanges.com/#inc014
+- Front: Skull and barbell mark on the left chest, 4.5 in. No words.
+- Back: "IT TEARS BEFORE IT GROWS." stacked, 13 in wide, the word TEARS torn in two along a jagged line, skull and barbell mark beneath.
+- Why: Muscle has to tear before it grows back stronger. So do people. If you are in the torn part right now, you are not finished.
+
+### INC-015 LEARNING ANYWAY ($40)
+
+- Link: https://www.ironneverchanges.com/#inc015
+- Front: Skull and barbell mark on the left chest, 4.5 in. No words.
+- Back: "NOBODY SHOWED ME HOW." over "I’M LEARNING ANYWAY." stacked, 13.5 in wide, a tally of reps and a skull and barbell mark beneath.
+- Why: For the guy who grew up without a dad around. Nobody showed him how. He shows up and figures it out anyway, one rep at a time.
+
+### INC-016 HOW ARE YOU, REALLY? ($38)
+
+- Link: https://www.ironneverchanges.com/#inc016
+- Front: Skull and barbell mark on the left chest, 4.5 in. No words.
+- Back: "HOW ARE YOU, REALLY?" stacked across the back in heavy type, 13 in wide, REALLY? largest, skull and barbell mark beneath.
+- Why: The check-in shirt. Wear it for the friend who always says he’s fine. Ask twice, and mean it.
+
+### INC-017 OPEN 24 HOURS ($40)
+
+- Link: https://www.ironneverchanges.com/#inc017
+- Front: A small neon-style "OPEN" sign on the left chest, 5 in.
+- Back: A large neon-style sign reading "OPEN 24 HOURS", 12 in, with "THE GYM NEVER CLOSED. IT MOVED IN." stacked under it.
+- Why: The sign never turns off because the gym lives in you now.
+
+### INC-018 NOBODY IS GOING TO LIFT IT FOR YOU ($38)
+
+- Link: https://www.ironneverchanges.com/#inc018
+- Front: The brand barbell, a loaded bar on the floor, over the heart, 7 in. No words.
+- Back: "NOBODY IS GOING TO LIFT IT" stacked above the brand barbell, "FOR YOU." below it, 13 in wide.
+- Why: The bar is on the floor and it’s staying there until you pick it up. That’s the whole deal.
+
+### INC-019 IT FIXES ENOUGH ($34)
+
+- Link: https://www.ironneverchanges.com/#inc019
+- Front: "IT DOESN’T FIX EVERYTHING. IT FIXES ENOUGH." stacked at the center chest, 10.5 in.
+- Back: Skull and barbell mark at the upper back, 5 in. No words.
+- Why: Some days the gym saves you. Most days it just helps. That’s plenty.
+
+### INC-020 STRONGER THAN THE YEAR ($38)
+
+- Link: https://www.ironneverchanges.com/#inc020
+- Front: Skull and barbell mark on the left chest, 6.5 in. No words.
+- Back: "STRONGER THAN THE YEAR THAT TRIED ME." stacked, 13 in wide, the brand barbell beneath.
+- Why: For whoever’s year it was. You outlifted it.
+
+### INC-021 THE SPOTTER ($34)
+
+- Link: https://www.ironneverchanges.com/#inc021
+- Front: "I GOT YOU." stacked at the center chest, 10 in.
+- Back: Skull and barbell mark at the upper back, 5 in. No words.
+- Why: Nothing on it but a promise. The one you buy for your training partner.
+
+### INC-022 SHOWED UP ANYWAY ($38)
+
+- Link: https://www.ironneverchanges.com/#inc022
+- Front: Circular stamp mark (a skull and barbell in a ring) on the left chest, 6.5 in. No words.
+- Back: "SHOWED UP ANYWAY" stacked in heavy type, 13 in wide, skull and barbell mark beneath.
+- Why: Three words that beat every excuse you had that day.
+
+### INC-023 THE WEIGHT NEVER LIES ($38)
+
+- Link: https://www.ironneverchanges.com/#inc023
+- Front: Circular stamp mark (a skull and barbell in a ring) on the left chest, 6 in. No words.
+- Back: "THE WEIGHT NEVER LIES" stacked in heavy type, 13 in wide, LIES largest at 3.9 in tall, over the brand loaded barbell at the same width.
+- Why: No spin, no filter, no opinion. The plates weigh what they weigh.
+
+### INC-024 COME BACK TOMORROW ($38)
+
+- Link: https://www.ironneverchanges.com/#inc024
+- Front: Skull and barbell mark on the left chest, 6.5 in. No words.
+- Back: "COME BACK TOMORROW." stacked in heavy type, 13.5 in wide, COME and BACK largest, with "AND THE DAY AFTER. AND THE DAY AFTER THAT." in smaller type beneath.
+- Why: The whole program in three words. See you at the same bar.
+
+### INC-025 TRAIN TO BE OKAY ($38)
+
+- Link: https://www.ironneverchanges.com/#inc025
+- Front: "BE OKAY." stacked on the left chest, 4.5 in.
+- Back: "I DON’T TRAIN TO LOOK OKAY." with LOOK struck through, over "I TRAIN TO BE OKAY." stacked large, 13 in wide.
+- Why: Some of us started lifting to look the part. We kept going because it’s the hour that keeps our head straight.
+
+### INC-026 LOST, NOT GONE. ($38)
+
+- Link: https://www.ironneverchanges.com/#inc026
+- Front: Skull and barbell mark on the left chest, 4.5 in. No words.
+- Back: "LOST," large, "NOT GONE." knocked out of an ink bar, skull and barbell mark beneath, 13 in wide.
+- Why: For the guy who has no idea where he’s headed. He doesn’t have to know yet. He’s still here, and that counts.
+
+### INC-027 FIXING ME ($38)
+
+- Link: https://www.ironneverchanges.com/#inc027
+- Front: "FIXING ME." stacked on the left chest, 4.7 in.
+- Back: "COULDN’T FIX US." above "FIXING ME." stacked large, 13 in wide, skull and barbell mark beneath.
+- Why: The breakup shirt. You tried to hold it together and it came apart anyway. Now every rep goes into the one thing you can fix.
+
+### INC-028 BETWEEN SETS ($38)
+
+- Link: https://www.ironneverchanges.com/#inc028
+- Front: Skull and barbell mark on the left chest, 4.5 in. No words.
+- Back: "I TALK TO HIM BETWEEN SETS." stacked in heavy type, 13 in wide.
+- Why: For the dad, the brother or the friend who isn’t there to spot you anymore. You still tell him how the set went.
+
+## Quick answers
+
+- What is Iron Never Changes? A heavyweight gym wear brand for everyday men, selling in the US: 28 screen-printed, garment-dyed gym shirts and coaching with Zac.
+- How much are the shirts? $34 to $42 each, plus a flat $6 shipping per order.
+- What sizes? S, M, L, XL, 2X and 3X, on every shirt.
+- What colors? Four garment-dyed washes on every shirt: washed black, washed blue, washed brown and washed grey.
+- Is it a limited drop? No. The shop is always open: no drops, no countdown.
+- Do they ship outside the US? No. US addresses only.
+- Can I return or exchange a shirt? No, all sales are final, unless an item arrives damaged or isn't what you ordered. Then email ironneverchanges@gmail.com with your order details and a photo for a replacement or a refund.
+- How do I pay? Stripe Checkout. Card details go to Stripe and never touch the site.
+- How much is coaching? $100 a month with Zac, month to month, no contract, cancel any time. Email ironneverchanges@gmail.com to start.
+- How do I contact them? Email ironneverchanges@gmail.com, the only contact the site publishes.
+
+## Pages
+
+- [Home](https://www.ironneverchanges.com/): the whole site is one page; the links below jump to its sections
+- [The Standard](https://www.ironneverchanges.com/#standard): what the brand stands for: show up, hard times, the iron, real life
+- [The Wall](https://www.ironneverchanges.com/#wall): the slogan bank every shirt starts from
+- [The Shop](https://www.ironneverchanges.com/#shop): all 28 shirts, front and back, with washes, sizes, print spec and price; each shirt has its own link, #inc001 to #inc028
+- [The Feed](https://www.ironneverchanges.com/#feed): real training footage and photos, shot mid-week, not staged
+- [The Corner](https://www.ironneverchanges.com/#corner): coaching with Zac
+- [The Name](https://www.ironneverchanges.com/#name): why iron never changes
+- [Privacy](https://www.ironneverchanges.com/privacy.html): no cookies and no analytics; Stripe takes payments, Vercel hosts the site
+- [Terms](https://www.ironneverchanges.com/terms.html): prices, US shipping, all sales final unless damaged or wrong, coaching terms
+
+## Contact
+
+- ironneverchanges@gmail.com: orders, damaged or wrong items, coaching, privacy requests, wholesale and collabs. It is the only contact the site publishes.

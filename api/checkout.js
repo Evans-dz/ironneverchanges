@@ -31,13 +31,37 @@ const CURRENCY = 'usd';
 
 /* Where a session is allowed to send the customer back to. An
    origin off this list falls through to the canonical domain, so
-   a forged Origin header can't aim the return trip somewhere else. */
+   a forged Origin header can't aim the return trip somewhere else.
+   The local dev origin only counts outside production. */
 const SITE = 'https://www.ironneverchanges.com';
 const ALLOWED_ORIGINS = [
   SITE,
   'https://ironneverchanges.com',
-  'http://localhost:4175',
+  ...(process.env.VERCEL_ENV === 'production' ? [] : ['http://localhost:4175']),
 ];
+
+/* Who may ask for a session at all: the shop's own pages. The vercel.app
+   alias serves the same shop, so it may ask too (its customers still
+   return to SITE). A page on another site can't: it would have to send
+   application/json, which needs a preflight this endpoint never grants,
+   and a no-cors text/plain or form post fails the content-type check. */
+const CALLERS = [...ALLOWED_ORIGINS, 'https://ironneverchanges.vercel.app'];
+
+/* Best-effort brake on one visitor hammering the endpoint: per warm
+   instance, so a determined flood can spread across instances. The real
+   limit is the Vercel Firewall rate-limit rule (DESIGN.md §9a). */
+const RATE_WINDOW_MS = 60 * 1000;
+const RATE_MAX = 10;
+const recent = new Map();
+function overLimit(req) {
+  const ip = String((req.headers && req.headers['x-forwarded-for']) || '').split(',')[0].trim() || 'unknown';
+  const now = Date.now();
+  const hits = (recent.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
+  hits.push(now);
+  recent.set(ip, hits);
+  if (recent.size > 5000) recent.clear();
+  return hits.length > RATE_MAX;
+}
 
 /* Stripe takes nested params as bracketed form keys:
    line_items[0][price_data][unit_amount]=4200 */
@@ -142,6 +166,16 @@ module.exports = async function handler(req, res) {
     return res.status(503).json({ error: 'Checkout is not open yet.' });
   }
 
+  const type = String((req.headers && req.headers['content-type']) || '');
+  const caller = req.headers && req.headers.origin;
+  if (!type.startsWith('application/json') || (caller && !CALLERS.includes(caller))) {
+    return res.status(400).json({ error: 'That cart could not be read. Refresh and try again.' });
+  }
+  if (overLimit(req)) {
+    res.setHeader('Retry-After', '60');
+    return res.status(429).json({ error: 'Too many tries. Wait a minute and try again.' });
+  }
+
   let lineItems;
   try {
     lineItems = buildLineItems(readBody(req).items);
@@ -154,7 +188,9 @@ module.exports = async function handler(req, res) {
   const params = {
     mode: 'payment',
     line_items: lineItems,
-    success_url: `${origin}/?paid=1`,
+    /* Stripe fills in the session id, so only a real return trip carries
+       one; the page ignores ?paid without a cs_ id (js/main.js). */
+    success_url: `${origin}/?paid={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/#shop`,
     submit_type: 'pay',
     shipping_address_collection: { allowed_countries: ['US'] },

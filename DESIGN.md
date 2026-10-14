@@ -269,6 +269,50 @@ and function logs by Vercel; the cart lives in the visitor's own localStorage
 to the privacy page the day it goes in); Web3Forms carries the coaching
 form. Neither page is lawyer-reviewed, and the owner has been told.
 
+## 9c. Security (review 2026-10-14)
+
+Three-lens review (server, client, exposure), every finding independently
+verified. No secrets in the repo or its history; prices are server-side; no
+open redirect; deploy-excluded files 404 on the live site.
+
+| Guard | Where | What it stops |
+|---|---|---|
+| Security headers | `vercel.json` `headers` | CSP (`script-src 'self'`, `connect-src 'self' https://api.web3forms.com`, `frame-ancestors 'none'`, `object-src 'none'`), X-Frame-Options DENY, nosniff, Referrer-Policy, Permissions-Policy, COOP. **Any new external host (analytics, a font, a form) must be added to the CSP or the browser blocks it.** Inline `<style>` and `style=` are allowed; inline `<script>` is not (JSON-LD is data, not script). |
+| Caller gate | `api/checkout.js` | Only `application/json` from the shop's own origins (www, apex, the vercel.app alias, localhost outside production) can create a session, so another site can't make visitors' browsers mint live sessions. |
+| Rate brake | `api/checkout.js` `overLimit` | Best effort, per warm instance: 10 POSTs a minute per IP, then 429. The real limit is a Vercel Firewall rule the owner adds (path `/api/checkout`, POST, 10 per 60s per IP, deny). |
+| Paid return | `success_url` `?paid={CHECKOUT_SESSION_ID}` + `js/main.js` | Only a real Stripe return (a `cs_` id) clears the cart and says ORDER IN; a bare `?paid=1` link does nothing. |
+| Saved-cart hygiene | `js/main.js` on load | Lines are kept only for real SKUs, sizes and integer quantities, capped to MAX_QTY/MAX_LINES and written back; quantities render as text, never HTML. Add to cart stops at the same limits ("MAX 10.", "CART FULL."). |
+
+Owner-side, not code: make the GitHub repo private (it is public, so the
+print masters and these notes are readable); add the Vercel Firewall rule;
+move Stripe two-step login from SMS to a passkey or authenticator app; keep
+the live key a restricted `rk_live_` with only Checkout Sessions: Write
+(it is: "INC key"; the full secret key has never been used).
+
+## 9d. Search and AI answers (2026-10-14)
+
+- Indexed: noindex off, canonicals on, Search Console verified (meta tag in
+  `index.html`), sitemap submitted. Bing via IndexNow: the key file
+  `3d1bd9232c890640a40f4b906f5058ad.txt` at the root and
+  `node tools/indexnow.mjs` after any content deploy (Bing feeds Copilot and,
+  in part, ChatGPT search). AI crawlers (OAI-SearchBot, ChatGPT-User,
+  PerplexityBot, Claude-SearchBot, Googlebot, Bingbot) are all allowed by the
+  single `User-agent: *` group; never turn on Vercel's AI-bot blocking.
+- Structured data: Organization (+ contactPoint), Brand, WebSite, and an
+  ItemList of 28 Products with Offer, $6 US shipping and the no-returns
+  policy. Each card has an id (`#inc004`) that is the Product's URL, with
+  `scroll-margin-top` so the link lands under the nav. Product photos in
+  `assets/products/` come from `node tools/product-images.mjs`; re-run it when
+  a print changes. `node tools/check-structured-data.mjs` fails if the JSON-LD
+  or the llms files drift from `js/products.js`: run it after any price or
+  name change.
+- `llms.txt` (summary) and `llms-full.txt` (every shirt, its printed words,
+  price and anchor). No engine confirms reading llms.txt; it costs nothing.
+- Not done, would help most next: one page per shirt (`/shirts/<slug>.html`),
+  Google and Microsoft Merchant Center feeds, real social profiles linked in
+  `sameAs` and the footer. Availability is marked InStock; switch to
+  MadeToOrder if shirts are printed per order.
+
 ## 10. Launch checklist
 
 - [x] Real prices confirmed, concept-placeholder notes removed (2026-09-25)
