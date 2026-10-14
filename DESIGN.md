@@ -288,8 +288,11 @@ form. Neither page is lawyer-reviewed, and the owner has been told.
 - [ ] Socials linked: add a SOCIAL footer column once real handles exist
       (the "soon" labels were removed 2026-09-25), plus `sameAs` in the JSON-LD
 - [x] robots.txt + sitemap.xml added (2026-09-25)
-- [ ] `noindex` removed and a canonical tag added (owner kept noindex on
-      2026-09-25; flip both together, never canonical alongside noindex)
+- [x] `noindex` removed and canonical tags added on home, privacy and terms
+      (2026-10-14, owner: "get it on google"); the 404 keeps its noindex.
+      Search Console: URL-prefix property https://www.ironneverchanges.com/ on
+      the Armour Crete Google account, verified by the meta tag in index.html
+      (keep that tag), sitemap submitted
 - [ ] GA4 (Armour Crete account) + Search Console + Bing — the standard EZHD
       analytics stack
 - [ ] `node ~/Projects/EZHD/ezhd-lab/verify/audit.mjs --url https://www.ironneverchanges.com` clean
